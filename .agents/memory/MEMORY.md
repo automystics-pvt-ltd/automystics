@@ -1,0 +1,1 @@
+- [Drizzle-kit config ESM shim](drizzle-kit-esm-shim.md) — drizzle-kit's loader shims `__dirname` for `.ts` config files; do NOT replace with `fileURLToPath`/`import.meta.url`.
