@@ -1,0 +1,36 @@
+git status --short
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# git fetch origin
+git checkout main 2>/dev/null || true
+git reset --hard origin/main
+git log --oneline -3
+ls lib/db/src/schema/products.ts && echo OK
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+fatal: detected dubious ownership in repository at '/home/automystics/htdocs/www.automystics.com/automystics'
+To add an exception for this directory, call:
+
+        git config --global --add safe.directory /home/automystics/htdocs/www.automystics.com/automystics
+ls: cannot access 'lib/db/src/schema/products.ts': No such file or directory
+root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# 

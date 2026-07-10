@@ -1,0 +1,88 @@
+root@srv1286649:/home/automystics/htdocs/www.automystics.com/automystics# cd $APP
+unset NODE_ENV
+sudo -u automystics bash -c "cd $APP && unset NODE_ENV && pnpm install"
+Scope: all 9 workspace projects
+
+   ╭───────────────────────────────────────────────────────────────────╮
+   │                                                                   │
+   │                Update available! 9.15.9 → 10.33.0.                │
+   │   Changelog: https://github.com/pnpm/pnpm/releases/tag/v10.33.0   │
+   │                 Run "pnpm add -g pnpm" to update.                 │
+   │                                                                   │
+   ╰───────────────────────────────────────────────────────────────────╯
+
+artifacts/api-server                     |  WARN  deprecated @types/bcryptjs@3.0.0
+Downloading react-icons@5.6.0: 22.42 MB/22.42 MB, done
+ WARN  GET https://registry.npmjs.org/recharts/-/recharts-2.15.4.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/react-icons/-/react-icons-5.6.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-3.5.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/tw-animate-css/-/tw-animate-css-1.4.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/tailwindcss/-/tailwindcss-4.2.1.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/vite/-/vite-7.3.1.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/wouter/-/wouter-3.9.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/react-helmet-async/-/react-helmet-async-2.0.5.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/fast-glob/-/fast-glob-3.3.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/chokidar/-/chokidar-4.0.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/drizzle-zod/-/drizzle-zod-0.8.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/pg/-/pg-8.20.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/drizzle-kit/-/drizzle-kit-0.31.9.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/orval/-/orval-8.5.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/@types/pg/-/pg-8.18.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/recharts/-/recharts-2.15.4.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-3.5.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/tailwindcss/-/tailwindcss-4.2.1.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/tw-animate-css/-/tw-animate-css-1.4.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/fast-glob/-/fast-glob-3.3.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/chokidar/-/chokidar-4.0.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/vite/-/vite-7.3.1.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/orval/-/orval-8.5.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/drizzle-zod/-/drizzle-zod-0.8.3.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/react-helmet-async/-/react-helmet-async-2.0.5.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/wouter/-/wouter-3.9.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/@types/pg/-/pg-8.18.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/pg/-/pg-8.20.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/drizzle-kit/-/drizzle-kit-0.31.9.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+ WARN  GET https://registry.npmjs.org/react-icons/-/react-icons-5.6.0.tgz error (ERR_PNPM_ENOSPC). Will retry in 1 minute. 1 retries left.
+/home/automystics/htdocs/www.automystics.com/automystics/artifacts/mockup-sandbox:
+ ERR_PNPM_ENOSPC  Failed to add tarball from "https://registry.npmjs.org/recharts/-/recharts-2.15.4.tgz" to store: ENOSPC: no space left on device, write
+
+This error happened while installing a direct dependency of /home/automystics/htdocs/www.automystics.com/automystics/artifacts/mockup-sandbox
+Progress: resolved 71, reused 0, downloaded 70, added 0
+root@srv1286649:/home/automystics/htdocs/www.automystics.com/automystics# sudo -u automystics bash -c "cd $APP && unset NODE_ENV && PORT=4173 BASE_PATH=/ pnpm --filter @workspace/automystics build"
+sudo -u automystics bash -c "cd $APP && unset NODE_ENV && pnpm --filter @workspace/api-server build"
+
+> @workspace/automystics@0.0.0 build /home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics
+> vite build --config vite.config.ts
+
+sh: 1: vite: not found
+/home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/automystics@0.0.0 build: `vite build --config vite.config.ts`
+spawn ENOENT
+ WARN   Local package.json exists, but node_modules missing, did you mean to install?
+
+> @workspace/api-server@0.0.0 build /home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server
+> node ./build.mjs
+
+node:internal/modules/esm/resolve:873
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'esbuild' imported from /home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server/build.mjs
+    at packageResolve (node:internal/modules/esm/resolve:873:9)
+    at moduleResolve (node:internal/modules/esm/resolve:946:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1188:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:708:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:657:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:640:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:264:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:168:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v20.20.2
+/home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/api-server@0.0.0 build: `node ./build.mjs`
+Exit status 1
+ WARN   Local package.json exists, but node_modules missing, did you mean to install?

@@ -1,0 +1,39 @@
+[PM2][WARN] Applications automystics-site not running, starting...
+[PM2] App [automystics-site] launched (1 instances)
+┌────┬─────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 4  │ automystics-api     │ default     │ 0.0.0   │ fork    │ 0        │ 0      │ 45   │ errored   │ 0%       │ 0b       │ root     │ disabled │
+│ 5  │ automystics-site    │ default     │ 0.0.0   │ fork    │ 286064   │ 0s     │ 0    │ online    │ 0%       │ 13.6mb   │ root     │ disabled │
+│ 2  │ fitro360            │ default     │ 1.0.0   │ fork    │ 262570   │ 9h     │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api       │ default     │ 0.0.0   │ fork    │ 282340   │ 56m    │ 1    │ online    │ 0%       │ 106.7mb  │ root     │ disabled │
+└────┴─────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+┌────┬─────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 4  │ automystics-api     │ default     │ 0.0.0   │ fork    │ 0        │ 0      │ 45   │ errored   │ 0%       │ 0b       │ root     │ disabled │
+│ 5  │ automystics-site    │ default     │ 0.0.0   │ fork    │ 286171   │ 0s     │ 8    │ online    │ 0%       │ 74.2mb   │ root     │ disabled │
+│ 2  │ fitro360            │ default     │ 1.0.0   │ fork    │ 262570   │ 9h     │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api       │ default     │ 0.0.0   │ fork    │ 282340   │ 56m    │ 1    │ online    │ 0%       │ 106.7mb  │ root     │ disabled │
+└────┴─────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+5|automyst | 2026-04-29T13:02:09:   constraint: undefined,
+5|automyst | 2026-04-29T13:02:09:   file: 'parse_relation.c',
+5|automyst | 2026-04-29T13:02:09:   line: '1449',
+5|automyst | 2026-04-29T13:02:09:   routine: 'parserOpenTable'
+5|automyst | 2026-04-29T13:02:09: }
+5|automyst | 2026-04-29T13:06:51: error: relation "user_sessions" does not exist
+5|automyst | 2026-04-29T13:06:51:     at file:///home/automystics/htdocs/www.automystics.com/automystics/node_modules/.pnpm/pg-pool@3.13.0_pg@8.20.0/node_modules/pg-pool/index.js:45:11
+5|automyst | 2026-04-29T13:06:51:     at processTicksAndRejections (node:internal/process/task_queues:103:5)
+5|automyst | 2026-04-29T13:06:51:     at PGStore._asyncQuery (file:///home/automystics/htdocs/www.automystics.com/automystics/node_modules/.pnpm/connect-pg-simple@10.0.0/node_modules/connect-pg-simple/index.js:322:21)
+
+/var/log/automystics/api.out.log last 20 lines:
+5|automyst | s":"::","port":8090},"msg":"Error listening on port"}
+5|automyst | 2026-04-29T13:32:18: {"level":30,"time":1777469538424,"pid":286133,"hostname":"srv1609330","staticDir":"/home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics/dist/public","msg":"Serving static frontend"}
+5|automyst | 2026-04-29T13:32:18: {"level":50,"time":1777469538430,"pid":286133,"hostname":"srv1609330","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::8090","stack":"Error: listen EADDRINUSE: address already in use :::8090\n    at Server.setupListenHandle [as _listen2] (node:net:1940:16)\n    at listenInCluster (node:net:1997:12)\n    at Server.listen (node:net:2102:7)\n    at Function.listen (file:///home/automystics/htdocs/www.automystics.com/automystics/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":8090},"msg":"Error listening on port"}
+5|automyst | 2026-04-29T13:32:18: {"level":30,"time":1777469538903,"pid":286145,"hostname":"srv1609330","staticDir":"/home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics/dist/public","msg":"Serving static frontend"}
+5|automyst | 2026-04-29T13:32:19: {"level":50,"time":1777469538909,"pid":286145,"hostname":"srv1609330","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::8090","stack":"Error: listen EADDRINUSE: address already in use :::8090\n    at Server.setupListenHandle [as _listen2] (node:net:1940:16)\n    at listenInCluster (node:net:1997:12)\n    at Server.listen (node:net:2102:7)\n    at Function.listen (file:///home/automystics/htdocs/www.automystics.com/automystics/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":8090},"msg":"Error listening on port"}
+5|automyst | 2026-04-29T13:32:19: {"level":30,"time":1777469539380,"pid":286158,"hostname":"srv1609330","staticDir":"/home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics/dist/public","msg":"Serving static frontend"}
+5|automyst | 2026-04-29T13:32:19: {"level":50,"time":1777469539386,"pid":286158,"hostname":"srv1609330","err":{"type":"Error","message":"listen EADDRINUSE: address already in use :::8090","stack":"Error: listen EADDRINUSE: address already in use :::8090\n    at Server.setupListenHandle [as _listen2] (node:net:1940:16)\n    at listenInCluster (node:net:1997:12)\n    at Server.listen (node:net:2102:7)\n    at Function.listen (file:///home/automystics/htdocs/www.automystics.com/automystics/node_modules/.pnpm/express@5.2.1/node_modules/express/lib/application.js:605:24)\n    at file:///home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server/src/index.ts:18:5\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)","code":"EADDRINUSE","errno":-98,"syscall":"listen","address":"::","port":8090},"msg":"Error listening on port"}
+5|automyst | 2026-04-29T13:32:19: {"level":30,"time":1777469539914,"pid":286171,"hostname":"srv1609330","staticDir":"/home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics/dist/public","msg":"Serving static frontend"}

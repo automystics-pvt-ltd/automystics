@@ -1,0 +1,43 @@
+# Verify products were seeded
+pm2 logs mystics-api --lines 30 --nostream | grep -iE "product|seed" | tail -10
+sudo -u postgres psql -d automystics -c "SELECT id, key, title FROM products ORDER BY sort_order;"
+curl -s https://www.automystics.com/api/public/products | head -c 600
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+ALTER SCHEMA
+
+> @workspace/db@0.0.0 push /home/automystics/htdocs/www.automystics.com/automystics/lib/db
+> drizzle-kit push --config ./drizzle.config.ts --force
+
+Reading config file '/home/automystics/htdocs/www.automystics.com/automystics/lib/db/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+[✓] Changes applied
+ public | products         | table | automystics
+[PM2] Applying action restartProcessId on app [mystics-api](ids: [ 1 ])
+[PM2] [mystics-api](1) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 2  │ fitro360         │ default     │ 1.0.0   │ fork    │ 262570   │ 8h     │ 0    │ online    │ 0%       │ 116.2mb  │ root     │ disabled │
+│ 3  │ kalvicore-api    │ default     │ 0.0.0   │ fork    │ 282340   │ 30m    │ 1    │ online    │ 0%       │ 100.9mb  │ root     │ disabled │
+│ 1  │ mystics-api      │ default     │ N/A     │ fork    │ 284380   │ 0s     │ 65   │ online    │ 0%       │ 14.5mb   │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+ id | key | title 
+----+-----+-------
+(0 rows)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /api/public/products</pre>
+</body>
+</html>
+root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# 

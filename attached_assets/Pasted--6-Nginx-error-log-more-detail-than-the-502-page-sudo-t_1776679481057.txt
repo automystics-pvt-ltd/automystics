@@ -1,0 +1,45 @@
+# 6. Nginx error log (more detail than the 502 page)
+sudo tail -n 30 /var/log/nginx/error.log
+[PM2] Spawning PM2 daemon with pm2_home=/root/.pm2
+[PM2] PM2 Successfully daemonized
+┌────┬───────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name      │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+└────┴───────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+*   Trying 127.0.0.1:8090...
+* connect to 127.0.0.1 port 8090 from 127.0.0.1 port 40284 failed: Connection refused
+* Failed to connect to 127.0.0.1 port 8090 after 0 ms: Couldn't connect to server
+* Closing connection
+curl: (7) Failed to connect to 127.0.0.1 port 8090 after 0 ms: Couldn't connect to server
+[TAILING] Tailing last 50 lines for [automystics-api] process (change the value with --lines option)
+grep: /etc/nginx/sites-available/automystics: No such file or directory
+2026/04/20 08:59:37 [warn] 1899530#1899530: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.kyro360.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.kyro360.com.crt"
+2026/04/20 08:59:37 [warn] 1899530#1899530: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kyrotrade.com.crt"
+nginx: [warn] "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kyrotrade.com.crt"
+2026/04/20 08:59:37 [warn] 1899530#1899530: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kyrotrade.com.crt"
+nginx: [warn] "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kyrotrade.com.crt"
+2026/04/20 08:59:40 [warn] 1899698#1899698: the "listen ... http2" directive is deprecated, use the "http2" directive instead in /home/clp/services/nginx/sites-enabled/cloudpanel.conf:3
+2026/04/20 08:59:40 [warn] 1899698#1899698: the "listen ... http2" directive is deprecated, use the "http2" directive instead in /home/clp/services/nginx/sites-enabled/cloudpanel.conf:4
+2026/04/20 08:59:40 [warn] 1899698#1899698: "ssl_stapling" ignored, issuer certificate not found for certificate "/home/clp/services/nginx/ssl-certificates/cert.crt"
+2026/04/20 08:59:40 [warn] 1899700#1899700: the "listen ... http2" directive is deprecated, use the "http2" directive instead in /home/clp/services/nginx/sites-enabled/cloudpanel.conf:3
+2026/04/20 08:59:40 [warn] 1899700#1899700: the "listen ... http2" directive is deprecated, use the "http2" directive instead in /home/clp/services/nginx/sites-enabled/cloudpanel.conf:4
+2026/04/20 08:59:40 [warn] 1899700#1899700: "ssl_stapling" ignored, issuer certificate not found for certificate "/home/clp/services/nginx/ssl-certificates/cert.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/kalvicore.automystics.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.artificialintellizence.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.artificialintellizence.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.automystics.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.automystics.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/dynamicgreenenergy.in/fullchain.pem"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/dynamicgreenenergy.in/fullchain.pem"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/fishtrading.in/fullchain.pem"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/fishtrading.in/fullchain.pem"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/fitro360.com/fullchain.pem"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/letsencrypt/live/fitro360.com/fullchain.pem"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kalvicore.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kalvicore.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.kyro360.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.kyro360.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kyrotrade.com.crt"
+2026/04/20 10:03:13 [warn] 2022599#2022599: "ssl_stapling" ignored, issuer certificate not found for certificate "/etc/nginx/ssl-certificates/www.kyrotrade.com.crt"
+2026/04/20 10:03:13 [notice] 2022599#2022599: signal process started
+root@srv1286649:/home/automystics/htdocs/www.automystics.com/automystics# 

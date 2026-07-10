@@ -1,0 +1,25 @@
+ Test login
+curl -s -X POST https://www.automystics.com/api/admin/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"automystics"}'
+│ script path       │ /home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server/dist/index.mjs │
+│ exec cwd          │ /home/automystics/htdocs/www.automystics.com/automystics/artifacts/api-server                │
+[PM2] Applying action deleteProcessId on app [4](ids: [ '4' ])
+[PM2] [4](4) ✓
+┌────┬─────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 5  │ automystics-site    │ default     │ 0.0.0   │ fork    │ 0        │ 0      │ 30   │ errored   │ 0%       │ 0b       │ root     │ disabled │
+│ 2  │ fitro360            │ default     │ 1.0.0   │ fork    │ 262570   │ 9h     │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api       │ default     │ 0.0.0   │ fork    │ 282340   │ 62m    │ 1    │ online    │ 0%       │ 106.7mb  │ root     │ disabled │
+└────┴─────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+┌────┬─────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 5  │ automystics-site    │ default     │ 0.0.0   │ fork    │ 0        │ 0      │ 30   │ errored   │ 0%       │ 0b       │ root     │ disabled │
+│ 2  │ fitro360            │ default     │ 1.0.0   │ fork    │ 262570   │ 9h     │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api       │ default     │ 0.0.0   │ fork    │ 282340   │ 62m    │ 1    │ online    │ 0%       │ 106.7mb  │ root     │ disabled │
+└────┴─────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+{"ok":true,"username":"admin"}root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# 

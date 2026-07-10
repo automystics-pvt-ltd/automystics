@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://automystics.com/sitemap.xml

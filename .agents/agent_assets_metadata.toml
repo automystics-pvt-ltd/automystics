@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "AAy7fb1Wjt6nYS-BIRozm"
+uri = "file://artifacts/automystics/src/assets/hero-bg.png"
+type = "image"
+title = "Dark high-tech neural network"
+
+[[generated]]
+id = "SwybuFKYudmIdjHv9NpxS"
+uri = "file://artifacts/automystics/src/assets/tech-bg.png"
+type = "image"
+title = "Abstract data visualization"
+
+[[generated]]
+id = "k5nYjvKpvCQUJ_tBr_7La"
+uri = "file://artifacts/automystics/src/assets/server-bg.png"
+type = "image"
+title = "Server room neon"
+
+[[generated]]
+id = "qkYCdEtxZZVzN-kkVvNxf"
+uri = "file://artifacts/automystics/src/assets/ai-brain.png"
+type = "image"
+title = "Glowing AI brain"

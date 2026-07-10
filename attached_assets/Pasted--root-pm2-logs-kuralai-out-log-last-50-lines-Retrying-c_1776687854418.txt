@@ -1,0 +1,51 @@
+/root/.pm2/logs/kuralai-out.log last 50 lines:
+]: Retrying call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502 (attempt 1)
+]: Retry failed for call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502:
+]: Retry scheduler: processed 2 calls
+]: Retrying call 94af0691-a0ae-428d-abbe-9b1fa57ea862 (attempt 1)
+]: Retry failed for call 94af0691-a0ae-428d-abbe-9b1fa57ea862:
+]: Retrying call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502 (attempt 1)
+]: Retry failed for call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502:
+]: Retry scheduler: processed 2 calls
+]: 📦 Serving dashboard from build directory
+]: ✅ Database connected
+]: ✅ WebSocket server initialized
+]: Retry scheduler started (runs every minute)
+]: ✅ Retry scheduler started
+]: 🚀 KuralAI server running on port 500
+]:    Environment: production
+]:    App URL: https://www.artificialintellizence.com
+]: ElevenLabs TTS completed in 439ms for 61 chars
+]: ElevenLabs TTS completed in 480ms for 85 chars
+]: ElevenLabs TTS completed in 459ms for 51 chars
+]: ElevenLabs TTS completed in 459ms for 69 chars
+]: ElevenLabs TTS completed in 507ms for 82 chars
+]: ✅ Pre-warmed 5 static TTS phrases
+]: 49.37.195.241 - - [20/Apr/2026:12:20:27 +0000] "GET / HTTP/1.1" 200 1043 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:27 +0000] "GET /static/css/main.8f60e6d6.css HTTP/1.1" 304 - "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:27 +0000] "GET /static/js/main.89dca04d.js HTTP/1.1" 304 - "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:28 +0000] "GET /api/dashboard/intents?days=7 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:28 +0000] "GET /api/dashboard/stats?days=7 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:28 +0000] "GET /api/dashboard/calls/timeline?days=14 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:28 +0000] "GET /api/dashboard/recent-calls?limit=10 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:33 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:33 +0000] "GET /static/js/main.89dca04d.js HTTP/1.1" 304 - "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:33 +0000] "GET /static/css/main.8f60e6d6.css HTTP/1.1" 304 - "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:34 +0000] "GET /api/dashboard/stats?days=7 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:34 +0000] "GET /api/dashboard/intents?days=7 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:34 +0000] "GET /api/dashboard/calls/timeline?days=14 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:34 +0000] "GET /api/dashboard/recent-calls?limit=10 HTTP/1.1" 403 36 "https://www.artificialintellizence.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:36 +0000] "GET /api/superadmin/dashboard HTTP/1.1" 403 36 "https://www.artificialintellizence.com/superadmin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:36 +0000] "GET /api/superadmin/organizations HTTP/1.1" 403 36 "https://www.artificialintellizence.com/superadmin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:37 +0000] "GET /api/superadmin/organizations HTTP/1.1" 403 36 "https://www.artificialintellizence.com/superadmin/organizations" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: 49.37.195.241 - - [20/Apr/2026:12:20:37 +0000] "GET /api/superadmin/plans HTTP/1.1" 403 36 "https://www.artificialintellizence.com/superadmin/organizations" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+]: Retrying call 94af0691-a0ae-428d-abbe-9b1fa57ea862 (attempt 1)
+]: Retry failed for call 94af0691-a0ae-428d-abbe-9b1fa57ea862:
+]: Retrying call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502 (attempt 1)
+]: Retry failed for call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502:
+]: Retry scheduler: processed 2 calls
+]: Retrying call 94af0691-a0ae-428d-abbe-9b1fa57ea862 (attempt 1)
+]: Retry failed for call 94af0691-a0ae-428d-abbe-9b1fa57ea862:
+]: Retrying call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502 (attempt 1)
+]: Retry failed for call 2daa1e8f-1cd8-40dc-a55d-47f2eb162502:
+]: Retry scheduler: processed 2 calls

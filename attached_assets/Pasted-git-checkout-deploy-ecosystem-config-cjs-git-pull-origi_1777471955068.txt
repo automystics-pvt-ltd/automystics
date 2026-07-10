@@ -1,0 +1,61 @@
+git checkout -- deploy/ecosystem.config.cjs
+git pull origin main
+grep -A1 "name:" deploy/ecosystem.config.cjs    # confirm it's "automystics-api" with path.resolve cwd
+
+# Build the frontend (writes to artifacts/automystics/dist/public)
+PORT=8090 BASE_PATH=/ pnpm --filter @workspace/automystics run build
+
+# Restart so the API serves the new dist
+pm2 restart automystics-api
+sleep 3
+pm2 list | grep automystics
+From https://github.com/Karthickdac/automystics
+ * branch            main       -> FETCH_HEAD
+Updating bc6fee8..ceb0cc9
+Fast-forward
+ artifacts/automystics/src/pages/admin-products.tsx                                               |  42 ++++++++++++++++++++++++++++++++++--------
+ attached_assets/Pasted--2-Check-the-parent-who-spawned-it-PPID-sudo-awk-PPid-p_1777470221805.txt |  66 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ attached_assets/Pasted--Test-login-curl-s-X-POST-https-www-automystics-com-api_1777469924542.txt |  25 +++++++++++++++++++++++++
+ attached_assets/Pasted--status-online--1777470160508_1777470160509.txt                           |  12 ++++++++++++
+ attached_assets/Pasted-pm2-logs-automystics-api-lines-15-nostream-tail-15-4-Te_1777470056860.txt |  31 +++++++++++++++++++++++++++++++
+ attached_assets/image_1777470771708.png                                                          | Bin 0 -> 9819 bytes
+ deploy/ecosystem.config.cjs                                                                      |   6 ++++--
+ 7 files changed, 172 insertions(+), 10 deletions(-)
+ create mode 100644 attached_assets/Pasted--2-Check-the-parent-who-spawned-it-PPID-sudo-awk-PPid-p_1777470221805.txt
+ create mode 100644 attached_assets/Pasted--Test-login-curl-s-X-POST-https-www-automystics-com-api_1777469924542.txt
+ create mode 100644 attached_assets/Pasted--status-online--1777470160508_1777470160509.txt
+ create mode 100644 attached_assets/Pasted-pm2-logs-automystics-api-lines-15-nostream-tail-15-4-Te_1777470056860.txt
+ create mode 100644 attached_assets/image_1777470771708.png
+      name: "automystics-api",
+      cwd: path.resolve(__dirname, "..", "artifacts", "api-server"),
+
+> @workspace/automystics@0.0.0 build /home/automystics/htdocs/www.automystics.com/automystics/artifacts/automystics
+> vite build --config vite.config.ts
+
+vite v7.3.1 building client environment for production...
+src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+src/components/ui/label.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+src/components/ui/select.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+src/components/ui/sheet.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+✓ 2259 modules transformed.
+dist/public/index.html                   2.06 kB │ gzip:   0.89 kB
+dist/public/assets/index-BH8VoYOJ.css  145.67 kB │ gzip:  21.66 kB
+dist/public/assets/index-DmigpwnZ.js   762.08 kB │ gzip: 221.04 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.49s
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [automystics-api](ids: [ 6 ])
+[PM2] [automystics-api](6) ✓
+┌────┬────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name               │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 6  │ automystics-api    │ default     │ 0.0.0   │ fork    │ 288207   │ 0s     │ 17   │ online    │ 0%       │ 17.4mb   │ root     │ disabled │
+│ 2  │ fitro360           │ default     │ 1.0.0   │ fork    │ 262570   │ 10h    │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api      │ default     │ 0.0.0   │ fork    │ 282340   │ 95m    │ 1    │ online    │ 0%       │ 107.5mb  │ root     │ disabled │
+└────┴────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+│ 6  │ automystics-api    │ default     │ 0.0.0   │ fork    │ 288207   │ 3s     │ 17   │ online    │ 0%       │ 89.2mb   │ root     │ disabled │
+root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# 

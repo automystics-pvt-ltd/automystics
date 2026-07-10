@@ -1,0 +1,132 @@
+r: ENOENT: no such file or directory, uv_cwd
+    at process.wrappedCwd [as cwd] (node:internal/bootstrap/switches/does_own_process_state:142:28)
+    at new API (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/API.js:69:24)
+    at Object.<anonymous> (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/binaries/CLI.js:27:11)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'uv_cwd'
+}
+
+Node.js v22.22.0
+node:internal/bootstrap/switches/does_own_process_state:142
+    cachedCwd = rawMethods.cwd();
+                           ^
+
+Error: ENOENT: no such file or directory, uv_cwd
+    at process.wrappedCwd [as cwd] (node:internal/bootstrap/switches/does_own_process_state:142:28)
+    at new API (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/API.js:69:24)
+    at Object.<anonymous> (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/binaries/CLI.js:27:11)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'uv_cwd'
+}
+
+Node.js v22.22.0
+node:internal/bootstrap/switches/does_own_process_state:142
+    cachedCwd = rawMethods.cwd();
+                           ^
+
+Error: ENOENT: no such file or directory, uv_cwd
+    at process.wrappedCwd [as cwd] (node:internal/bootstrap/switches/does_own_process_state:142:28)
+    at new API (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/API.js:69:24)
+    at Object.<anonymous> (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/binaries/CLI.js:27:11)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'uv_cwd'
+}
+
+Node.js v22.22.0
+root@srv1286649:/home/automystics/htdocs/www.automystics.com/automystics# cd ~/kuralai
+git fetch --all
+git reset --hard origin/main          # discards any local edits, matches remote exactly
+rm -rf node_modules dashboard/node_modules dashboard/build
+npm install
+cd dashboard && npm install && npm run build && cd ..
+pm2 restart kuralai --update-env
+pm2 logs kuralai --lines 50
+-bash: cd: /root/kuralai: No such file or directory
+fatal: Unable to read current working directory: No such file or directory
+fatal: Unable to read current working directory: No such file or directory
+/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/lib/cli/validate-engines.js:31
+    throw err
+    ^
+
+Error: ENOENT: no such file or directory, uv_cwd
+    at process.wrappedCwd (node:internal/bootstrap/switches/does_own_process_state:142:28)
+    at process.cwd (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/node_modules/graceful-fs/polyfills.js:10:19)
+    at new Config (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js:71:19)
+    at new Npm (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/lib/npm.js:67:19)
+    at module.exports (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/lib/cli/entry.js:21:15)
+    at module.exports (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/lib/cli/validate-engines.js:39:10)
+    at module.exports (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/lib/cli.js:12:31)
+    at Object.<anonymous> (/root/.nvm/versions/node/v22.22.0/lib/node_modules/npm/bin/npm-cli.js:2:25)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'uv_cwd'
+}
+
+Node.js v22.22.0
+-bash: cd: dashboard: No such file or directory
+node:internal/bootstrap/switches/does_own_process_state:142
+    cachedCwd = rawMethods.cwd();
+                           ^
+
+Error: ENOENT: no such file or directory, uv_cwd
+    at process.wrappedCwd [as cwd] (node:internal/bootstrap/switches/does_own_process_state:142:28)
+    at new API (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/API.js:69:24)
+    at Object.<anonymous> (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/binaries/CLI.js:27:11)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'uv_cwd'
+}
+
+Node.js v22.22.0
+node:internal/bootstrap/switches/does_own_process_state:142
+    cachedCwd = rawMethods.cwd();
+                           ^
+
+Error: ENOENT: no such file or directory, uv_cwd
+    at process.wrappedCwd [as cwd] (node:internal/bootstrap/switches/does_own_process_state:142:28)
+    at new API (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/API.js:69:24)
+    at Object.<anonymous> (/root/.nvm/versions/node/v22.22.0/lib/node_modules/pm2/lib/binaries/CLI.js:27:11)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'uv_cwd'
+}

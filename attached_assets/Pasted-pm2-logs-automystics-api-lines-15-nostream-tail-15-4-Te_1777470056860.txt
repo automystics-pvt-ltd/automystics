@@ -1,0 +1,31 @@
+pm2 logs automystics-api --lines 15 --nostream | tail -15
+
+# 4. Test login
+curl -s -X POST https://www.automystics.com/api/admin/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"automystics"}'
+From https://github.com/Karthickdac/automystics
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+      name: "automystics-site",
+[PM2] Applying action deleteProcessId on app [automystics-site](ids: [ 5 ])
+[PM2] [automystics-site](5) ✓
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 2  │ fitro360         │ default     │ 1.0.0   │ fork    │ 262570   │ 9h     │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api    │ default     │ 0.0.0   │ fork    │ 282340   │ 64m    │ 1    │ online    │ 0%       │ 106.7mb  │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+LISTEN 0      511                *:8090             *:*    users:(("node /home/auto",pid=287027,fd=23))                                                                                                
+[PM2][WARN] Applications automystics-site not running, starting...
+[PM2][ERROR] Error: Script not found: /var/www/automystics/artifacts/api-server/dist/index.mjs
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 2  │ fitro360         │ default     │ 1.0.0   │ fork    │ 262570   │ 9h     │ 0    │ online    │ 0%       │ 116.3mb  │ root     │ disabled │
+│ 3  │ kalvicore-api    │ default     │ 0.0.0   │ fork    │ 282340   │ 64m    │ 1    │ online    │ 0%       │ 106.7mb  │ root     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[TAILING] Tailing last 15 lines for [automystics-api] process (change the value with --lines option)
+{"ok":true,"username":"admin"}root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# 
