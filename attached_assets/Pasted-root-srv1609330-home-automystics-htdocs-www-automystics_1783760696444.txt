@@ -1,0 +1,31 @@
+root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# cd /home/automystics/htdocs/www.automystics.com/automystics
+cp artifacts/api-server/.env /root/automystics-api.env.backup
+pm2 stop automystics-api
+pm2 delete automystics-api
+[PM2][ERROR] Process or Namespace automystics-api not found
+[PM2][ERROR] Process or Namespace automystics-api not found
+root@srv1609330:/home/automystics/htdocs/www.automystics.com/automystics# cd /home/automystics/htdocs/www.automystics.com
+mv automystics automystics-old-karthick
+git clone https://github.com/automystics-pvt-ltd/automystics-mainzip-1 automystics
+cd automystics
+Cloning into 'automystics'...
+Username for 'https://github.com': karthickdac
+Password for 'https://karthickdac@github.com': 
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/automystics-pvt-ltd/automystics-mainzip-1/'
+-bash: cd: automystics: No such file or directory
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# cp /root/automystics-api.env.backup artifacts/api-server/.env
+chmod 600 artifacts/api-server/.env
+pnpm install --frozen-lockfile
+cp: cannot create regular file 'artifacts/api-server/.env': No such file or directory
+chmod: cannot access 'artifacts/api-server/.env': No such file or directory
+ ERR_PNPM_NO_PKG_MANIFEST  No package.json found in /home/automystics/htdocs/www.automystics.com
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# pnpm --filter @workspace/db exec drizzle-kit push --force
+bash deploy/deploy.sh
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/home/automystics/htdocs/www.automystics.com/automystics-old-karthick/lib/db/drizzle.config.ts'
+DATABASE_URL, ensure the database is provisioned
+/home/automystics/htdocs/www.automystics.com/automystics-old-karthick/lib/db:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command failed with exit code 1: drizzle-kit push --force
+bash: deploy/deploy.sh: No such file or directory
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# 
