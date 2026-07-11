@@ -13,6 +13,7 @@ export const emailSettingsTable = pgTable("email_settings", {
   notifyEmails: text("notify_emails"),
   notifyOnNewEnquiry: boolean("notify_on_new_enquiry").notNull().default(true),
   notifyOnNewDemoRequest: boolean("notify_on_new_demo_request").notNull().default(true),
+  notifyVisitorOnDemoRequest: boolean("notify_visitor_on_demo_request").notNull().default(true),
   enabled: boolean("enabled").notNull().default(false),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
@@ -30,6 +31,7 @@ export const updateEmailSettingsSchema = z.object({
   notifyEmails: z.string().trim().max(2000).optional().or(z.literal("")),
   notifyOnNewEnquiry: z.boolean().optional(),
   notifyOnNewDemoRequest: z.boolean().optional(),
+  notifyVisitorOnDemoRequest: z.boolean().optional(),
   enabled: z.boolean().optional(),
 });
 export type UpdateEmailSettings = z.infer<typeof updateEmailSettingsSchema>;

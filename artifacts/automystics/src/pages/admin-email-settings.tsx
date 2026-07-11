@@ -31,6 +31,7 @@ type Settings = {
   notifyEmails: string;
   notifyOnNewEnquiry: boolean;
   notifyOnNewDemoRequest: boolean;
+  notifyVisitorOnDemoRequest: boolean;
   enabled: boolean;
   updatedAt: string | null;
 };
@@ -46,6 +47,7 @@ const DEFAULTS: Settings = {
   notifyEmails: "",
   notifyOnNewEnquiry: true,
   notifyOnNewDemoRequest: true,
+  notifyVisitorOnDemoRequest: true,
   enabled: false,
   updatedAt: null,
 };
@@ -96,6 +98,7 @@ export function AdminEmailSettings() {
         notifyEmails: settings.notifyEmails,
         notifyOnNewEnquiry: settings.notifyOnNewEnquiry,
         notifyOnNewDemoRequest: settings.notifyOnNewDemoRequest,
+        notifyVisitorOnDemoRequest: settings.notifyVisitorOnDemoRequest,
         enabled: settings.enabled,
       };
       payload.smtpPassword = touchedPassword ? password : PASSWORD_PLACEHOLDER;
@@ -338,6 +341,18 @@ export function AdminEmailSettings() {
               id="notifyDemoToggle"
               checked={settings.notifyOnNewDemoRequest}
               onCheckedChange={(v) => update("notifyOnNewDemoRequest", v)}
+            />
+          </div>
+          <div className="md:col-span-2 flex items-center justify-between bg-muted/40 border border-card-border rounded-2xl p-4">
+            <div>
+              <Label htmlFor="notifyVisitorDemoToggle" className="font-semibold">Send visitors a confirmation email</Label>
+              <p className="text-xs text-muted-foreground mt-1">Email the visitor a confirmation whenever they book a demo. Turn off to only notify your team.</p>
+            </div>
+            <Switch
+              id="notifyVisitorDemoToggle"
+              checked={settings.notifyVisitorOnDemoRequest}
+              onCheckedChange={(v) => update("notifyVisitorOnDemoRequest", v)}
+              data-testid="notify-visitor-demo-switch"
             />
           </div>
         </div>

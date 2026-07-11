@@ -160,7 +160,7 @@ export async function sendDemoRequestNotification(payload: DemoRequestEmailPaylo
 export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPayload): Promise<void> {
   try {
     const settings = await getEmailSettings();
-    if (!settings || !settings.enabled) return;
+    if (!settings || !settings.enabled || !settings.notifyVisitorOnDemoRequest) return;
     if (!settings.smtpHost || !settings.fromEmail) return;
 
     const transport = await buildTransport(settings);
