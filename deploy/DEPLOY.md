@@ -135,6 +135,21 @@ Certbot will rewrite the Nginx config to add SSL and auto-renew via systemd time
 
 ## Re-deploying after a code update
 
+Run the deploy script from inside the repo (it locates the repo root itself, so `cd` there first):
+
+```bash
+cd /var/www/automystics   # or wherever the repo actually lives on this server
+bash deploy/deploy.sh
+```
+
+Add `--migrate` if the schema changed, or `--branch <name>` to deploy a specific branch:
+
+```bash
+bash deploy/deploy.sh --migrate
+```
+
+That script runs the same steps as before (git pull, `pnpm install --frozen-lockfile`, build API + frontend, optional `drizzle-kit push --force`, `pm2 reload automystics-api --update-env`, then a health check). Equivalent manual steps, if you'd rather run them by hand:
+
 ```bash
 cd /var/www/automystics
 git pull
