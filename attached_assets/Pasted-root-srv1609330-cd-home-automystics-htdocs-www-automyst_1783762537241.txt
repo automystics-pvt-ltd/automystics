@@ -1,0 +1,140 @@
+root@srv1609330:~# cd /home/automystics/htdocs/www.automystics.com
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# ssh-keygen -t ed25519 -f /root/.ssh/automystics_deploy_key -N "" -C "automystics-vps-deploy"
+cat /root/.ssh/automystics_deploy_key.pub
+Generating public/private ed25519 key pair.
+Your identification has been saved in /root/.ssh/automystics_deploy_key
+Your public key has been saved in /root/.ssh/automystics_deploy_key.pub
+The key fingerprint is:
+SHA256:i/dvq8LX6JI6z5XoEJmnenM6Cp3UKuTyZLK/ou3b5o4 automystics-vps-deploy
+The key's randomart image is:
++--[ED25519 256]--+
+|                 |
+|                 |
+|                 |
+|     . o         |
+|  . . = S        |
+| o o o = o .     |
+|o * + +.+.oo     |
+|.O =..==*oo o    |
+|++E**ooO+=++o.   |
++----[SHA256]-----+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILYa9WcIKpsb+HgxaVPyd9GqvT6dpTUTr/bwPjVi3EIB automystics-vps-deploy
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# cat >> /root/.ssh/config <<'EOF'
+Host github-automystics
+  HostName github.com
+  User git
+  IdentityFile /root/.ssh/automystics_deploy_key
+  IdentitiesOnly yes
+EOF
+ssh -T git@github-automystics   # should say "successfully authenticated" (Hi automystics-pvt-ltd/automystics-mainzip-1! ...)
+git@github.com: Permission denied (publickey).
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# cd /home/automystics/htdocs/www.automystics.com
+git clone github-automystics:automystics-pvt-ltd/automystics-mainzip-1.git automystics-new
+cd automystics-new
+Cloning into 'automystics-new'...
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+-bash: cd: automystics-new: No such file or directory
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# pnpm install --no-frozen-lockfile
+cp /root/automystics-api.env.backup artifacts/api-server/.env
+chmod 600 artifacts/api-server/.env
+pnpm --filter @workspace/db exec drizzle-kit push --force
+pnpm --filter @workspace/api-server build
+PORT=8090 BASE_PATH=/ pnpm --filter @workspace/automystics build
+ ERR_PNPM_NO_PKG_MANIFEST  No package.json found in /home/automystics/htdocs/www.automystics.com
+cp: cannot create regular file 'artifacts/api-server/.env': No such file or directory
+chmod: cannot access 'artifacts/api-server/.env': No such file or directory
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/lib/db/drizzle.config.ts'
+Cannot find module 'drizzle-kit'
+Require stack:
+- /home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/lib/db/drizzle.config.ts
+- /usr/lib/node_modules/drizzle-kit/bin.cjs
+/home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/lib/db:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command failed with exit code 1: drizzle-kit push --force
+
+> @workspace/api-server@0.0.0 build /home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/artifacts/api-server
+> node ./build.mjs
+
+node:internal/modules/package_json_reader:301
+  throw new ERR_MODULE_NOT_FOUND(packageName, fileURLToPath(base), null);
+        ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'esbuild' imported from /home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/artifacts/api-server/build.mjs
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:301:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:859:18)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:691:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:708:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:740:52)
+    at #resolve (node:internal/modules/esm/loader:673:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:593:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v24.16.0
+/home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/artifacts/api-server:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/api-server@0.0.0 build: `node ./build.mjs`
+Exit status 1
+
+> @workspace/automystics@0.0.0 build /home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/artifacts/automystics
+> vite build --config vite.config.ts
+
+sh: 1: vite: not found
+/home/automystics/htdocs/www.automystics.com/automystics-old-karthick2/artifacts/automystics:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/automystics@0.0.0 build: `vite build --config vite.config.ts`
+spawn ENOENT
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# ls artifacts/api-server/dist/index.mjs
+ls artifacts/automystics/dist/public/index.html
+ls: cannot access 'artifacts/api-server/dist/index.mjs': No such file or directory
+ls: cannot access 'artifacts/automystics/dist/public/index.html': No such file or directory
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# cd /home/automystics/htdocs/www.automystics.com
+pm2 stop automystics-api
+mv automystics automystics-old-karthick2
+mv automystics-new automystics
+cd automystics
+pm2 delete automystics-api
+pm2 start deploy/ecosystem.config.cjs --update-env
+pm2 save
+curl -s http://127.0.0.1:8080/api/healthz
+nginx -t && systemctl reload nginx
+[PM2][ERROR] Process or Namespace automystics-api not found
+mv: cannot stat 'automystics': No such file or directory
+mv: cannot stat 'automystics-new': No such file or directory
+-bash: cd: automystics: No such file or directory
+[PM2][ERROR] Process or Namespace automystics-api not found
+[PM2][ERROR] File deploy/ecosystem.config.cjs not found
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+{"status":"ok"}nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/ctr.tamilagavetrikalagam.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/erp.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/erp.mmwear.in.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/kalvicore.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/kuralai.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/mysticsaudit.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/mysticscivil.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/mysticshr.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/mysticsinv.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/solarnexus.automystics.tech.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/tkprabhu.tamilagavetrikalagam.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/ungalrajeev.tamilagavetrikalagam.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/ungaludansarath.tamilagavetrikalagam.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/ungalvignesh.tamilagavetrikalagam.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.automystics.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.automystics.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.fitro360.com.crt"
+nginx: [warn] "ssl_stapling" ignored, no OCSP responder URL in the certificate "/etc/nginx/ssl-certificates/www.fitro360.com.crt"
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# cd /home/automystics/htdocs/www.automystics.com/automystics
+git pull
+bash deploy/deploy.sh
+-bash: cd: /home/automystics/htdocs/www.automystics.com/automystics: No such file or directory
+fatal: not a git repository (or any of the parent directories): .git
+bash: deploy/deploy.sh: No such file or directory
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# 
