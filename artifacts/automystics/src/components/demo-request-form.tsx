@@ -18,6 +18,71 @@ function toDateKey(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
+function detectLocalTimezone(): string {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz || "UTC";
+  } catch {
+    return "UTC";
+  }
+}
+
+function shortTzLabel(tz: string, iso: string): string {
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz,
+      timeZoneName: "short",
+    }).formatToParts(new Date(iso));
+    const tzPart = parts.find((p) => p.type === "timeZoneName");
+    return tzPart?.value || tz;
+  } catch {
+    return tz;
+  }
+}
+
+function formatInTimezone(iso: string, tz: string): string {
+  try {
+    return new Intl.DateTimeFormat("en-US", {
+      timeZone: tz,
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).format(new Date(iso));
+  } catch {
+    return new Date(iso).toLocaleTimeString();
+  }
+}
+
+// A reasonably broad, browser-supported list of IANA timezones visitors can
+// pick from if they'd rather not use their device's auto-detected zone.
+const COMMON_TIMEZONES: string[] = (() => {
+  try {
+    // Intl.supportedValuesOf is widely available in modern browsers.
+    const anyIntl = Intl as unknown as { supportedValuesOf?: (key: string) => string[] };
+    if (typeof anyIntl.supportedValuesOf === "function") {
+      return anyIntl.supportedValuesOf("timeZone");
+    }
+  } catch {
+    // fall through to static list below
+  }
+  return [
+    "Asia/Kolkata",
+    "UTC",
+    "America/New_York",
+    "America/Chicago",
+    "America/Denver",
+    "America/Los_Angeles",
+    "Europe/London",
+    "Europe/Berlin",
+    "Europe/Paris",
+    "Asia/Dubai",
+    "Asia/Singapore",
+    "Asia/Tokyo",
+    "Asia/Shanghai",
+    "Australia/Sydney",
+  ];
+})();
+
 export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,6 +94,7 @@ export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
   const [timezoneLabel, setTimezoneLabel] = useState("IST");
   const [bookableWeekdays, setBookableWeekdays] = useState<number[]>([1, 2, 3, 4, 5]);
   const [blockedDates, setBlockedDates] = useState<string[]>([]);
+  const [visitorTimezone, setVisitorTimezone] = useState<string>(() => detectLocalTimezone());
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -222,9 +288,32 @@ export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
 
           <div className="space-y-3">
             <Label className="text-foreground font-semibold ml-1">Pick a date &amp; time</Label>
-            <p className="text-sm text-muted-foreground ml-1">
-              Times are shown in {timezoneLabel}.
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-2 ml-1">
+              <p className="text-sm text-muted-foreground">
+                Slot times below are shown in your local time. Original booking hours are set in {timezoneLabel}.
+              </p>
+              <div className="flex items-center gap-2">
+                <Label htmlFor="demo-timezone" className="text-xs text-muted-foreground font-medium whitespace-nowrap">
+                  Your timezone
+                </Label>
+                <select
+                  id="demo-timezone"
+                  value={visitorTimezone}
+                  onChange={(e) => setVisitorTimezone(e.target.value)}
+                  className="h-9 rounded-lg px-2 text-sm bg-white border border-card-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary max-w-[220px]"
+                  data-testid="demo-request-timezone"
+                >
+                  {!COMMON_TIMEZONES.includes(visitorTimezone) && (
+                    <option value={visitorTimezone}>{visitorTimezone}</option>
+                  )}
+                  {COMMON_TIMEZONES.map((tz) => (
+                    <option key={tz} value={tz}>
+                      {tz.replace(/_/g, " ")}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <div className="grid md:grid-cols-2 gap-6 bg-muted/30 border border-card-border rounded-2xl p-4 md:p-6">
               <div className="flex justify-center md:justify-start">
                 <Calendar
@@ -255,24 +344,37 @@ export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
                   </div>
                 ) : (
                   <div className="grid grid-cols-2 gap-3" data-testid="demo-request-slots">
-                    {slots.map((slot) => (
-                      <button
-                        key={slot.iso}
-                        type="button"
-                        disabled={!slot.available}
-                        onClick={() => setSelectedSlotIso(slot.iso)}
-                        data-testid={`demo-slot-${slot.hour}`}
-                        className={`h-12 rounded-xl border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors ${
-                          selectedSlotIso === slot.iso
-                            ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
-                            : slot.available
-                              ? "bg-white border-card-border hover:border-primary/50 text-foreground"
-                              : "bg-muted text-muted-foreground border-card-border/60 line-through cursor-not-allowed opacity-60"
-                        }`}
-                      >
-                        <Clock className="w-3.5 h-3.5" /> {slot.label}
-                      </button>
-                    ))}
+                    {slots.map((slot) => {
+                      const localTime = formatInTimezone(slot.iso, visitorTimezone);
+                      const localTzShort = shortTzLabel(visitorTimezone, slot.iso);
+                      return (
+                        <button
+                          key={slot.iso}
+                          type="button"
+                          disabled={!slot.available}
+                          onClick={() => setSelectedSlotIso(slot.iso)}
+                          data-testid={`demo-slot-${slot.hour}`}
+                          className={`h-14 rounded-xl border text-sm font-semibold flex flex-col items-center justify-center gap-0.5 transition-colors ${
+                            selectedSlotIso === slot.iso
+                              ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                              : slot.available
+                                ? "bg-white border-card-border hover:border-primary/50 text-foreground"
+                                : "bg-muted text-muted-foreground border-card-border/60 line-through cursor-not-allowed opacity-60"
+                          }`}
+                        >
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="w-3.5 h-3.5" /> {localTime} {localTzShort}
+                          </span>
+                          <span
+                            className={`text-[11px] font-normal ${
+                              selectedSlotIso === slot.iso ? "text-primary-foreground/80" : "text-muted-foreground"
+                            }`}
+                          >
+                            {slot.label} {timezoneLabel}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
