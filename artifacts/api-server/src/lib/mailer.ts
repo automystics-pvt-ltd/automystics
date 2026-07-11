@@ -86,6 +86,76 @@ export async function sendEnquiryNotification(payload: EnquiryEmailPayload): Pro
   }
 }
 
+export type DemoRequestEmailPayload = {
+  id: number;
+  name: string;
+  email: string;
+  phone?: string | null;
+  company?: string | null;
+  productInterest?: string | null;
+  preferredDate?: string | null;
+  message?: string | null;
+};
+
+export async function sendDemoRequestNotification(payload: DemoRequestEmailPayload): Promise<void> {
+  try {
+    const settings = await getEmailSettings();
+    if (!settings || !settings.enabled || !settings.notifyOnNewDemoRequest) return;
+    if (!settings.smtpHost || !settings.fromEmail || !settings.notifyEmails) return;
+
+    const recipients = settings.notifyEmails
+      .split(/[,;\s]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (recipients.length === 0) return;
+
+    const transport = await buildTransport(settings);
+    const subject = `New demo request from ${payload.name}${payload.company ? ` (${payload.company})` : ""}`;
+    const text = [
+      `New demo request received on the Automystics website.`,
+      ``,
+      `Name:              ${payload.name}`,
+      `Email:             ${payload.email}`,
+      `Phone:             ${payload.phone || "—"}`,
+      `Company:           ${payload.company || "—"}`,
+      `Product interest:  ${payload.productInterest || "—"}`,
+      `Preferred date:    ${payload.preferredDate || "—"}`,
+      ``,
+      `Message:`,
+      payload.message || "—",
+      ``,
+      `View in admin: /admin`,
+    ].join("\n");
+    const html = `
+      <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
+        <h2 style="color:#06b6d4;margin:0 0 16px">New demo request received</h2>
+        <table style="width:100%;border-collapse:collapse;margin-bottom:16px">
+          <tr><td style="padding:6px 0;color:#64748b">Name</td><td style="padding:6px 0;font-weight:600">${escapeHtml(payload.name)}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Email</td><td style="padding:6px 0"><a href="mailto:${escapeHtml(payload.email)}">${escapeHtml(payload.email)}</a></td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Phone</td><td style="padding:6px 0">${escapeHtml(payload.phone || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Company</td><td style="padding:6px 0">${escapeHtml(payload.company || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Product interest</td><td style="padding:6px 0">${escapeHtml(payload.productInterest || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Preferred date</td><td style="padding:6px 0">${escapeHtml(payload.preferredDate || "—")}</td></tr>
+        </table>
+        <h3 style="margin:0 0 8px">Message</h3>
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;white-space:pre-wrap">${escapeHtml(payload.message || "—")}</div>
+        <p style="margin-top:24px;color:#64748b;font-size:13px">View and manage this request in the admin console.</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress(settings),
+      to: recipients.join(", "),
+      subject,
+      text,
+      html,
+    });
+    logger.info({ id: payload.id, recipients: recipients.length }, "demo request notification sent");
+  } catch (err) {
+    logger.error({ err, id: payload.id }, "failed to send demo request notification");
+  }
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")

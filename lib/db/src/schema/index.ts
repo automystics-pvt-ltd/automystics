@@ -24,3 +24,4 @@ export * from "./site-settings";
 export * from "./office-locations";
 export * from "./product-demos";
 export * from "./products";
+export * from "./demo-requests";

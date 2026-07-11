@@ -27,6 +27,7 @@ function sanitize(row: EmailSettings | null) {
       fromName: "",
       notifyEmails: "",
       notifyOnNewEnquiry: true,
+      notifyOnNewDemoRequest: true,
       enabled: false,
       updatedAt: null,
     };
@@ -41,6 +42,7 @@ function sanitize(row: EmailSettings | null) {
     fromName: row.fromName || "",
     notifyEmails: row.notifyEmails || "",
     notifyOnNewEnquiry: !!row.notifyOnNewEnquiry,
+    notifyOnNewDemoRequest: !!row.notifyOnNewDemoRequest,
     enabled: !!row.enabled,
     updatedAt: row.updatedAt,
   };
@@ -74,6 +76,7 @@ router.put("/email", requireAdmin, async (req, res) => {
     fromName: data.fromName ?? existing?.fromName ?? null,
     notifyEmails: data.notifyEmails ?? existing?.notifyEmails ?? null,
     notifyOnNewEnquiry: data.notifyOnNewEnquiry ?? existing?.notifyOnNewEnquiry ?? true,
+    notifyOnNewDemoRequest: data.notifyOnNewDemoRequest ?? existing?.notifyOnNewDemoRequest ?? true,
     enabled: data.enabled ?? existing?.enabled ?? false,
     updatedAt: new Date(),
   };

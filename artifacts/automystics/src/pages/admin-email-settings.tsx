@@ -30,6 +30,7 @@ type Settings = {
   fromName: string;
   notifyEmails: string;
   notifyOnNewEnquiry: boolean;
+  notifyOnNewDemoRequest: boolean;
   enabled: boolean;
   updatedAt: string | null;
 };
@@ -44,6 +45,7 @@ const DEFAULTS: Settings = {
   fromName: "Automystics",
   notifyEmails: "",
   notifyOnNewEnquiry: true,
+  notifyOnNewDemoRequest: true,
   enabled: false,
   updatedAt: null,
 };
@@ -93,6 +95,7 @@ export function AdminEmailSettings() {
         fromName: settings.fromName,
         notifyEmails: settings.notifyEmails,
         notifyOnNewEnquiry: settings.notifyOnNewEnquiry,
+        notifyOnNewDemoRequest: settings.notifyOnNewDemoRequest,
         enabled: settings.enabled,
       };
       payload.smtpPassword = touchedPassword ? password : PASSWORD_PLACEHOLDER;
@@ -324,6 +327,17 @@ export function AdminEmailSettings() {
               id="notifyToggle"
               checked={settings.notifyOnNewEnquiry}
               onCheckedChange={(v) => update("notifyOnNewEnquiry", v)}
+            />
+          </div>
+          <div className="md:col-span-2 flex items-center justify-between bg-muted/40 border border-card-border rounded-2xl p-4">
+            <div>
+              <Label htmlFor="notifyDemoToggle" className="font-semibold">Notify on new demo request</Label>
+              <p className="text-xs text-muted-foreground mt-1">Send an email to your notification recipients whenever a visitor books a demo.</p>
+            </div>
+            <Switch
+              id="notifyDemoToggle"
+              checked={settings.notifyOnNewDemoRequest}
+              onCheckedChange={(v) => update("notifyOnNewDemoRequest", v)}
             />
           </div>
         </div>

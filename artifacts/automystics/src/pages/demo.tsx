@@ -7,6 +7,7 @@ import { ArrowUpRight, PlayCircle, Lock, Copy, Check, Search, Sparkles } from "l
 import { Input } from "@/components/ui/input";
 import { useDemos, type PublicDemo } from "@/hooks/use-demos";
 import { useToast } from "@/hooks/use-toast";
+import { DemoRequestForm } from "@/components/demo-request-form";
 
 function CredentialChip({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -208,6 +209,10 @@ export function Demo() {
             {filtered.map((d) => <DemoCard key={d.id} demo={d} />)}
           </div>
         )}
+
+        <div className="mt-24 max-w-3xl mx-auto">
+          <DemoRequestForm demos={demos} />
+        </div>
       </div>
     </div>
   );
