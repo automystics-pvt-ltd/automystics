@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, ArrowUpRight, Building2, GraduationCap, Mic, LineChart, Sun, Camera, Code, Server, Cloud, Smartphone, Paintbrush, Cog, Workflow, Settings, Users, BookOpen, Briefcase, FileText, HeartHandshake, Database, Dumbbell, Package, Zap, Shield, HeartPulse, CalendarCheck, Activity, DollarSign } from "lucide-react";
@@ -98,6 +98,18 @@ export function Navbar() {
   const [location] = useLocation();
   const isHome = location === "/";
   const isContact = location === "/contact";
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initialize
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isTransparent = isHome && !isScrolled;
   const { products: livePublicProducts } = useProducts();
   const products = livePublicProducts.length
     ? livePublicProducts.map((p) => ({
@@ -110,21 +122,23 @@ export function Navbar() {
 
   const triggerClass = (path: string) => {
     const active = location === path || location.startsWith(path + "/");
-    return `!h-10 rounded-sm px-4 py-2 text-sm font-semibold transition-all focus:!outline-none focus-visible:!ring-2 focus-visible:!ring-primary/60 data-[state=open]:!bg-accent data-[state=open]:!text-accent-foreground ${
-      active
-        ? "!bg-accent !text-accent-foreground hover:!bg-accent/90"
-        : "!bg-transparent !text-foreground hover:!bg-accent hover:!text-accent-foreground focus:!bg-transparent focus-visible:!bg-accent"
-    }`;
+    if (active) {
+      return `!h-10 rounded-sm px-4 py-2 text-sm font-semibold transition-all focus:!outline-none focus-visible:!ring-2 focus-visible:!ring-primary/60 data-[state=open]:!bg-accent data-[state=open]:!text-accent-foreground !bg-accent !text-accent-foreground hover:!bg-accent/90`;
+    }
+    if (isTransparent) {
+      return `!h-10 rounded-sm px-4 py-2 text-sm font-semibold transition-all focus:!outline-none focus-visible:!ring-2 focus-visible:!ring-white/60 data-[state=open]:!bg-accent data-[state=open]:!text-accent-foreground !bg-transparent !text-white hover:!bg-white/10`;
+    }
+    return `!h-10 rounded-sm px-4 py-2 text-sm font-semibold transition-all focus:!outline-none focus-visible:!ring-2 focus-visible:!ring-primary/60 data-[state=open]:!bg-accent data-[state=open]:!text-accent-foreground !bg-transparent !text-foreground hover:!bg-accent hover:!text-accent-foreground`;
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isTransparent ? "bg-transparent border-transparent py-2" : "bg-background/90 backdrop-blur-md border-b border-border py-0"}`}>
       <div className="container mx-auto max-w-7xl">
         <div className="flex items-center justify-between h-16 px-4 md:px-6">
           <Link href="/" className="flex items-center gap-3 relative z-10 outline-none shrink-0" data-testid="nav-logo">
-            <img src="/logo-icon.png" alt="Automystics" className="h-8 w-8 object-contain" />
+            <img src="/logo-icon.png" alt="Automystics" className={`h-8 w-8 object-contain ${isTransparent ? "brightness-0 invert" : ""}`} />
             <div className="hidden sm:flex flex-col leading-none">
-              <span className="text-lg font-bold tracking-tight text-foreground font-serif">Automystics</span>
+              <span className={`text-lg font-bold tracking-tight font-serif ${isTransparent ? "text-white" : "text-foreground"}`}>Automystics</span>
             </div>
           </Link>
 
@@ -182,12 +196,12 @@ export function Navbar() {
 
           <div className="hidden lg:flex items-center justify-end gap-3 relative z-10 shrink-0">
              <Link href="/demo">
-                <Button variant="ghost" className={`font-semibold ${location.startsWith("/demo") ? "bg-accent text-accent-foreground" : ""}`} data-testid="nav-demo">
+                <Button variant="ghost" className={`font-semibold ${isTransparent ? "text-white hover:bg-white/10 hover:text-white" : "text-foreground hover:bg-accent"} ${location.startsWith("/demo") ? "bg-accent text-accent-foreground" : ""}`} data-testid="nav-demo">
                   Demo
                 </Button>
             </Link>
             <Link href="/contact">
-              <Button className="font-semibold gap-2 transition-all group" data-testid="nav-cta">
+              <Button className={`font-semibold gap-2 transition-all group ${isTransparent ? "bg-white text-black hover:bg-white/90" : ""}`} data-testid="nav-cta">
                 Start a Project
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Button>
@@ -198,7 +212,7 @@ export function Navbar() {
           <div className="lg:hidden relative z-10">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-foreground">
+                <Button variant="ghost" size="icon" className={isTransparent ? "text-white hover:bg-white/10" : "text-foreground"}>
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>

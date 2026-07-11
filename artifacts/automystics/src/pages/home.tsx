@@ -6,12 +6,13 @@ import { motion } from "framer-motion";
 import { 
   Building2, GraduationCap, Mic, LineChart, Sun, Camera, Code, Dumbbell,
   Zap, Shield, Clock, ArrowUpRight, CheckCircle2, Factory, Database,
-  Activity, Users, Sparkles, FileSignature, 
+  Activity, Users, Sparkles, FileSignature, Play, Layers,
   Package, HeartPulse, CalendarCheck, DollarSign, ArrowRight, BrainCircuit,
   Workflow
 } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
 import { DiagonalDivider, WaveDivider } from "@/components/dividers";
+import { NetworkGraph } from "@/components/network-graph";
 
 const HOME_ICON_MAP: Record<string, any> = {
   Building2, GraduationCap, Mic, LineChart, Sun, Camera, Code, Dumbbell,
@@ -50,13 +51,23 @@ export function Home() {
         canonical="/"
       />
 
-      {/* Modern Gradient Hero */}
-      <section className="relative flex flex-col justify-center pt-40 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
-        
-        {/* Soft abstract blobs */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-primary/20 to-secondary/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
+      {/* Dark Cinematic Hero */}
+      <section
+        className="relative flex flex-col justify-center pt-40 pb-28 md:pt-48 md:pb-36 overflow-hidden bg-[#080B14]"
+        style={{
+          backgroundImage: "linear-gradient(180deg, rgba(8,11,20,0.75) 0%, rgba(8,11,20,0.55) 40%, rgba(8,11,20,0.92) 100%), url('/hero-bg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Animated node/network overlay */}
+        <div className="absolute inset-0 opacity-60 pointer-events-none">
+          <NetworkGraph />
+        </div>
+
+        {/* Glow accents */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-primary/30 to-secondary/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-secondary/30 to-primary/20 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4 pointer-events-none" />
 
         <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl">
           <motion.div 
@@ -65,38 +76,44 @@ export function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-primary/20 shadow-sm text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em]">
-              <Sparkles className="w-4 h-4 text-primary" /> 
+            {/* Centered brand icon */}
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-8 shadow-[0_0_40px_hsla(var(--primary),0.4)]">
+              <Layers className="w-8 h-8 text-white" />
+            </div>
+
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm shadow-sm text-white text-xs font-bold mb-8 uppercase tracking-[0.2em]">
+              <Sparkles className="w-4 h-4 text-secondary" /> 
               <span>Next-Gen AI Automation</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-foreground leading-[1.1] mb-8 relative">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.1] mb-8 relative">
               Automate the Future,<br/>
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Faster Than Anyone.</span>
             </h1>
             
-            <p className="text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p className="text-lg md:text-2xl text-white/70 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
               We deliver precision-engineered AI applications, financial platforms, and industrial systems with unprecedented speed and scale.
             </p>
             
-            <div className="flex flex-col sm:flex-row justify-center gap-5 mb-16 w-full sm:w-auto">
-              <Link href="/contact" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold px-9 py-7 text-lg shadow-[0_10px_30px_hsla(var(--primary),0.3)] transition-all duration-300 group">
-                  Start Your Project
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            <div className="flex flex-col sm:flex-row justify-center gap-5 mb-4 w-full sm:w-auto">
+              <Link href="/products" className="w-full sm:w-auto order-2 sm:order-1">
+                <Button size="lg" variant="outline" className="w-full rounded-full bg-white/10 border-white/25 hover:bg-white/20 hover:border-white/40 text-white font-bold px-9 py-7 text-lg backdrop-blur-sm transition-all duration-300 group">
+                  <Play className="w-4 h-4 mr-2 fill-current" />
+                  Watch Video
                 </Button>
               </Link>
-              <Link href="/products" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="w-full rounded-full bg-background/50 border-primary/20 hover:bg-primary/5 hover:border-primary/40 text-foreground font-bold px-9 py-7 text-lg backdrop-blur-sm transition-all duration-300 group">
-                  Explore Solutions
+              <Link href="/contact" className="w-full sm:w-auto order-1 sm:order-2">
+                <Button size="lg" className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold px-9 py-7 text-lg shadow-[0_10px_30px_hsla(var(--primary),0.4)] transition-all duration-300 group">
+                  Request a Demo
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
           </motion.div>
         </div>
         
-        {/* Wave Divider to next section */}
-        <WaveDivider className="bottom-[-1px] text-card" fill="fill-card" />
+        {/* Straight transition into logo strip */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-card to-transparent pointer-events-none" />
       </section>
 
       {/* Grayscale Trust Strip */}
