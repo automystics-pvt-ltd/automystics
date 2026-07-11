@@ -14,9 +14,12 @@
       "backgroundColor": "#05080f"
     },
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.automystics.mobile"
     },
-    "android": {},
+    "android": {
+      "package": "com.automystics.mobile"
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },
