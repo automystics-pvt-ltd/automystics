@@ -95,9 +95,9 @@ const fallbackProducts = [
 
 function StatBlock({ label, value, accent, sub }: { label: string; value: string; accent?: string; sub?: string }) {
   return (
-    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
-      <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">{label}</div>
-      <div className="text-xl font-extrabold text-white mt-1 tracking-tight">{value}</div>
+    <div className="bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
+      <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">{label}</div>
+      <div className="text-xl font-extrabold text-foreground mt-1 tracking-tight">{value}</div>
       {sub && <div className={`text-[10px] font-bold mt-0.5 ${accent || "text-primary"}`}>{sub}</div>}
     </div>
   );
@@ -145,9 +145,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Total AUM" value="₹128.4 Cr" sub="↑ 18.4% YoY" />
           <StatBlock label="Active Members" value="45,672" sub="↑ 1,204 this mo" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Monthly Collection</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Monthly Collection</div>
               <div className="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded-full">98.7% on time</div>
             </div>
             <MiniLine points={[42, 48, 45, 58, 62, 71, 68, 79, 84, 92, 88, 96]} />
@@ -162,9 +162,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Students" value={id === "kalvicore" ? "12,840" : "3,247"} sub="↑ 8% enrolled" />
           <StatBlock label="Attendance" value="94.2%" sub="Today" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Fee Collection (12mo)</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Fee Collection (12mo)</div>
               <div className="text-[10px] font-bold text-primary">₹4.8 Cr</div>
             </div>
             <MiniBars data={[55, 78, 62, 88, 71, 94, 82, 76, 91, 84, 96, 89]} />
@@ -178,9 +178,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Calls Handled" value="284,120" sub="↑ 32% wk" />
           <StatBlock label="Accuracy" value="98.4%" sub="Intent match" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Live Voice Activity</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Live Voice Activity</div>
               <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> LIVE
               </div>
@@ -200,9 +200,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="P&L Today" value="+$48,290" sub="↑ 4.7%" accent="text-emerald-400" />
           <StatBlock label="Win Rate" value="71.2%" sub="Last 30d" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Equity Curve</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Equity Curve</div>
               <div className="text-[10px] font-bold text-emerald-400">Sharpe 2.84</div>
             </div>
             <MiniLine points={[20, 28, 24, 35, 42, 38, 51, 58, 54, 67, 74, 82, 78, 89]} />
@@ -216,9 +216,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Power Output" value="128.4 MW" sub="Real-time" accent="text-emerald-400" />
           <StatBlock label="Plant Uptime" value="99.96%" sub="Last 30d" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Generation 24h</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Generation 24h</div>
               <div className="text-[10px] font-bold text-primary">2.84 GWh</div>
             </div>
             <MiniBars data={[5, 12, 28, 48, 72, 92, 96, 88, 76, 58, 32, 12]} />
@@ -232,9 +232,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Cameras" value="1,284" sub="All online" accent="text-emerald-400" />
           <StatBlock label="Detections" value="48.2K" sub="Last 24h" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Event Timeline</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Event Timeline</div>
               <div className="flex items-center gap-1 text-[10px] font-bold text-rose-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse" /> 2 ALERTS
               </div>
@@ -250,18 +250,18 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Active Members" value="48,210" sub="↑ 22.4% MoM" />
           <StatBlock label="Monthly Revenue" value="₹2.84 Cr" sub="↑ 31% YoY" accent="text-emerald-400" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Daily Check-ins (last 12 days)</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Daily Check-ins (last 12 days)</div>
               <div className="text-[10px] font-bold text-emerald-400 flex items-center gap-1"><HeartPulse className="w-3 h-3" /> 6,142 today</div>
             </div>
             <MiniBars data={[3820, 4210, 4580, 5120, 4920, 5340, 5680, 5910, 6020, 5780, 6240, 6142]} />
           </div>
           <StatBlock label="Retention 90d" value="86.3%" sub="Industry: 64%" accent="text-emerald-400" />
           <StatBlock label="PT Sessions" value="12,486" sub="This month" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold flex items-center gap-1.5"><CalendarCheck className="w-3 h-3" /> Class Occupancy</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold flex items-center gap-1.5"><CalendarCheck className="w-3 h-3" /> Class Occupancy</div>
               <div className="text-[10px] font-bold text-primary">94% avg</div>
             </div>
             <MiniLine points={[68, 72, 78, 82, 79, 86, 88, 92, 95, 91, 96, 94]} />
@@ -276,9 +276,9 @@ function ProductPreview({ id }: { id: string }) {
         <div className="w-full grid grid-cols-2 gap-3">
           <StatBlock label="Projects Live" value="150+" sub="Enterprise" />
           <StatBlock label="Avg Delivery" value="6.2 wk" sub="↓ 60% vs market" accent="text-emerald-400" />
-          <div className="col-span-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-3">
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 backdrop-blur-md border border-border rounded-xl p-3">
             <div className="flex justify-between items-center mb-2">
-              <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold">Velocity (sprints)</div>
+              <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold">Velocity (sprints)</div>
               <div className="text-[10px] font-bold text-primary">+38% QoQ</div>
             </div>
             <MiniBars data={[42, 58, 51, 68, 74, 82, 78, 88, 92, 86, 95, 98]} />
@@ -345,7 +345,7 @@ export function Products() {
         </div>
       </div>
 
-      <div className="py-24 md:py-32 relative z-10 bg-[#D4DBE8]">
+      <div className="py-24 md:py-32 relative z-10 bg-muted/30">
         <div className="absolute inset-0 bg-diagonal-pattern opacity-30" />
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           {loading && live.length === 0 && (
@@ -382,9 +382,9 @@ export function Products() {
                   <div className="grid sm:grid-cols-2 gap-6 mb-10">
                     {product.features.map((feature, i) => (
                       <div key={i} className="group/feat relative flex items-start gap-3 p-4 rounded-2xl bg-white border border-card-border shadow-sm overflow-hidden cursor-default transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40 hover:bg-gradient-to-br hover:from-white hover:to-primary/5">
-                        <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-cyan-400/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
+                        <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
                         <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
-                          <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-white transition-colors duration-300" />
+                          <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-foreground transition-colors duration-300" />
                         </span>
                         <span className="relative text-sm font-medium text-foreground group-hover/feat:text-primary transition-colors duration-300">{feature}</span>
                       </div>
@@ -392,7 +392,7 @@ export function Products() {
                   </div>
 
                   <Link href="/contact">
-                    <Button size="lg" className="rounded-full h-14 px-8 text-lg font-bold bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/20 group">
+                    <Button size="lg" className="rounded-full h-14 px-8 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 group">
                       Request Demo <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </Button>
                   </Link>
@@ -402,7 +402,7 @@ export function Products() {
                   <Card className="bg-gradient-to-br from-[#0B1426] via-[#11203A] to-[#0B1426] border-0 shadow-2xl shadow-primary/20 rounded-[2.5rem] aspect-[4/3] flex items-center justify-center overflow-hidden relative group p-4 transition-all duration-500">
                     <div className="absolute inset-0 dark-grid-pattern opacity-40" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/30 rounded-full blur-[100px] group-hover:bg-primary/50 transition-colors duration-500" />
-                    <div className="absolute top-6 left-6 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold uppercase tracking-widest text-white/80">
+                    <div className="absolute top-6 left-6 px-3 py-1 rounded-full bg-foreground/10 dark:bg-white/10 backdrop-blur-md border border-border/80 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
                       Live Preview
                     </div>
                     <div className="absolute bottom-6 right-6 flex gap-1.5">
@@ -412,12 +412,12 @@ export function Products() {
                     </div>
                     <div className="relative z-10 w-full px-5 pt-12 pb-5">
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center shadow-lg shadow-primary/40">
-                          <product.icon className="w-5 h-5 text-white" />
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary flex items-center justify-center shadow-lg shadow-primary/40">
+                          <product.icon className="w-5 h-5 text-foreground" />
                         </div>
                         <div>
-                          <div className="text-white font-bold text-sm tracking-tight leading-tight">{product.title}</div>
-                          <div className="text-[10px] text-white/50 font-semibold uppercase tracking-wider">Dashboard</div>
+                          <div className="text-foreground font-bold text-sm tracking-tight leading-tight">{product.title}</div>
+                          <div className="text-[10px] text-foreground/50 font-semibold uppercase tracking-wider">Dashboard</div>
                         </div>
                       </div>
                       <ProductPreview id={product.id} />

@@ -18,66 +18,66 @@ export function Company() {
       />
 
       {/* Deep near-black hero background with side glows */}
-      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[#0A0612] pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_rgba(8,145,178,0.35),_transparent_60%)] pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_rgba(34,211,238,0.28),_transparent_60%)] pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,_rgba(34,211,238,0.18),_transparent_70%)] pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[820px] bg-background pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_hsla(var(--primary),0.35),_transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_hsla(var(--primary),0.28),_transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[820px] bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,_hsla(var(--primary),0.18),_transparent_70%)] pointer-events-none" />
 
       <div className="pt-36 pb-24 relative z-10 overflow-hidden">
         <div className="absolute inset-0 dark-grid-pattern opacity-30 pointer-events-none" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-5xl pt-10 relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] mx-auto backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 dark:bg-white/5 border border-border shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] mx-auto backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5" /> THE COMPANY <span className="w-1 h-1 rounded-full bg-primary" /> Est. 2019
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 tracking-tight leading-[1.1]">
               An AI Automation Company<br />
               <span className="relative inline-block mt-1">
-                <span className="bg-gradient-to-r from-cyan-400 via-primary to-cyan-300 bg-clip-text text-transparent">for SaaS, Startups, and SMEs</span>
+                <span className="bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">for SaaS, Startups, and SMEs</span>
                 <svg className="absolute -bottom-2 left-0 w-full" height="12" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none">
                   <path d="M2 8 Q50 2 100 6 T198 5" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.7" />
                 </svg>
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
               Accelerate your roadmap with custom AI-integrated web and mobile ecosystems. We bridge the gap between initial concept and global scale, delivering rapid MVP launches and robust, enterprise-grade SaaS architectures for the next generation of business.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
               <Link href="/contact">
-                <Button size="lg" data-testid="button-hero-consult" className="rounded-full bg-gradient-to-r from-primary to-cyan-500 hover:from-primary/90 hover:to-cyan-500/90 text-white font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
+                <Button size="lg" data-testid="button-hero-consult" className="rounded-full bg-gradient-to-r from-primary to-primary hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
                   Book 20-min Consult
                   <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
               </Link>
               <Link href="/company#case-studies">
-                <Button size="lg" variant="outline" data-testid="button-hero-portfolio" className="rounded-full bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30 text-white font-semibold px-7 py-6 text-base backdrop-blur-md group">
+                <Button size="lg" variant="outline" data-testid="button-hero-portfolio" className="rounded-full bg-foreground/5 dark:bg-white/5 border-border/80 hover:bg-foreground/10 dark:bg-white/10 hover:border-white/30 text-foreground font-semibold px-7 py-6 text-base backdrop-blur-md group">
                   View Our Work Portfolios
                   <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
               </Link>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-12 text-white/80">
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-12 text-muted-foreground">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <HandCoins className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Free Estimate</span>
               </div>
-              <div className="hidden md:block w-px h-6 bg-white/10" />
+              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <FileSignature className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Signed with NDA</span>
               </div>
-              <div className="hidden md:block w-px h-6 bg-white/10" />
+              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <ShieldCheck className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">100% Risk-Free</span>
@@ -87,7 +87,7 @@ export function Company() {
         </div>
       </div>
 
-      <div className="py-24 md:py-32 relative z-10 bg-[#D4DBE8]">
+      <div className="py-24 md:py-32 relative z-10 bg-muted/30">
         <div className="absolute inset-0 bg-diagonal-pattern opacity-30" />
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-32">
@@ -111,9 +111,9 @@ export function Company() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   {["Tamil-Nadu based engineering hub", "Elite, hand-picked technical team", "Obsession with code quality", "Focus on measurable ROI"].map((feature, i) => (
                     <div key={i} className="group/feat relative flex items-start gap-3 p-4 rounded-2xl bg-white border border-card-border shadow-sm overflow-hidden cursor-default transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40 hover:bg-gradient-to-br hover:from-white hover:to-primary/5">
-                      <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-cyan-400/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
+                      <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
                       <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
-                        <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-white transition-colors duration-300" />
+                        <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-foreground transition-colors duration-300" />
                       </span>
                       <span className="relative text-sm font-medium text-foreground group-hover/feat:text-primary transition-colors duration-300">{feature}</span>
                     </div>
@@ -127,8 +127,8 @@ export function Company() {
                     <StatBlock label="Engineers" value="84+" sub="Hand-picked" accent="text-emerald-400" />
                     <StatBlock label="Clients" value="142" sub="Enterprise" />
                     <StatBlock label="Retention" value="98%" sub="Multi-year" accent="text-emerald-400" />
-                    <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-                      <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Annual Growth</div>
+                    <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+                      <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Annual Growth</div>
                       <MiniLine points={[20, 32, 48, 62, 78, 96, 118, 142, 168, 192, 224, 268]} />
                     </div>
                   </div>
@@ -171,8 +171,8 @@ export function Company() {
                     <StatBlock label="On-time" value="96.4%" sub="Sprint commits" />
                     <StatBlock label="Code Review" value="100%" sub="Coverage" />
                     <StatBlock label="Test Coverage" value="92%" sub="Avg across repos" accent="text-emerald-400" />
-                    <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-                      <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Sprint Velocity (story pts)</div>
+                    <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+                      <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Sprint Velocity (story pts)</div>
                       <MiniBars data={[42, 51, 58, 64, 72, 78, 84, 91, 88, 96, 102, 118]} />
                     </div>
                   </div>
@@ -209,8 +209,8 @@ export function Company() {
                     <StatBlock label="Applicants" value="2,840" sub="This quarter" />
                     <StatBlock label="Avg Tenure" value="3.4 yrs" sub="Engineering" />
                     <StatBlock label="Remote" value="68%" sub="Distributed" accent="text-emerald-400" />
-                    <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-                      <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Headcount Growth</div>
+                    <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+                      <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Headcount Growth</div>
                       <MiniBars data={[12, 18, 22, 28, 34, 42, 48, 56, 64, 72, 78, 84]} />
                     </div>
                   </div>
@@ -242,15 +242,15 @@ export function Company() {
                     <div className="absolute -top-12 -right-12 w-48 h-48 bg-primary/30 rounded-full blur-3xl group-hover:bg-primary/50 transition-colors" />
                     <div className="relative z-10">
                       <div className="flex items-center justify-between mb-6">
-                        <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur border border-white/20 text-[10px] font-bold uppercase tracking-widest text-white/80">{study.tag}</span>
+                        <span className="px-3 py-1 rounded-full bg-foreground/10 dark:bg-white/10 backdrop-blur border border-border/80 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{study.tag}</span>
                         <BookOpen className="w-5 h-5 text-primary" />
                       </div>
                       <div className="mb-6">
-                        <div className="text-4xl font-extrabold text-white tracking-tight">{study.metric}</div>
+                        <div className="text-4xl font-extrabold text-foreground tracking-tight">{study.metric}</div>
                         <div className="text-[10px] uppercase tracking-widest text-primary font-bold mt-1">{study.metricLabel}</div>
                       </div>
-                      <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors leading-snug">{study.title}</h3>
-                      <p className="text-sm text-white/60 leading-relaxed">{study.desc}</p>
+                      <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors leading-snug">{study.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{study.desc}</p>
                       <div className="mt-6 text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-2">Read Study <span className="group-hover:translate-x-1 transition-transform">&rarr;</span></div>
                     </div>
                   </Card>
@@ -282,8 +282,8 @@ export function Company() {
                       <div className="absolute inset-0 dark-grid-pattern opacity-50" />
                       <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-primary/40 rounded-full blur-2xl" />
                       <div className="relative z-10 p-6 flex items-start justify-between h-full">
-                        <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur border border-white/20 text-[10px] font-bold uppercase tracking-widest text-white">{post.tag}</span>
-                        <FileText className="w-5 h-5 text-white/80" />
+                        <span className="px-3 py-1 rounded-full bg-foreground/10 dark:bg-white/10 backdrop-blur border border-border/80 text-[10px] font-bold uppercase tracking-widest text-foreground">{post.tag}</span>
+                        <FileText className="w-5 h-5 text-muted-foreground" />
                       </div>
                     </div>
                     <div className="p-6">
@@ -316,7 +316,7 @@ export function Company() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
-                  { name: "Cloud Infrastructure", icon: Cloud, count: "AWS · Azure · GCP", color: "from-blue-500/20 to-cyan-500/20" },
+                  { name: "Cloud Infrastructure", icon: Cloud, count: "AWS · Azure · GCP", color: "from-primary/20 to-primary/20" },
                   { name: "Security Auditing", icon: Shield, count: "ISO 27001 · SOC 2", color: "from-emerald-500/20 to-teal-500/20" },
                   { name: "Hardware & IoT", icon: Cpu, count: "Sensors · Edge devices", color: "from-amber-500/20 to-orange-500/20" },
                   { name: "Education Boards", icon: GraduationCap, count: "CBSE · State boards", color: "from-violet-500/20 to-purple-500/20" }

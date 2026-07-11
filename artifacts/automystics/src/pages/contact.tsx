@@ -145,7 +145,7 @@ export function Contact() {
                   <Button 
                     type="submit" 
                     disabled={isSubmitting} 
-                    className="w-full rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-lg h-16 group shadow-lg shadow-primary/20"
+                    className="w-full rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg h-16 group shadow-lg shadow-primary/20"
                     data-testid="contact-submit"
                   >
                     {isSubmitting ? (
@@ -180,7 +180,7 @@ export function Contact() {
                 </p>
                 {site.primaryPhone && (
                   <a href={`tel:${site.primaryPhone.replace(/[^+\d]/g, "")}`} className="block">
-                    <Button size="lg" variant="outline" className="w-full rounded-full h-14 bg-white border-primary text-primary font-bold text-lg hover:bg-primary hover:text-white transition-all shadow-sm" data-testid="contact-phone-button">
+                    <Button size="lg" variant="outline" className="w-full rounded-full h-14 bg-white border-primary text-primary font-bold text-lg hover:bg-primary hover:text-primary-foreground transition-all shadow-sm" data-testid="contact-phone-button">
                       <Phone className="w-5 h-5 mr-2" /> {site.primaryPhone}
                     </Button>
                   </a>
@@ -235,12 +235,12 @@ export function Contact() {
                           )}
                           <div className="flex flex-col gap-1 mt-3 text-sm">
                             {loc.phone && (
-                              <a href={`tel:${loc.phone.replace(/[^+\d]/g, "")}`} className="text-foreground/80 hover:text-primary inline-flex items-center gap-2">
+                              <a href={`tel:${loc.phone.replace(/[^+\d]/g, "")}`} className="text-muted-foreground hover:text-primary inline-flex items-center gap-2">
                                 <Phone className="w-3.5 h-3.5" /> {loc.phone}
                               </a>
                             )}
                             {loc.email && (
-                              <a href={`mailto:${loc.email}`} className="text-foreground/80 hover:text-primary inline-flex items-center gap-2">
+                              <a href={`mailto:${loc.email}`} className="text-muted-foreground hover:text-primary inline-flex items-center gap-2">
                                 <Mail className="w-3.5 h-3.5" /> {loc.email}
                               </a>
                             )}

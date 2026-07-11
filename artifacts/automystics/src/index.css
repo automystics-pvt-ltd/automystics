@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -52,42 +54,78 @@
 :root {
   color-scheme: light;
   
-  --background: 220 22% 86%; /* notably darker blue-gray */
-  --foreground: 222 47% 9%;
+  /* Alabaster & Graphite */
+  --background: 0 0% 98%;
+  --foreground: 0 0% 10%;
   
-  --border: 218 22% 78%;
+  --border: 0 0% 88%;
   
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --card-border: 218 22% 80%;
+  --card-foreground: 0 0% 15%;
+  --card-border: 0 0% 88%;
   
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  --popover-border: 214 32% 91%;
+  --popover-foreground: 0 0% 10%;
+  --popover-border: 0 0% 90%;
   
-  /* Electric Cyan / Blue */
-  --primary: 190 90% 45%;
+  /* Precision Vermilion */
+  --primary: 10 80% 45%;
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 226 40% 95%;
-  --secondary-foreground: 222 47% 11%;
+  --secondary: 0 0% 92%;
+  --secondary-foreground: 0 0% 15%;
   
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  --muted: 0 0% 94%;
+  --muted-foreground: 0 0% 45%;
   
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222 47% 11%;
+  --accent: 0 0% 92%;
+  --accent-foreground: 0 0% 15%;
   
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   
-  --input: 214 32% 91%;
-  --ring: 190 90% 45%;
+  --input: 0 0% 88%;
+  --ring: 10 80% 45%;
 
-  --app-font-sans: 'Inter', system-ui, sans-serif;
-  --app-font-serif: Georgia, serif;
-  --app-font-mono: Menlo, monospace;
-  --radius: 1rem;
+  --app-font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --app-font-serif: 'Space Grotesk', system-ui, sans-serif;
+  --app-font-mono: 'JetBrains Mono', monospace;
+  --radius: 0.25rem; /* sharper corners for engineering feel */
+}
+
+.dark {
+  color-scheme: dark;
+  
+  --background: 0 0% 6%;
+  --foreground: 0 0% 96%;
+  
+  --border: 0 0% 16%;
+  
+  --card: 0 0% 9%;
+  --card-foreground: 0 0% 96%;
+  --card-border: 0 0% 14%;
+  
+  --popover: 0 0% 9%;
+  --popover-foreground: 0 0% 96%;
+  --popover-border: 0 0% 16%;
+  
+  --primary: 10 85% 60%;
+  --primary-foreground: 0 0% 10%;
+  
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 96%;
+  
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 65%;
+  
+  --accent: 0 0% 15%;
+  --accent-foreground: 0 0% 96%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --input: 0 0% 16%;
+  --ring: 10 85% 60%;
 }
 
 @layer base {
@@ -95,53 +133,71 @@
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/20 selection:text-primary;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
   }
 }
 
-/* Subtle background patterns */
+/* Engineering patterns */
 .bg-grid-pattern {
-  background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 .bg-dot-pattern {
-  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
 }
 
 .bg-diagonal-pattern {
-  background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.02) 0, rgba(0,0,0,0.02) 1px, transparent 0, transparent 50%);
-  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.03) 0, rgba(0,0,0,0.03) 1px, transparent 0, transparent 50%);
+  background-size: 8px 8px;
 }
 
-.dark-grid-pattern {
+.dark .bg-grid-pattern {
   background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
                     linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+}
+
+.dark .bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+.dark .bg-diagonal-pattern {
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 0, transparent 50%);
 }
 
 .bg-glow-top-right {
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle at center, hsla(var(--primary), 0.12) 0%, hsla(var(--primary), 0.05) 30%, transparent 70%);
+  top: -10%;
+  right: -5%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle at center, hsla(var(--primary), 0.08) 0%, hsla(var(--primary), 0.03) 40%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
 
 .bg-glow-bottom-left {
   position: absolute;
-  bottom: -20%;
-  left: -10%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle at center, hsla(var(--primary), 0.1) 0%, transparent 60%);
+  bottom: -10%;
+  left: -5%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle at center, hsla(var(--primary), 0.06) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
+}
+
+.dark .bg-glow-top-right {
+  background: radial-gradient(circle at center, hsla(var(--primary), 0.15) 0%, hsla(var(--primary), 0.05) 40%, transparent 70%);
+}
+
+.dark .bg-glow-bottom-left {
+  background: radial-gradient(circle at center, hsla(var(--primary), 0.12) 0%, transparent 60%);
 }
 
 .rounded-pill {
@@ -149,5 +205,5 @@
 }
 
 .card-hover-effect {
-  @apply transition-all duration-300 border-card-border shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-primary/50;
+  @apply transition-all duration-300 border-card-border/60 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-primary/30 dark:hover:shadow-[0_8px_30px_rgb(255,255,255,0.02)];
 }

@@ -200,7 +200,7 @@ export function AdminSiteSettings() {
         <Button
           onClick={save}
           disabled={saving}
-          className="rounded-full bg-primary hover:bg-primary/90 text-white font-semibold h-12 px-8 shadow-lg shadow-primary/20"
+          className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-12 px-8 shadow-lg shadow-primary/20"
           data-testid="save-site-settings"
         >
           <Save className="w-4 h-4 mr-2" />

@@ -94,21 +94,21 @@ export function Terms() {
         canonical="/terms"
       />
 
-      <div className="absolute top-0 left-0 right-0 h-[520px] bg-[#0A0612] pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-[520px] bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_rgba(8,145,178,0.35),_transparent_60%)] pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-[520px] bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_rgba(34,211,238,0.28),_transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[520px] bg-background pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[520px] bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_hsla(var(--primary),0.35),_transparent_60%)] pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-[520px] bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_hsla(var(--primary),0.28),_transparent_60%)] pointer-events-none" />
 
       <div className="pt-36 pb-16 relative z-10 overflow-hidden">
         <div className="absolute inset-0 dark-grid-pattern opacity-30 pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center pt-6 relative">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] mx-auto backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 dark:bg-white/5 border border-border shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] mx-auto backdrop-blur-md">
               <FileText className="w-3.5 h-3.5" /> LEGAL <span className="w-1 h-1 rounded-full bg-primary" /> Effective: April 17, 2026
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
-              Terms of <span className="bg-gradient-to-r from-cyan-400 via-primary to-cyan-300 bg-clip-text text-transparent">Service</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 tracking-tight leading-[1.1]">
+              Terms of <span className="bg-gradient-to-r from-primary via-primary to-primary/80 bg-clip-text text-transparent">Service</span>
             </h1>
-            <p className="text-base md:text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               The agreement that governs your use of Automystics websites, products, and services.
             </p>
           </motion.div>
@@ -132,7 +132,7 @@ export function Terms() {
                   {s.title}
                 </h2>
                 {Array.isArray(s.body) ? (
-                  <ul className="space-y-2 text-foreground/80 leading-relaxed text-[15px]">
+                  <ul className="space-y-2 text-muted-foreground leading-relaxed text-[15px]">
                     {s.body.map((b, i) => (
                       <li key={i} className="flex gap-3">
                         <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
@@ -141,7 +141,7 @@ export function Terms() {
                     ))}
                   </ul>
                 ) : (
-                  <p className="text-foreground/80 leading-relaxed text-[15px]">{s.body}</p>
+                  <p className="text-muted-foreground leading-relaxed text-[15px]">{s.body}</p>
                 )}
               </motion.div>
             ))}

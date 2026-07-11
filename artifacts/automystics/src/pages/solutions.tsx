@@ -70,8 +70,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Workflows" value="284" sub="Automated" accent="text-emerald-400" />
           <StatBlock label="Hours Saved" value="48K/mo" sub="Across teams" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Process Throughput</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Process Throughput</div>
             <MiniBars data={[42, 58, 64, 78, 82, 91, 88, 96, 102, 118, 124, 138]} />
           </div>
         </div>
@@ -81,8 +81,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Calls / day" value="48,200" sub="Peak capacity" accent="text-emerald-400" />
           <StatBlock label="Intent Acc" value="96.4%" sub="Multi-language" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Conversation Volume</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Conversation Volume</div>
             <MiniLine points={[120, 168, 192, 224, 268, 312, 348, 396, 432, 478, 524, 580]} />
           </div>
         </div>
@@ -92,8 +92,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Latency" value="0.8 ms" sub="Order routing" accent="text-emerald-400" />
           <StatBlock label="Strategies" value="142" sub="Live" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Cumulative P&L</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Cumulative P&L</div>
             <MiniLine points={[10, 22, 32, 28, 48, 64, 72, 88, 98, 112, 128, 148]} />
           </div>
         </div>
@@ -103,8 +103,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Cameras" value="2,840" sub="AI-monitored" accent="text-emerald-400" />
           <StatBlock label="Detections" value="1,284" sub="Last 24h" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Anomaly Events / hr</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Anomaly Events / hr</div>
             <MiniBars data={[12, 18, 14, 22, 28, 16, 32, 24, 38, 28, 42, 36]} />
           </div>
         </div>
@@ -114,8 +114,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Power Output" value="128.4 MW" sub="Real-time" accent="text-emerald-400" />
           <StatBlock label="Inverters" value="1,284" sub="Online" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Daily Generation Curve</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Daily Generation Curve</div>
             <MiniLine points={[5, 14, 32, 54, 78, 94, 98, 92, 78, 56, 32, 12]} />
           </div>
         </div>
@@ -125,8 +125,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Students" value="1.8 L+" sub="Lifecycle managed" accent="text-emerald-400" />
           <StatBlock label="Faculty" value="8,400" sub="Active users" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Term Enrollment</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Term Enrollment</div>
             <MiniBars data={[48, 56, 64, 72, 78, 84, 92, 98, 104, 112, 124, 138]} />
           </div>
         </div>
@@ -136,8 +136,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Settled Vol" value="₹284 Cr" sub="This month" accent="text-emerald-400" />
           <StatBlock label="KYC Auto" value="98.2%" sub="Pass rate" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Daily Disbursals</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Daily Disbursals</div>
             <MiniLine points={[180, 220, 264, 298, 324, 368, 412, 446, 488, 524, 572, 624]} />
           </div>
         </div>
@@ -148,8 +148,8 @@ function SolutionPreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Pipelines" value="148" sub="Production" accent="text-emerald-400" />
           <StatBlock label="Records / day" value="2.4 B" sub="Processed" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Query Throughput</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Query Throughput</div>
             <MiniBars data={[58, 72, 64, 84, 92, 78, 102, 88, 116, 98, 128, 142]} />
           </div>
         </div>
@@ -183,7 +183,7 @@ export function Solutions() {
         </div>
       </div>
 
-      <div className="py-24 md:py-32 relative z-10 bg-[#D4DBE8]">
+      <div className="py-24 md:py-32 relative z-10 bg-muted/30">
         <div className="absolute inset-0 bg-diagonal-pattern opacity-30" />
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-32">
@@ -214,9 +214,9 @@ export function Solutions() {
                   <div className="grid sm:grid-cols-2 gap-6 mb-10">
                     {solution.features.map((feature, i) => (
                       <div key={i} className="group/feat relative flex items-start gap-3 p-4 rounded-2xl bg-white border border-card-border shadow-sm overflow-hidden cursor-default transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40 hover:bg-gradient-to-br hover:from-white hover:to-primary/5">
-                        <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-cyan-400/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
+                        <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
                         <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
-                          <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-white transition-colors duration-300" />
+                          <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-foreground transition-colors duration-300" />
                         </span>
                         <span className="relative text-sm font-medium text-foreground group-hover/feat:text-primary transition-colors duration-300">{feature}</span>
                       </div>

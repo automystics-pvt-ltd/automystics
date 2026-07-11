@@ -11,8 +11,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Projects Live" value="150+" sub="Enterprise" />
           <StatBlock label="Avg Delivery" value="6.2 wk" sub="↓ 60% vs market" accent="text-emerald-400" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Sprint Velocity</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Sprint Velocity</div>
             <MiniBars data={[42, 58, 51, 68, 74, 82, 78, 88, 92, 86, 95, 98]} />
           </div>
         </div>
@@ -22,8 +22,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="PageSpeed" value="98/100" sub="Lighthouse" accent="text-emerald-400" />
           <StatBlock label="TTFB" value="84ms" sub="Global avg" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Daily Requests</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Daily Requests</div>
             <MiniLine points={[120, 180, 240, 320, 280, 410, 480, 520, 600, 580, 720, 840]} />
           </div>
         </div>
@@ -33,8 +33,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="App Rating" value="4.8 ★" sub="iOS + Android" accent="text-emerald-400" />
           <StatBlock label="Crash Free" value="99.92%" sub="Sessions" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Active Users (30d)</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Active Users (30d)</div>
             <MiniBars data={[28, 34, 42, 38, 51, 64, 58, 72, 81, 78, 89, 94]} />
           </div>
         </div>
@@ -44,8 +44,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Models Deployed" value="84" sub="Production" />
           <StatBlock label="Inference" value="120ms" sub="P95 latency" accent="text-emerald-400" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Tokens / sec</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Tokens / sec</div>
             <MiniLine points={[200, 260, 240, 320, 380, 420, 460, 520, 580, 640, 720, 810]} />
           </div>
         </div>
@@ -55,8 +55,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Deploy Freq" value="42/day" sub="Across stack" accent="text-emerald-400" />
           <StatBlock label="MTTR" value="8 min" sub="↓ from 4 hrs" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">CI/CD Pipeline Runs</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">CI/CD Pipeline Runs</div>
             <MiniBars data={[64, 72, 58, 84, 91, 78, 96, 88, 102, 94, 118, 124]} />
           </div>
         </div>
@@ -66,8 +66,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Conversion" value="+38%" sub="Avg lift" accent="text-emerald-400" />
           <StatBlock label="Task Success" value="94.6%" sub="Usability tests" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">User Engagement</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">User Engagement</div>
             <MiniLine points={[40, 48, 55, 62, 70, 68, 78, 85, 82, 91, 96, 102]} />
           </div>
         </div>
@@ -77,8 +77,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Uptime" value="99.99%" sub="API SLA" accent="text-emerald-400" />
           <StatBlock label="Endpoints" value="284" sub="REST + GraphQL" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">Calls / minute</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">Calls / minute</div>
             <MiniBars data={[120, 145, 132, 168, 184, 152, 196, 178, 212, 198, 234, 256]} />
           </div>
         </div>
@@ -89,8 +89,8 @@ function ServicePreview({ id }: { id: string }) {
         <div className="grid grid-cols-2 gap-3">
           <StatBlock label="Response Time" value="< 5 min" sub="Critical issues" accent="text-emerald-400" />
           <StatBlock label="Tickets Closed" value="1,847" sub="This month" />
-          <div className="col-span-2 bg-white/5 border border-white/10 rounded-xl p-3">
-            <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold mb-2">System Health 24h</div>
+          <div className="col-span-2 bg-foreground/5 dark:bg-white/5 border border-border rounded-xl p-3">
+            <div className="text-[10px] uppercase tracking-widest text-foreground/50 font-bold mb-2">System Health 24h</div>
             <MiniLine points={[92, 94, 91, 95, 97, 96, 98, 97, 99, 98, 99, 99]} />
           </div>
         </div>
@@ -183,7 +183,7 @@ export function Services() {
         </div>
       </div>
 
-      <div className="py-24 md:py-32 relative z-10 bg-[#D4DBE8]">
+      <div className="py-24 md:py-32 relative z-10 bg-muted/30">
         <div className="absolute inset-0 bg-diagonal-pattern opacity-30" />
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-32">
@@ -214,9 +214,9 @@ export function Services() {
                   <div className="grid sm:grid-cols-2 gap-6 mb-10">
                     {service.features.map((feature, i) => (
                       <div key={i} className="group/feat relative flex items-start gap-3 p-4 rounded-2xl bg-white border border-card-border shadow-sm overflow-hidden cursor-default transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40 hover:bg-gradient-to-br hover:from-white hover:to-primary/5">
-                        <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-cyan-400/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
+                        <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
                         <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
-                          <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-white transition-colors duration-300" />
+                          <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-foreground transition-colors duration-300" />
                         </span>
                         <span className="relative text-sm font-medium text-foreground group-hover/feat:text-primary transition-colors duration-300">{feature}</span>
                       </div>

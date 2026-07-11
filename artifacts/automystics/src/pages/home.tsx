@@ -51,10 +51,10 @@ export function Home() {
       {/* Hero Section */}
       <section className="relative pt-36 pb-24 md:pt-44 md:pb-28 overflow-hidden">
         {/* Deep near-black background with side glows */}
-        <div className="absolute inset-0 bg-[#0A0612] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_rgba(8,145,178,0.35),_transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_rgba(34,211,238,0.28),_transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,_rgba(34,211,238,0.18),_transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-background dark:bg-background pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_hsla(var(--primary),0.35),_transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_hsla(var(--primary),0.28),_transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,_hsla(var(--primary),0.18),_transparent_70%)] pointer-events-none" />
         <div className="absolute inset-0 dark-grid-pattern opacity-30 pointer-events-none" />
 
         {/* Animated orbs */}
@@ -66,7 +66,7 @@ export function Home() {
         <motion.div 
           animate={{ y: [0, 30, 0], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/3 right-12 w-56 h-56 bg-cyan-400/25 rounded-full blur-3xl pointer-events-none" 
+          className="absolute top-1/3 right-12 w-56 h-56 bg-primary/25 rounded-full blur-3xl pointer-events-none" 
         />
 
         <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl">
@@ -75,33 +75,33 @@ export function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 dark:bg-white/5 border border-border shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5" /> Engineering The Future
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-[1.05] mb-8 relative">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-foreground leading-[1.05] mb-8 relative">
               We Build Software,<br/>
               <span className="relative inline-block mt-1">
-                <span className="bg-gradient-to-r from-cyan-400 via-primary to-cyan-300 bg-clip-text text-transparent">Faster Than Anyone.</span>
+                <span className="bg-gradient-to-r from-primary/80 via-primary to-primary/60 bg-clip-text text-transparent">Faster Than Anyone.</span>
                 <svg className="absolute w-full -bottom-2 left-0" height="12" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none">
                   <path d="M2 8 Q50 2 100 6 T198 5" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.7" />
                 </svg>
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-white/60 mb-10 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
               Automystics delivers precision-engineered AI applications, financial platforms, and industrial systems with unprecedented speed.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
               <Link href="/contact">
-                <Button size="lg" data-testid="button-hero-start" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-primary to-cyan-500 hover:from-primary/90 hover:to-cyan-500/90 text-white font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
+                <Button size="lg" data-testid="button-hero-start" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
                   Start Your Project
                   <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
               </Link>
               <Link href="/products">
-                <Button size="lg" variant="outline" data-testid="button-hero-explore" className="w-full sm:w-auto rounded-full bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/30 text-white font-semibold px-7 py-6 text-base backdrop-blur-md group">
+                <Button size="lg" variant="outline" data-testid="button-hero-explore" className="w-full sm:w-auto rounded-full bg-foreground/5 dark:bg-white/5 border-border/80 hover:bg-foreground/10 dark:bg-white/10 hover:border-white/30 text-foreground font-semibold px-7 py-6 text-base backdrop-blur-md group">
                   Explore Products
                   <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
@@ -109,30 +109,30 @@ export function Home() {
             </div>
 
             {/* Trust strip - icon row */}
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-4 text-white/80">
+            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-4 text-muted-foreground">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <Zap className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Fastest Delivery</span>
               </div>
-              <div className="hidden md:block w-px h-6 bg-white/10" />
+              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <Shield className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Enterprise Grade</span>
               </div>
-              <div className="hidden md:block w-px h-6 bg-white/10" />
+              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <FileSignature className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Signed with NDA</span>
               </div>
-              <div className="hidden md:block w-px h-6 bg-white/10" />
+              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-cyan-500/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
                   <Code className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">100% Custom Built</span>
@@ -143,7 +143,7 @@ export function Home() {
       </section>
 
       {/* Stats Dark Accent Band */}
-      <section className="py-16 bg-[#0B1426] border-y border-primary/20 relative overflow-hidden">
+      <section className="py-16 bg-secondary dark:bg-secondary border-y border-primary/20 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10">
@@ -155,7 +155,7 @@ export function Home() {
             ].map((stat, i) => (
               <div key={i} className="text-center px-4">
                 <stat.icon className="w-6 h-6 text-primary mx-auto mb-3 opacity-80" />
-                <div className="text-3xl md:text-4xl font-extrabold text-white mb-1">{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-foreground mb-1">{stat.value}</div>
                 <div className="text-sm text-primary font-semibold uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}
@@ -163,8 +163,8 @@ export function Home() {
         </div>
       </section>
 
-      {/* Services Grid (Section A: light blue-gray) */}
-      <section id="services" className="py-24 md:py-32 relative bg-[#D4DBE8]">
+      {/* Services Grid (Section A: light primary-gray) */}
+      <section id="services" className="py-24 md:py-32 relative bg-muted/30 dark:bg-muted/10">
         <div className="absolute inset-0 bg-diagonal-pattern opacity-30" />
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -185,15 +185,15 @@ export function Home() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
                 <Link href={`/products#${product.id}`} className="block h-full group" data-testid={`product-tile-${product.id}`}>
-                  <div className="relative h-full bg-[#334155] rounded-3xl border border-white/10 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/50">
+                  <div className="relative h-full bg-card dark:bg-card rounded-3xl border border-border overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/50">
                     {/* Top gradient accent bar */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/80 to-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
                     
                     {/* Decorative bg blob */}
                     <div className="absolute -top-12 -right-12 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                     
                     {/* Index number watermark */}
-                    <div className="absolute top-6 right-6 text-5xl font-extrabold text-white/5 group-hover:text-primary/30 transition-colors leading-none select-none">
+                    <div className="absolute top-6 right-6 text-5xl font-extrabold text-foreground/5 group-hover:text-primary/30 transition-colors leading-none select-none">
                       {String(i + 1).padStart(2, "0")}
                     </div>
 
@@ -201,24 +201,24 @@ export function Home() {
                       {/* Icon */}
                       <div className="relative mb-8">
                         <div className="absolute inset-0 bg-primary/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                          <product.icon className="w-7 h-7 text-white" />
+                        <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                          <product.icon className="w-7 h-7 text-foreground" />
                         </div>
                       </div>
 
-                      <h3 className="text-lg font-bold text-white mb-3 tracking-tight group-hover:text-primary transition-colors">
+                      <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors">
                         {product.title}
                       </h3>
-                      <p className="text-sm text-white/60 leading-relaxed mb-6 flex-1">
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
                         {product.desc}
                       </p>
 
-                      <div className="flex items-center justify-between pt-5 border-t border-white/10">
-                        <span className="text-xs font-bold uppercase tracking-wider text-white/60 group-hover:text-primary transition-colors">
+                      <div className="flex items-center justify-between pt-5 border-t border-border">
+                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
                           Explore
                         </span>
-                        <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                          <ArrowUpRight className="w-4 h-4 text-white transition-colors" />
+                        <div className="w-9 h-9 rounded-full bg-foreground/10 dark:bg-white/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                          <ArrowUpRight className="w-4 h-4 text-foreground transition-colors" />
                         </div>
                       </div>
                     </div>
@@ -231,7 +231,7 @@ export function Home() {
       </section>
 
       {/* Industries (Section B: soft gradient panel) */}
-      <section id="industries" className="py-24 md:py-32 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-[#E1E6EF] to-[#D4DBE8]">
+      <section id="industries" className="py-24 md:py-32 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-muted/20 dark:via-muted/5 to-muted/40 dark:to-muted/15">
         <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -386,8 +386,8 @@ export function Home() {
               >
                 {/* Step number circle on top */}
                 <div className="absolute left-1/2 -translate-x-1/2 -top-1 z-20">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center shadow-lg shadow-primary/30 border-4 border-white">
-                    <step.icon className="w-6 h-6 text-white" />
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/30 border-4 border-white">
+                    <step.icon className="w-6 h-6 text-foreground" />
                   </div>
                 </div>
 
@@ -410,7 +410,7 @@ export function Home() {
                       {step.deliverables.map((d, j) => (
                         <div key={j} className="flex items-center gap-2 text-xs">
                           <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
-                          <span className="text-foreground/80 font-medium">{d}</span>
+                          <span className="text-muted-foreground font-medium">{d}</span>
                         </div>
                       ))}
                     </div>

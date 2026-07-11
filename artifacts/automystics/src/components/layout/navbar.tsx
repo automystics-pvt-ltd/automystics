@@ -73,11 +73,11 @@ const company = [
 ];
 
 const DropdownGrid = ({ items, linkPrefix }: { items: any[], linkPrefix: string }) => (
-  <div className="w-[800px] p-6 grid grid-cols-2 gap-4 bg-white border border-border shadow-2xl rounded-2xl">
+  <div className="w-[800px] p-6 grid grid-cols-2 gap-4 bg-background border border-border shadow-2xl rounded-sm">
     {items.map((item) => (
       <NavigationMenuLink asChild key={item.id}>
-        <Link href={`${linkPrefix}#${item.id}`} className="group p-3 rounded-xl hover:bg-muted transition-colors flex gap-4 items-start outline-none">
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+        <Link href={`${linkPrefix}#${item.id}`} className="group p-3 rounded-sm hover:bg-muted/50 transition-colors flex gap-4 items-start outline-none">
+          <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors text-primary">
             <item.icon className="w-5 h-5" />
           </div>
           <div>
@@ -110,31 +110,30 @@ export function Navbar() {
 
   const triggerClass = (path: string) => {
     const active = location === path || location.startsWith(path + "/");
-    return `!h-10 rounded-full px-4 py-2 text-sm font-semibold transition-all focus:!outline-none focus-visible:!ring-2 focus-visible:!ring-primary/60 data-[state=open]:!bg-primary data-[state=open]:!text-white ${
+    return `!h-10 rounded-sm px-4 py-2 text-sm font-semibold transition-all focus:!outline-none focus-visible:!ring-2 focus-visible:!ring-primary/60 data-[state=open]:!bg-accent data-[state=open]:!text-accent-foreground ${
       active
-        ? "!bg-primary !text-white shadow-lg shadow-primary/40 hover:!bg-primary hover:!text-white focus:!bg-primary focus:!text-white"
-        : "!bg-transparent !text-white/80 hover:!bg-white/10 hover:!text-white focus:!bg-transparent focus-visible:!bg-white/10"
+        ? "!bg-accent !text-accent-foreground hover:!bg-accent/90"
+        : "!bg-transparent !text-foreground hover:!bg-accent hover:!text-accent-foreground focus:!bg-transparent focus-visible:!bg-accent"
     }`;
   };
 
   return (
-    <nav className="fixed top-6 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto max-w-6xl">
-        <div className="bg-[#0B1426] text-white rounded-full shadow-2xl shadow-primary/10 border border-white/10 flex items-center justify-between h-16 px-4 md:px-6">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <div className="container mx-auto max-w-7xl">
+        <div className="flex items-center justify-between h-16 px-4 md:px-6">
           <Link href="/" className="flex items-center gap-3 relative z-10 outline-none shrink-0" data-testid="nav-logo">
-            <div className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center shadow-lg ring-1 ring-white/20">
-              <img src="/logo-icon.png" alt="Automystics" className="h-10 w-auto object-contain" />
+            <div className="bg-primary text-primary-foreground rounded-sm h-8 w-8 flex items-center justify-center font-bold text-lg">
+              A
             </div>
             <div className="hidden sm:flex flex-col leading-none">
-              <span className="text-base font-extrabold tracking-tight text-white uppercase">Automystics</span>
-              <span className="text-[6.5px] font-semibold uppercase text-primary mt-1 block" style={{ letterSpacing: "0.135em", marginRight: "-0.135em" }}>An AI Automation Company</span>
+              <span className="text-lg font-bold tracking-tight text-foreground font-serif">Automystics</span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center justify-center flex-1">
             <NavigationMenu>
-              <NavigationMenuList className="gap-0.5">
+              <NavigationMenuList className="gap-1">
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className={triggerClass("/services")}>
                     Services
@@ -179,29 +178,18 @@ export function Navbar() {
                     <DropdownGrid items={company} linkPrefix="/company" />
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="/demo" className={`group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-all hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white outline-none ${location.startsWith("/demo") ? "bg-primary text-white shadow-lg shadow-primary/40" : "text-white/80"}`} data-testid="nav-demo">
-                      Demo
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="/contact" className={`group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-semibold transition-all hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white outline-none ${isContact ? "bg-primary text-white shadow-lg shadow-primary/40" : "text-white/80"}`}>
-                      Contact Us
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
 
-          <div className="hidden lg:flex items-center justify-end relative z-10 shrink-0">
+          <div className="hidden lg:flex items-center justify-end gap-3 relative z-10 shrink-0">
+             <Link href="/demo">
+                <Button variant="ghost" className={`font-semibold ${location.startsWith("/demo") ? "bg-accent text-accent-foreground" : ""}`} data-testid="nav-demo">
+                  Demo
+                </Button>
+            </Link>
             <Link href="/contact">
-              <Button className="rounded-full h-10 px-5 bg-primary hover:bg-primary/90 text-white font-semibold gap-2 transition-all group" data-testid="nav-cta">
+              <Button className="font-semibold gap-2 transition-all group" data-testid="nav-cta">
                 Start a Project
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Button>
@@ -212,21 +200,21 @@ export function Navbar() {
           <div className="lg:hidden relative z-10">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 hover:text-white rounded-full">
+                <Button variant="ghost" size="icon" className="text-foreground">
                   <Menu className="w-5 h-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-[#0B1426] border-l border-white/10 p-6 w-[320px] overflow-y-auto">
+              <SheetContent side="right" className="bg-background border-l border-border p-6 w-[320px] overflow-y-auto">
                 <div className="flex flex-col gap-6 mt-10">
-                  <Link href="/" className={`text-lg font-medium transition-colors ${isHome ? "text-white" : "text-white/70"}`}>
+                  <Link href="/" className={`text-lg font-semibold transition-colors ${isHome ? "text-primary" : "text-foreground"}`}>
                     Home
                   </Link>
                   
                   <div className="space-y-4">
-                    <div className="text-lg font-medium text-white">Services</div>
-                    <div className="pl-4 border-l border-white/10 flex flex-col gap-4">
+                    <div className="text-lg font-semibold text-foreground">Services</div>
+                    <div className="pl-4 border-l border-border flex flex-col gap-4">
                       {services.map(p => (
-                        <Link key={p.id} href={`/services#${p.id}`} className="text-white/70 hover:text-white text-sm">
+                        <Link key={p.id} href={`/services#${p.id}`} className="text-muted-foreground hover:text-primary text-sm">
                           {p.title}
                         </Link>
                       ))}
@@ -234,10 +222,10 @@ export function Navbar() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="text-lg font-medium text-white">Products</div>
-                    <div className="pl-4 border-l border-white/10 flex flex-col gap-4">
+                    <div className="text-lg font-semibold text-foreground">Products</div>
+                    <div className="pl-4 border-l border-border flex flex-col gap-4">
                       {products.map(p => (
-                        <Link key={p.id} href={`/products#${p.id}`} className="text-white/70 hover:text-white text-sm">
+                        <Link key={p.id} href={`/products#${p.id}`} className="text-muted-foreground hover:text-primary text-sm">
                           {p.title}
                         </Link>
                       ))}
@@ -245,10 +233,10 @@ export function Navbar() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="text-lg font-medium text-white">Industries</div>
-                    <div className="pl-4 border-l border-white/10 flex flex-col gap-4">
+                    <div className="text-lg font-semibold text-foreground">Industries</div>
+                    <div className="pl-4 border-l border-border flex flex-col gap-4">
                       {industries.map(p => (
-                        <Link key={p.id} href={`/industries#${p.id}`} className="text-white/70 hover:text-white text-sm">
+                        <Link key={p.id} href={`/industries#${p.id}`} className="text-muted-foreground hover:text-primary text-sm">
                           {p.title}
                         </Link>
                       ))}
@@ -256,10 +244,10 @@ export function Navbar() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="text-lg font-medium text-white">Solutions</div>
-                    <div className="pl-4 border-l border-white/10 flex flex-col gap-4">
+                    <div className="text-lg font-semibold text-foreground">Solutions</div>
+                    <div className="pl-4 border-l border-border flex flex-col gap-4">
                       {solutions.map(p => (
-                        <Link key={p.id} href={`/solutions#${p.id}`} className="text-white/70 hover:text-white text-sm">
+                        <Link key={p.id} href={`/solutions#${p.id}`} className="text-muted-foreground hover:text-primary text-sm">
                           {p.title}
                         </Link>
                       ))}
@@ -267,27 +255,27 @@ export function Navbar() {
                   </div>
 
                   <div className="space-y-4">
-                    <div className="text-lg font-medium text-white">Company</div>
-                    <div className="pl-4 border-l border-white/10 flex flex-col gap-4">
+                    <div className="text-lg font-semibold text-foreground">Company</div>
+                    <div className="pl-4 border-l border-border flex flex-col gap-4">
                       {company.map(p => (
-                        <Link key={p.id} href={`/company#${p.id}`} className="text-white/70 hover:text-white text-sm">
+                        <Link key={p.id} href={`/company#${p.id}`} className="text-muted-foreground hover:text-primary text-sm">
                           {p.title}
                         </Link>
                       ))}
                     </div>
                   </div>
 
-                  <Link href="/demo" className={`text-lg font-medium transition-colors ${location.startsWith("/demo") ? "text-white" : "text-white/70"}`}>
+                  <Link href="/demo" className={`text-lg font-semibold transition-colors ${location.startsWith("/demo") ? "text-primary" : "text-foreground"}`}>
                     Demo
                   </Link>
 
-                  <Link href="/contact" className={`text-lg font-medium transition-colors ${isContact ? "text-white" : "text-white/70"}`}>
+                  <Link href="/contact" className={`text-lg font-semibold transition-colors ${isContact ? "text-primary" : "text-foreground"}`}>
                     Contact Us
                   </Link>
                   
-                  <div className="h-px bg-white/10 w-full my-2"></div>
+                  <div className="h-px bg-border w-full my-2"></div>
                   <Link href="/contact">
-                    <Button variant="default" className="w-full rounded-full bg-primary text-white font-semibold gap-2 h-12 hover:bg-primary/90">
+                    <Button variant="default" className="w-full font-semibold gap-2 h-12">
                       Start a Project <ArrowUpRight className="w-4 h-4" />
                     </Button>
                   </Link>

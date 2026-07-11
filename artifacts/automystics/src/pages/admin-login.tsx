@@ -106,7 +106,7 @@ export function AdminLogin() {
                 type="submit"
                 disabled={submitting}
                 data-testid="admin-login-submit"
-                className="w-full rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base h-12 group shadow-lg shadow-primary/20"
+                className="w-full rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base h-12 group shadow-lg shadow-primary/20"
               >
                 {submitting ? (
                   <div className="flex items-center justify-center gap-2">

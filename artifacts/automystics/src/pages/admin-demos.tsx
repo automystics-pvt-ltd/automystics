@@ -34,17 +34,17 @@ const EMPTY: Omit<Demo, "id"> = {
 };
 
 function FormGrid({ data, onChange, idPrefix }: {
-  data: Omit<Demo, "id">; onChange: (p: Partial<Demo>) => void; idPrefix: string;
+  data: Omit<Demo, "id">; onChange: (p: Partial<Omit<Demo, "id">>) => void; idPrefix: string;
 }) {
-  const f = (k: keyof Demo, label: string, opts: { type?: string; placeholder?: string; testId?: string; full?: boolean } = {}) => (
+  const f = (k: keyof Omit<Demo, "id">, label: string, opts: { type?: string; placeholder?: string; testId?: string; full?: boolean } = {}) => (
     <div className={`space-y-2 ${opts.full ? "md:col-span-2" : ""}`}>
       <Label className="font-semibold">{label}</Label>
       <Input
         type={opts.type || "text"}
         value={(data[k] as string) ?? ""}
-        onChange={(e) => onChange({ [k]: e.target.value } as Partial<Demo>)}
+        onChange={(e) => onChange({ [k]: e.target.value } as Partial<Omit<Demo, "id">>)}
         placeholder={opts.placeholder}
-        className="bg-white border-card-border h-11 rounded-xl"
+        className="bg-background border-border h-11 rounded-sm"
         data-testid={opts.testId ? `${idPrefix}-${opts.testId}` : undefined}
       />
     </div>
@@ -127,7 +127,7 @@ function DemoRow({
             <Button variant="outline" onClick={onDelete} className="rounded-full border-rose-200 text-rose-700 hover:bg-rose-50 hover:text-rose-800" data-testid={`demo-delete-${demo.id}`}>
               <Trash2 className="w-4 h-4 mr-2" /> Delete
             </Button>
-            <Button onClick={onSave} className="rounded-full bg-primary hover:bg-primary/90 text-white" data-testid={`demo-save-${demo.id}`}>
+            <Button onClick={onSave} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground" data-testid={`demo-save-${demo.id}`}>
               <Save className="w-4 h-4 mr-2" /> Save changes
             </Button>
           </div>
@@ -247,7 +247,7 @@ export function AdminDemos() {
           </p>
         </div>
         {!creating && (
-          <Button onClick={() => setCreating(true)} className="rounded-full bg-primary hover:bg-primary/90 text-white" data-testid="add-demo-btn">
+          <Button onClick={() => setCreating(true)} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground" data-testid="add-demo-btn">
             <Plus className="w-4 h-4 mr-2" /> Add demo
           </Button>
         )}
@@ -259,7 +259,7 @@ export function AdminDemos() {
           <FormGrid data={draft} onChange={(p) => setDraft({ ...draft, ...p })} idPrefix="new-demo" />
           <div className="flex justify-end gap-3">
             <Button variant="outline" onClick={() => { setCreating(false); setDraft({ ...EMPTY }); }} className="rounded-full border-card-border bg-white">Cancel</Button>
-            <Button onClick={createNew} className="rounded-full bg-primary hover:bg-primary/90 text-white" data-testid="save-new-demo">
+            <Button onClick={createNew} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground" data-testid="save-new-demo">
               <Plus className="w-4 h-4 mr-2" /> Add demo
             </Button>
           </div>

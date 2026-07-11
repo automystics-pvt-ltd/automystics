@@ -60,7 +60,7 @@ const STATUS_OPTIONS = [
 ];
 
 const STATUS_COLORS: Record<string, string> = {
-  new: "bg-blue-100 text-blue-800 border-blue-300",
+  new: "bg-primary/10 text-primary border-primary/30",
   in_progress: "bg-amber-100 text-amber-800 border-amber-300",
   contacted: "bg-purple-100 text-purple-800 border-purple-300",
   won: "bg-emerald-100 text-emerald-800 border-emerald-300",
@@ -228,42 +228,42 @@ export function AdminDashboard() {
           <TabsList className="bg-white border border-card-border rounded-2xl p-1 mb-8 h-auto">
             <TabsTrigger
               value="enquiries"
-              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-white font-semibold"
+              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-semibold"
               data-testid="tab-enquiries"
             >
               <Inbox className="w-4 h-4 mr-2" /> Enquiries
             </TabsTrigger>
             <TabsTrigger
               value="email"
-              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-white font-semibold"
+              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-semibold"
               data-testid="tab-email"
             >
               <Settings2 className="w-4 h-4 mr-2" /> Email Settings
             </TabsTrigger>
             <TabsTrigger
               value="contact"
-              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-white font-semibold"
+              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-semibold"
               data-testid="tab-contact"
             >
               <Phone className="w-4 h-4 mr-2" /> Contact Info
             </TabsTrigger>
             <TabsTrigger
               value="locations"
-              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-white font-semibold"
+              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-semibold"
               data-testid="tab-locations"
             >
               <MapPin className="w-4 h-4 mr-2" /> Locations
             </TabsTrigger>
             <TabsTrigger
               value="demos"
-              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-white font-semibold"
+              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-semibold"
               data-testid="tab-demos"
             >
               <PlayCircle className="w-4 h-4 mr-2" /> Demos
             </TabsTrigger>
             <TabsTrigger
               value="products"
-              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-white font-semibold"
+              className="rounded-xl px-5 py-2.5 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-semibold"
               data-testid="tab-products"
             >
               <Package className="w-4 h-4 mr-2" /> Products
@@ -277,7 +277,7 @@ export function AdminDashboard() {
           <button
             onClick={() => setStatusFilter("all")}
             className={`p-4 rounded-2xl border text-left transition-all ${
-              statusFilter === "all" ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" : "bg-white border-card-border hover:border-primary/40"
+              statusFilter === "all" ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-white border-card-border hover:border-primary/40"
             }`}
           >
             <div className="text-xs font-bold uppercase tracking-wide opacity-80">All</div>
@@ -288,7 +288,7 @@ export function AdminDashboard() {
               key={s.value}
               onClick={() => setStatusFilter(s.value)}
               className={`p-4 rounded-2xl border text-left transition-all ${
-                statusFilter === s.value ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" : "bg-white border-card-border hover:border-primary/40"
+                statusFilter === s.value ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20" : "bg-white border-card-border hover:border-primary/40"
               }`}
             >
               <div className="text-xs font-bold uppercase tracking-wide opacity-80">{s.label}</div>
@@ -352,7 +352,7 @@ export function AdminDashboard() {
                         <span className="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {new Date(e.createdAt).toLocaleString()}</span>
                       </div>
                       {!isOpen && (
-                        <p className="mt-2 text-foreground/80 line-clamp-2">{e.message}</p>
+                        <p className="mt-2 text-muted-foreground line-clamp-2">{e.message}</p>
                       )}
                     </div>
                     {isOpen ? <ChevronUp className="w-5 h-5 text-muted-foreground" /> : <ChevronDown className="w-5 h-5 text-muted-foreground" />}
@@ -379,7 +379,7 @@ export function AdminDashboard() {
                             <div className="mt-3 flex justify-end">
                               <Button
                                 onClick={() => updateEnquiry(e.id, { notes })}
-                                className="rounded-full bg-primary hover:bg-primary/90 text-white"
+                                className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
                               >
                                 Save notes
                               </Button>

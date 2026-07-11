@@ -55,7 +55,7 @@ function DemoCard({ demo }: { demo: PublicDemo }) {
           </div>
         )}
         {demo.badge && (
-          <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-wide shadow-lg">
+          <span className="absolute top-4 left-4 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wide shadow-lg">
             {demo.badge}
           </span>
         )}
@@ -90,7 +90,7 @@ function DemoCard({ demo }: { demo: PublicDemo }) {
         <div className="mt-auto pt-6 flex flex-wrap gap-3">
           {demo.demoUrl && (
             <a href={demo.demoUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[140px]">
-              <Button className="w-full rounded-full h-12 bg-primary hover:bg-primary/90 text-white font-bold group" data-testid={`demo-launch-${demo.id}`}>
+              <Button className="w-full rounded-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-bold group" data-testid={`demo-launch-${demo.id}`}>
                 {cta} <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Button>
             </a>
@@ -176,7 +176,7 @@ export function Demo() {
                     onClick={() => setActiveCategory(c)}
                     className={`px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
                       activeCategory === c
-                        ? "bg-primary text-white border-primary"
+                        ? "bg-primary text-primary-foreground border-primary"
                         : "bg-white text-foreground border-card-border hover:border-primary/40"
                     }`}
                     data-testid={`demo-category-${c}`}

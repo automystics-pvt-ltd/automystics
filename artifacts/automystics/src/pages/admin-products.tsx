@@ -323,7 +323,7 @@ function ProductRow({
             </Button>
             <Button
               onClick={onSave}
-              className="rounded-full bg-primary hover:bg-primary/90 text-white"
+              className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
               data-testid={`product-save-${product.id}`}
             >
               <Save className="w-4 h-4 mr-2" /> Save changes
@@ -512,7 +512,7 @@ export function AdminProducts() {
         {!creating && (
           <Button
             onClick={() => setCreating(true)}
-            className="rounded-full bg-primary hover:bg-primary/90 text-white"
+            className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
             data-testid="add-product-btn"
           >
             <Plus className="w-4 h-4 mr-2" /> Add product
@@ -545,7 +545,7 @@ export function AdminProducts() {
             </Button>
             <Button
               onClick={createNew}
-              className="rounded-full bg-primary hover:bg-primary/90 text-white"
+              className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
               data-testid="save-new-product"
             >
               <Plus className="w-4 h-4 mr-2" /> Add product

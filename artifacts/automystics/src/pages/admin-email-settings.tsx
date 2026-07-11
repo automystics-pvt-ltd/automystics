@@ -353,7 +353,7 @@ export function AdminEmailSettings() {
             type="button"
             onClick={handleTest}
             disabled={testing}
-            className="rounded-full bg-foreground hover:bg-foreground/90 text-white h-12 px-6"
+            className="rounded-full bg-foreground hover:bg-foreground/90 text-foreground h-12 px-6"
             data-testid="send-test-email"
           >
             {testing ? (
@@ -382,7 +382,7 @@ export function AdminEmailSettings() {
         <Button
           type="submit"
           disabled={saving}
-          className="rounded-full bg-primary hover:bg-primary/90 text-white h-11 px-6 shadow-lg shadow-primary/20"
+          className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground h-11 px-6 shadow-lg shadow-primary/20"
           data-testid="save-email-settings"
         >
           {saving ? (

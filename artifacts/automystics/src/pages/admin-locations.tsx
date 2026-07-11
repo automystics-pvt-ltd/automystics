@@ -35,7 +35,7 @@ const LOCATION_TYPES = [
 
 const TYPE_BADGE: Record<string, string> = {
   headquarters: "bg-primary/10 text-primary border-primary/20",
-  branch: "bg-blue-50 text-blue-700 border-blue-200",
+  branch: "bg-primary/10 text-primary border-primary/30",
   sales: "bg-emerald-50 text-emerald-700 border-emerald-200",
   support: "bg-amber-50 text-amber-700 border-amber-200",
   registered: "bg-violet-50 text-violet-700 border-violet-200",
@@ -174,7 +174,7 @@ function LocationCard({
             </Button>
             <Button
               onClick={onSave}
-              className="rounded-full bg-primary hover:bg-primary/90 text-white"
+              className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
               data-testid={`location-save-${loc.id}`}
             >
               <Save className="w-4 h-4 mr-2" /> Save changes
@@ -311,7 +311,7 @@ export function AdminLocations() {
         {!creating && (
           <Button
             onClick={() => setCreating(true)}
-            className="rounded-full bg-primary hover:bg-primary/90 text-white"
+            className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
             data-testid="add-location-btn"
           >
             <Plus className="w-4 h-4 mr-2" /> Add location
@@ -369,7 +369,7 @@ export function AdminLocations() {
           </div>
           <div className="flex justify-end gap-3">
             <Button variant="outline" onClick={() => { setCreating(false); setDraft({ ...EMPTY }); }} className="rounded-full border-card-border bg-white">Cancel</Button>
-            <Button onClick={createNew} className="rounded-full bg-primary hover:bg-primary/90 text-white" data-testid="save-new-location">
+            <Button onClick={createNew} className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground" data-testid="save-new-location">
               <Plus className="w-4 h-4 mr-2" /> Add location
             </Button>
           </div>
