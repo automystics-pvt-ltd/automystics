@@ -10,6 +10,7 @@ import {
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
 import emailSettingsRouter from "./admin-email";
+import { sendAdminPasswordChangedNotification } from "../lib/mailer";
 
 const router: IRouter = Router();
 
@@ -155,6 +156,11 @@ router.post("/change-password", requireAdmin, async (req, res) => {
     .update(adminUsersTable)
     .set({ passwordHash: hash })
     .where(eq(adminUsersTable.id, adminId));
+
+  // Fire-and-forget: notify the admin's configured recipients that the
+  // password changed, in case this wasn't the real admin doing it. Never
+  // include the new password in the email.
+  void sendAdminPasswordChangedNotification(new Date());
 
   // Invalidate the current session so the admin must sign back in with the
   // new password. This also protects against a stolen session being used to

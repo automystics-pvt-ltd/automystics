@@ -219,6 +219,58 @@ export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPaylo
   }
 }
 
+export async function sendAdminPasswordChangedNotification(changedAt: Date): Promise<void> {
+  try {
+    const settings = await getEmailSettings();
+    if (!settings || !settings.enabled) return;
+    if (!settings.smtpHost || !settings.fromEmail || !settings.notifyEmails) return;
+
+    const recipients = settings.notifyEmails
+      .split(/[,;\s]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (recipients.length === 0) return;
+
+    const transport = await buildTransport(settings);
+    const when = changedAt.toLocaleString("en-US", {
+      dateStyle: "long",
+      timeStyle: "short",
+      timeZone: "UTC",
+    }) + " UTC";
+    const subject = "Your Automystics admin password was changed";
+    const text = [
+      `This is a confirmation that the Automystics admin password was changed.`,
+      ``,
+      `When: ${when}`,
+      ``,
+      `If you made this change, no action is needed.`,
+      `If you did not make this change, someone else may have access to your admin account — reset the password immediately and review recent activity.`,
+    ].join("\n");
+    const html = `
+      <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
+        <h2 style="color:#06b6d4;margin:0 0 16px">Admin password changed</h2>
+        <p>This is a confirmation that the Automystics admin password was changed.</p>
+        <table style="width:100%;border-collapse:collapse;margin:16px 0">
+          <tr><td style="padding:6px 0;color:#64748b">When</td><td style="padding:6px 0;font-weight:600">${escapeHtml(when)}</td></tr>
+        </table>
+        <p>If you made this change, no action is needed.</p>
+        <p style="color:#b91c1c;font-weight:600">If you did not make this change, someone else may have access to your admin account — reset the password immediately and review recent activity.</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress(settings),
+      to: recipients.join(", "),
+      subject,
+      text,
+      html,
+    });
+    logger.info("admin password change notification sent");
+  } catch (err) {
+    logger.error({ err }, "failed to send admin password change notification");
+  }
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
