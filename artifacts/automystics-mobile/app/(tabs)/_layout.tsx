@@ -27,6 +27,10 @@ function NativeTabLayout() {
         <Icon sf={{ default: 'envelope', selected: 'envelope.fill' }} />
         <Label>Contact</Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="book-demo">
+        <Icon sf={{ default: 'calendar', selected: 'calendar' }} />
+        <Label>Book Demo</Label>
+      </NativeTabs.Trigger>
     </NativeTabs>
   );
 }
@@ -105,6 +109,19 @@ function ClassicTabLayout() {
               <SymbolView name="envelope" tintColor={color} size={22} />
             ) : (
               <Feather name="mail" size={20} color={color} />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="book-demo"
+        options={{
+          title: 'Book Demo',
+          headerShown: false,
+          tabBarIcon: ({ color }) =>
+            isIOS ? (
+              <SymbolView name="calendar" tintColor={color} size={22} />
+            ) : (
+              <Feather name="calendar" size={20} color={color} />
             ),
         }}
       />
