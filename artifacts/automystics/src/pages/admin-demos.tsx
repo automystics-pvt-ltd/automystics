@@ -96,14 +96,14 @@ function DemoRow({
   return (
     <div className="bg-white border border-card-border rounded-3xl shadow-sm overflow-hidden" data-testid={`demo-row-${demo.id}`}>
       <div className="p-5 flex items-start gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
           <PlayCircle className="w-5 h-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
             <h3 className="text-lg font-bold text-foreground truncate">{demo.title || "Untitled demo"}</h3>
             {demo.category && <Badge className="border bg-slate-100 text-slate-700 border-slate-200">{demo.category}</Badge>}
-            {demo.badge && <Badge className="border bg-primary/10 text-primary border-primary/20">{demo.badge}</Badge>}
+            {demo.badge && <Badge className="border bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/30">{demo.badge}</Badge>}
             {!demo.enabled && <Badge className="border bg-rose-50 text-rose-700 border-rose-200">Hidden</Badge>}
           </div>
           {demo.tagline && <p className="text-sm text-muted-foreground truncate">{demo.tagline}</p>}
@@ -254,7 +254,7 @@ export function AdminDemos() {
       </div>
 
       {creating && (
-        <div className="bg-white border-2 border-primary/30 rounded-3xl p-6 shadow-md space-y-5" data-testid="new-demo-form">
+        <div className="bg-white border-2 border-primary/40 rounded-3xl p-6 shadow-md space-y-5" data-testid="new-demo-form">
           <h3 className="text-lg font-bold text-foreground">New demo</h3>
           <FormGrid data={draft} onChange={(p) => setDraft({ ...draft, ...p })} idPrefix="new-demo" />
           <div className="flex justify-end gap-3">

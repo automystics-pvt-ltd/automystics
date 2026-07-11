@@ -190,7 +190,7 @@ export function AdminEmailSettings() {
       {/* SMTP card */}
       <div className="bg-white border border-card-border rounded-3xl p-8 shadow-sm">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center">
             <Server className="w-5 h-5 text-primary" />
           </div>
           <div>
@@ -268,7 +268,7 @@ export function AdminEmailSettings() {
       {/* From / Recipients card */}
       <div className="bg-white border border-card-border rounded-3xl p-8 shadow-sm">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center">
             <AtSign className="w-5 h-5 text-primary" />
           </div>
           <div>
@@ -332,7 +332,7 @@ export function AdminEmailSettings() {
       {/* Test card */}
       <div className="bg-white border border-card-border rounded-3xl p-8 shadow-sm">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center">
             <ShieldCheck className="w-5 h-5 text-primary" />
           </div>
           <div>

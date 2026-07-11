@@ -77,7 +77,7 @@ const DropdownGrid = ({ items, linkPrefix }: { items: any[], linkPrefix: string 
     {items.map((item) => (
       <NavigationMenuLink asChild key={item.id}>
         <Link href={`${linkPrefix}#${item.id}`} className="group p-3 rounded-sm hover:bg-muted/50 transition-colors flex gap-4 items-start outline-none">
-          <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors text-primary">
+          <div className="w-10 h-10 rounded-sm bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-gradient-to-br hover:from-primary hover:to-secondary group-hover:text-primary-foreground transition-colors text-primary">
             <item.icon className="w-5 h-5" />
           </div>
           <div>

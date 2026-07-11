@@ -95,7 +95,7 @@ export function Contact() {
               
               {isSuccess ? (
                 <div className="text-center py-20 relative z-10">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-8 border border-primary/20">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mx-auto mb-8 border border-primary/30">
                     <CheckCircle2 className="w-10 h-10 text-primary" />
                   </div>
                   <h3 className="text-3xl font-bold text-foreground mb-4 tracking-tight">Request Received</h3>
@@ -191,7 +191,7 @@ export function Contact() {
             <div className="bg-white border border-card-border shadow-lg rounded-[2.5rem] p-10 card-hover-effect">
               <h3 className="text-xl font-bold text-foreground mb-8 tracking-tight">Email Us</h3>
               <div className="flex items-start gap-5">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
                   <Mail className="w-6 h-6 text-primary" />
                 </div>
                 <p className="text-muted-foreground leading-relaxed flex flex-col gap-1">
@@ -213,13 +213,13 @@ export function Contact() {
                   return (
                     <div key={loc.id} className="bg-white border border-card-border shadow-lg rounded-[2.5rem] p-8 card-hover-effect" data-testid={`location-${loc.id}`}>
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
                           <MapPin className="w-6 h-6 text-primary" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2 mb-2">
                             <h4 className="text-foreground font-bold">{loc.label}</h4>
-                            <span className="text-xs font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                            <span className="text-xs font-bold uppercase tracking-wide px-2 py-0.5 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border border-primary/30">
                               {LOCATION_TYPE_LABELS[loc.locationType] || loc.locationType}
                             </span>
                           </div>
@@ -261,7 +261,7 @@ export function Contact() {
                 <div className="bg-white border border-card-border shadow-lg rounded-[2.5rem] p-10 card-hover-effect">
                   <h3 className="text-xl font-bold text-foreground mb-6 tracking-tight">Office Location</h3>
                   <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <p className="text-muted-foreground leading-relaxed" data-testid="contact-address">

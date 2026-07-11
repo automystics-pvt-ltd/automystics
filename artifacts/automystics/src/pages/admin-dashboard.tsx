@@ -60,7 +60,7 @@ const STATUS_OPTIONS = [
 ];
 
 const STATUS_COLORS: Record<string, string> = {
-  new: "bg-primary/10 text-primary border-primary/30",
+  new: "bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/40",
   in_progress: "bg-amber-100 text-amber-800 border-amber-300",
   contacted: "bg-purple-100 text-purple-800 border-purple-300",
   won: "bg-emerald-100 text-emerald-800 border-emerald-300",
@@ -332,7 +332,7 @@ export function AdminDashboard() {
                     onClick={() => setExpanded(isOpen ? null : e.id)}
                     className="w-full text-left p-6 flex items-start gap-4 hover:bg-muted/40 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
                       <User className="w-5 h-5 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">

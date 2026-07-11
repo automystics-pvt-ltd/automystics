@@ -95,7 +95,7 @@ export function Home() {
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
               <Link href="/contact">
-                <Button size="lg" data-testid="button-hero-start" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
+                <Button size="lg" data-testid="button-hero-start" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-primary via-primary to-secondary hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
                   Start Your Project
                   <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
@@ -111,28 +111,28 @@ export function Home() {
             {/* Trust strip - icon row */}
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-4 text-muted-foreground">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <Zap className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Fastest Delivery</span>
               </div>
               <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <Shield className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Enterprise Grade</span>
               </div>
               <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <FileSignature className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Signed with NDA</span>
               </div>
               <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <Code className="w-4 h-4 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">100% Custom Built</span>
@@ -143,7 +143,7 @@ export function Home() {
       </section>
 
       {/* Stats Dark Accent Band */}
-      <section className="py-16 bg-secondary dark:bg-secondary border-y border-primary/20 relative overflow-hidden">
+      <section className="py-16 bg-secondary dark:bg-secondary border-y border-primary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-10" />
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10">
@@ -185,7 +185,7 @@ export function Home() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
               >
                 <Link href={`/products#${product.id}`} className="block h-full group" data-testid={`product-tile-${product.id}`}>
-                  <div className="relative h-full bg-card dark:bg-card rounded-3xl border border-border overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/50">
+                  <div className="relative h-full bg-card dark:bg-card rounded-3xl border border-border overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/60 hover:shadow-secondary/20">
                     {/* Top gradient accent bar */}
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/80 to-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
                     
@@ -206,7 +206,7 @@ export function Home() {
                         </div>
                       </div>
 
-                      <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight group-hover:text-primary transition-colors">
+                      <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight group-hover:text-primary group-hover:scale-105 transition-colors">
                         {product.title}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
@@ -214,7 +214,7 @@ export function Home() {
                       </p>
 
                       <div className="flex items-center justify-between pt-5 border-t border-border">
-                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground group-hover:text-primary transition-colors">
+                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground group-hover:text-primary group-hover:scale-105 transition-colors">
                           Explore
                         </span>
                         <div className="w-9 h-9 rounded-full bg-foreground/10 dark:bg-white/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
@@ -274,16 +274,16 @@ export function Home() {
               className="relative rounded-[2.5rem] overflow-hidden border border-card-border aspect-square lg:aspect-[4/3] bg-white shadow-xl p-8 flex flex-col items-center justify-center group"
             >
               <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-              <div className="w-64 h-64 bg-primary/10 rounded-full blur-[80px] absolute group-hover:bg-primary/20 transition-colors duration-700" />
+              <div className="w-64 h-64 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-[80px] absolute group-hover:bg-primary/20 transition-colors duration-700" />
               <div className="relative z-10 w-full h-full border border-card-border rounded-2xl bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-center p-6">
                 <div className="grid grid-cols-2 gap-4 w-full h-full">
                   {/* Trading metric */}
                   <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 relative overflow-hidden">
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
                         <LineChart className="w-5 h-5 text-primary" />
                       </div>
-                      <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">+24.7%</span>
+                      <span className="text-[10px] font-bold text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2 py-0.5 rounded-full">+24.7%</span>
                     </div>
                     <div className="mt-2">
                       <div className="text-xs text-muted-foreground font-semibold">Trade Volume</div>
@@ -296,7 +296,7 @@ export function Home() {
                   {/* Solar metric */}
                   <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 mt-6 relative overflow-hidden">
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
                         <Sun className="w-5 h-5 text-primary" />
                       </div>
                       <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">LIVE</span>
@@ -314,10 +314,10 @@ export function Home() {
                   {/* Voice AI */}
                   <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 -mt-6 relative overflow-hidden">
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
                         <Mic className="w-5 h-5 text-primary" />
                       </div>
-                      <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">98% ACC</span>
+                      <span className="text-[10px] font-bold text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2 py-0.5 rounded-full">98% ACC</span>
                     </div>
                     <div className="mt-2">
                       <div className="text-xs text-muted-foreground font-semibold">Calls Handled</div>
@@ -332,10 +332,10 @@ export function Home() {
                   {/* Fintech */}
                   <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 relative overflow-hidden">
                     <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
                         <Building2 className="w-5 h-5 text-primary" />
                       </div>
-                      <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">SECURE</span>
+                      <span className="text-[10px] font-bold text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2 py-0.5 rounded-full">SECURE</span>
                     </div>
                     <div className="mt-2">
                       <div className="text-xs text-muted-foreground font-semibold">Active Members</div>
@@ -368,7 +368,7 @@ export function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
             {/* Dashed connector line behind cards */}
-            <div className="hidden md:block absolute top-16 left-[12%] right-[12%] h-px border-t-2 border-dashed border-primary/30" />
+            <div className="hidden md:block absolute top-16 left-[12%] right-[12%] h-px border-t-2 border-dashed border-primary/40" />
 
             {[
               { num: "01", title: "Discover", desc: "Deep dive into requirements and architecture planning.", icon: Database, time: "1-2 weeks", deliverables: ["Requirements doc", "Tech architecture", "Project roadmap"] },
@@ -397,7 +397,7 @@ export function Home() {
 
                   <div className="relative">
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full">Step {step.num}</span>
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2.5 py-1 rounded-full">Step {step.num}</span>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1">
                         <Clock className="w-3 h-3" /> {step.time}
                       </span>

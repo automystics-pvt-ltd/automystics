@@ -125,7 +125,7 @@ export function Terms() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: idx * 0.03 }}
-                className="bg-white border border-card-border rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:shadow-primary/10 hover:border-primary/30 transition-all"
+                className="bg-white border border-card-border rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:shadow-primary/10 hover:border-primary/40 transition-all"
               >
                 <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4 flex items-center gap-3">
                   <Sparkles className="w-5 h-5 text-primary" />

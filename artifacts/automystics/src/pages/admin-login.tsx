@@ -66,7 +66,7 @@ export function AdminLogin() {
         <div className="bg-white border border-card-border rounded-[2.5rem] p-10 shadow-xl shadow-black/5 relative overflow-hidden">
           <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
           <div className="relative z-10">
-            <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center mx-auto mb-6">
               <ShieldCheck className="w-8 h-8 text-primary" />
             </div>
             <h1 className="text-3xl font-extrabold text-foreground tracking-tight text-center mb-2">Admin Sign In</h1>

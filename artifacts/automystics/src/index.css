@@ -54,78 +54,80 @@
 :root {
   color-scheme: light;
   
-  /* Alabaster & Graphite */
-  --background: 0 0% 98%;
-  --foreground: 0 0% 10%;
+  /* Vibrant Engineering Palette */
+  --background: 0 0% 99%;
+  --foreground: 222 47% 11%;
   
-  --border: 0 0% 88%;
+  --border: 220 13% 85%;
   
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 15%;
-  --card-border: 0 0% 88%;
+  --card-foreground: 222 47% 11%;
+  --card-border: 220 13% 88%;
   
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 10%;
-  --popover-border: 0 0% 90%;
+  --popover-foreground: 222 47% 11%;
+  --popover-border: 220 13% 90%;
   
-  /* Precision Vermilion */
-  --primary: 10 80% 45%;
+  /* Electric Coral - Bold Primary */
+  --primary: 14 100% 57%;
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 0 0% 92%;
-  --secondary-foreground: 0 0% 15%;
+  /* Deep Teal - Secondary Accent */
+  --secondary: 185 84% 35%;
+  --secondary-foreground: 0 0% 100%;
   
-  --muted: 0 0% 94%;
-  --muted-foreground: 0 0% 45%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 46%;
   
-  --accent: 0 0% 92%;
-  --accent-foreground: 0 0% 15%;
+  /* Vibrant Teal Accent */
+  --accent: 185 90% 95%;
+  --accent-foreground: 185 84% 25%;
   
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   
-  --input: 0 0% 88%;
-  --ring: 10 80% 45%;
+  --input: 220 13% 91%;
+  --ring: 14 100% 57%;
 
   --app-font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --app-font-serif: 'Space Grotesk', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', monospace;
-  --radius: 0.25rem; /* sharper corners for engineering feel */
+  --radius: 0.25rem;
 }
 
 .dark {
   color-scheme: dark;
   
-  --background: 0 0% 6%;
-  --foreground: 0 0% 96%;
+  --background: 222 47% 6%;
+  --foreground: 0 0% 98%;
   
-  --border: 0 0% 16%;
+  --border: 220 13% 18%;
   
-  --card: 0 0% 9%;
-  --card-foreground: 0 0% 96%;
-  --card-border: 0 0% 14%;
+  --card: 222 40% 9%;
+  --card-foreground: 0 0% 98%;
+  --card-border: 220 13% 16%;
   
-  --popover: 0 0% 9%;
-  --popover-foreground: 0 0% 96%;
-  --popover-border: 0 0% 16%;
+  --popover: 222 40% 9%;
+  --popover-foreground: 0 0% 98%;
+  --popover-border: 220 13% 18%;
   
-  --primary: 10 85% 60%;
-  --primary-foreground: 0 0% 10%;
+  --primary: 14 95% 62%;
+  --primary-foreground: 0 0% 100%;
   
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 96%;
+  --secondary: 185 80% 45%;
+  --secondary-foreground: 0 0% 100%;
   
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 65%;
+  --muted: 220 15% 14%;
+  --muted-foreground: 220 9% 65%;
   
-  --accent: 0 0% 15%;
-  --accent-foreground: 0 0% 96%;
+  --accent: 185 60% 20%;
+  --accent-foreground: 185 90% 85%;
   
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   
-  --input: 0 0% 16%;
-  --ring: 10 85% 60%;
+  --input: 220 13% 18%;
+  --ring: 14 95% 62%;
 }
 
 @layer base {

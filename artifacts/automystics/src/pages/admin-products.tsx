@@ -250,7 +250,7 @@ function ProductRow({
       data-testid={`product-row-${product.id}`}
     >
       <div className="p-5 flex items-start gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
           <Package className="w-5 h-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
@@ -263,7 +263,7 @@ function ProductRow({
                 {product.category}
               </Badge>
             )}
-            <Badge className="border bg-primary/10 text-primary border-primary/20">
+            <Badge className="border bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/30">
               {product.key || "—"}
             </Badge>
             {!product.enabled && (
@@ -522,7 +522,7 @@ export function AdminProducts() {
 
       {creating && (
         <div
-          className="bg-white border-2 border-primary/30 rounded-3xl p-6 shadow-md space-y-5"
+          className="bg-white border-2 border-primary/40 rounded-3xl p-6 shadow-md space-y-5"
           data-testid="new-product-form"
         >
           <h3 className="text-lg font-bold text-foreground">New product</h3>

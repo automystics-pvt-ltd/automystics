@@ -34,8 +34,8 @@ const LOCATION_TYPES = [
 ] as const;
 
 const TYPE_BADGE: Record<string, string> = {
-  headquarters: "bg-primary/10 text-primary border-primary/20",
-  branch: "bg-primary/10 text-primary border-primary/30",
+  headquarters: "bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/30",
+  branch: "bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/40",
   sales: "bg-emerald-50 text-emerald-700 border-emerald-200",
   support: "bg-amber-50 text-amber-700 border-amber-200",
   registered: "bg-violet-50 text-violet-700 border-violet-200",
@@ -63,7 +63,7 @@ function LocationCard({
   return (
     <div className="bg-white border border-card-border rounded-3xl shadow-sm overflow-hidden" data-testid={`location-card-${loc.id}`}>
       <div className="p-5 flex items-start gap-4">
-        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/30 flex items-center justify-center shrink-0">
           <MapPin className="w-5 h-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
@@ -320,7 +320,7 @@ export function AdminLocations() {
       </div>
 
       {creating && (
-        <div className="bg-white border-2 border-primary/30 rounded-3xl p-6 shadow-md space-y-4" data-testid="new-location-form">
+        <div className="bg-white border-2 border-primary/40 rounded-3xl p-6 shadow-md space-y-4" data-testid="new-location-form">
           <h3 className="text-lg font-bold text-foreground">New location</h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">

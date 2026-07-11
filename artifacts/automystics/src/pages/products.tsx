@@ -365,7 +365,7 @@ export function Products() {
                 className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-24 items-center scroll-mt-32`}
               >
                 <div className="flex-1 w-full">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-bold tracking-wide uppercase mb-8">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/40 text-primary text-sm font-bold tracking-wide uppercase mb-8">
                     <span className="w-2 h-2 rounded-full bg-primary"></span>
                     {product.category}
                   </div>
@@ -383,7 +383,7 @@ export function Products() {
                     {product.features.map((feature, i) => (
                       <div key={i} className="group/feat relative flex items-start gap-3 p-4 rounded-2xl bg-white border border-card-border shadow-sm overflow-hidden cursor-default transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40 hover:bg-gradient-to-br hover:from-white hover:to-primary/5">
                         <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
-                        <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
+                        <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
                           <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-foreground transition-colors duration-300" />
                         </span>
                         <span className="relative text-sm font-medium text-foreground group-hover/feat:text-primary transition-colors duration-300">{feature}</span>

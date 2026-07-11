@@ -48,7 +48,7 @@ export function Company() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
               <Link href="/contact">
-                <Button size="lg" data-testid="button-hero-consult" className="rounded-full bg-gradient-to-r from-primary to-primary hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
+                <Button size="lg" data-testid="button-hero-consult" className="rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
                   Book 20-min Consult
                   <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
@@ -63,21 +63,21 @@ export function Company() {
 
             <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-12 text-muted-foreground">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <HandCoins className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Free Estimate</span>
               </div>
               <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <FileSignature className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">Signed with NDA</span>
               </div>
               <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
                   <ShieldCheck className="w-4.5 h-4.5 text-primary" />
                 </div>
                 <span className="text-sm font-semibold">100% Risk-Free</span>
@@ -112,7 +112,7 @@ export function Company() {
                   {["Tamil-Nadu based engineering hub", "Elite, hand-picked technical team", "Obsession with code quality", "Focus on measurable ROI"].map((feature, i) => (
                     <div key={i} className="group/feat relative flex items-start gap-3 p-4 rounded-2xl bg-white border border-card-border shadow-sm overflow-hidden cursor-default transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/20 hover:border-primary/40 hover:bg-gradient-to-br hover:from-white hover:to-primary/5">
                       <span className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover/feat:opacity-100 transition-opacity duration-500" />
-                      <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-primary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
+                      <span className="relative flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 group-hover/feat:bg-primary group-hover/feat:scale-110 group-hover/feat:rotate-6 transition-all duration-300 shrink-0">
                         <CheckCircle2 className="w-4 h-4 text-primary group-hover/feat:text-foreground transition-colors duration-300" />
                       </span>
                       <span className="relative text-sm font-medium text-foreground group-hover/feat:text-primary transition-colors duration-300">{feature}</span>
@@ -196,7 +196,7 @@ export function Company() {
                 <div className="grid gap-4">
                   {["Full-stack Engineer (React/Node)", "Machine Learning Engineer", "DevOps & Cloud Architect", "Product Designer (UI/UX)"].map((role, i) => (
                     <div key={i} className="flex items-center justify-between p-5 rounded-2xl bg-white border border-card-border shadow-sm hover:border-primary transition-colors cursor-pointer group">
-                      <span className="font-semibold text-foreground group-hover:text-primary transition-colors">{role}</span>
+                      <span className="font-semibold text-foreground group-hover:text-primary group-hover:scale-105 transition-colors">{role}</span>
                       <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">View Role</span>
                     </div>
                   ))}
@@ -249,7 +249,7 @@ export function Company() {
                         <div className="text-4xl font-extrabold text-foreground tracking-tight">{study.metric}</div>
                         <div className="text-[10px] uppercase tracking-widest text-primary font-bold mt-1">{study.metricLabel}</div>
                       </div>
-                      <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors leading-snug">{study.title}</h3>
+                      <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary group-hover:scale-105 transition-colors leading-snug">{study.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">{study.desc}</p>
                       <div className="mt-6 text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-2">Read Study <span className="group-hover:translate-x-1 transition-transform">&rarr;</span></div>
                     </div>
@@ -292,7 +292,7 @@ export function Company() {
                         <span className="w-1 h-1 rounded-full bg-muted-foreground" />
                         <span>{post.readTime} read</span>
                       </div>
-                      <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors leading-snug">{post.title}</h3>
+                      <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary group-hover:scale-105 transition-colors leading-snug">{post.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">{post.excerpt}</p>
                       <div className="mt-5 text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-2">Read Post <span className="group-hover:translate-x-1 transition-transform">&rarr;</span></div>
                     </div>
