@@ -7,7 +7,7 @@ import {
   updateDemoRequestSchema,
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
-import { sendDemoRequestNotification } from "../lib/mailer";
+import { sendDemoRequestNotification, sendDemoRequestConfirmation } from "../lib/mailer";
 
 const router: IRouter = Router();
 
@@ -31,7 +31,7 @@ router.post("/demo-requests", async (req, res) => {
       })
       .returning();
     res.status(201).json({ ok: true, id: row.id });
-    void sendDemoRequestNotification({
+    const emailPayload = {
       id: row.id,
       name: row.name,
       email: row.email,
@@ -40,7 +40,9 @@ router.post("/demo-requests", async (req, res) => {
       productInterest: row.productInterest,
       preferredDate: row.preferredDate,
       message: row.message,
-    });
+    };
+    void sendDemoRequestNotification(emailPayload);
+    void sendDemoRequestConfirmation(emailPayload);
   } catch (err) {
     req.log?.error({ err }, "failed to insert demo request");
     res.status(500).json({ error: "server_error" });

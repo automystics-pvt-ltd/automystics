@@ -156,6 +156,68 @@ export async function sendDemoRequestNotification(payload: DemoRequestEmailPaylo
   }
 }
 
+export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPayload): Promise<void> {
+  try {
+    const settings = await getEmailSettings();
+    if (!settings || !settings.enabled) return;
+    if (!settings.smtpHost || !settings.fromEmail) return;
+
+    const transport = await buildTransport(settings);
+    const subject = `We received your demo request — Automystics`;
+    const text = [
+      `Hi ${payload.name},`,
+      ``,
+      `Thanks for requesting a demo of Automystics${payload.productInterest ? ` for ${payload.productInterest}` : ""}!`,
+      `We've received your request and a member of our team will reach out to ${payload.email} shortly to schedule a time.`,
+      ``,
+      `Here's a summary of what you submitted:`,
+      `Name:              ${payload.name}`,
+      `Email:             ${payload.email}`,
+      `Phone:             ${payload.phone || "—"}`,
+      `Company:           ${payload.company || "—"}`,
+      `Product interest:  ${payload.productInterest || "—"}`,
+      `Preferred date:    ${payload.preferredDate || "—"}`,
+      payload.message ? `Message:           ${payload.message}` : undefined,
+      ``,
+      `If any of this looks incorrect or you'd like to add more details, just reply to this email.`,
+      ``,
+      `Talk soon,`,
+      `The Automystics Team`,
+    ]
+      .filter((line): line is string => line !== undefined)
+      .join("\n");
+    const html = `
+      <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
+        <h2 style="color:#06b6d4;margin:0 0 16px">Thanks for requesting a demo!</h2>
+        <p>Hi ${escapeHtml(payload.name)},</p>
+        <p>Thanks for requesting a demo of Automystics${payload.productInterest ? ` for <strong>${escapeHtml(payload.productInterest)}</strong>` : ""}! We've received your request and a member of our team will reach out to <a href="mailto:${escapeHtml(payload.email)}">${escapeHtml(payload.email)}</a> shortly to schedule a time.</p>
+        <h3 style="margin:24px 0 8px">Your request</h3>
+        <table style="width:100%;border-collapse:collapse;margin-bottom:16px">
+          <tr><td style="padding:6px 0;color:#64748b">Name</td><td style="padding:6px 0;font-weight:600">${escapeHtml(payload.name)}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Email</td><td style="padding:6px 0">${escapeHtml(payload.email)}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Phone</td><td style="padding:6px 0">${escapeHtml(payload.phone || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Company</td><td style="padding:6px 0">${escapeHtml(payload.company || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Product interest</td><td style="padding:6px 0">${escapeHtml(payload.productInterest || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Preferred date</td><td style="padding:6px 0">${escapeHtml(payload.preferredDate || "—")}</td></tr>
+        </table>
+        ${payload.message ? `<h3 style="margin:0 0 8px">Your message</h3><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;white-space:pre-wrap">${escapeHtml(payload.message)}</div>` : ""}
+        <p style="margin-top:24px;color:#64748b;font-size:13px">If any of this looks incorrect or you'd like to add more details, just reply to this email.</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress(settings),
+      to: payload.email,
+      subject,
+      text,
+      html,
+    });
+    logger.info({ id: payload.id }, "demo request confirmation sent");
+  } catch (err) {
+    logger.error({ err, id: payload.id }, "failed to send demo request confirmation");
+  }
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
