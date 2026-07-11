@@ -10,11 +10,13 @@ import {
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
 import emailSettingsRouter from "./admin-email";
+import bookingSettingsRouter from "./admin-booking-settings";
 import { sendAdminPasswordChangedNotification, sendAdminLockoutNotification } from "../lib/mailer";
 
 const router: IRouter = Router();
 
 router.use("/settings", emailSettingsRouter);
+router.use("/settings", bookingSettingsRouter);
 
 const loginSchema = z.object({
   username: z.string().trim().min(1).max(64),

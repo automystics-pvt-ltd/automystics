@@ -25,3 +25,4 @@ export * from "./office-locations";
 export * from "./product-demos";
 export * from "./products";
 export * from "./demo-requests";
+export * from "./booking-settings";

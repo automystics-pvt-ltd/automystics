@@ -10,6 +10,7 @@ import { requireAdmin } from "../middlewares/auth";
 import { sendDemoRequestNotification, sendDemoRequestConfirmation } from "../lib/mailer";
 import {
   BOOKING_TIMEZONE_LABEL,
+  getBookingSettings,
   getDaySlots,
   getIstDayRangeUtc,
   isValidSlotIso,
@@ -19,6 +20,21 @@ import {
 
 const router: IRouter = Router();
 
+// Public config so the visitor-facing calendar can grey out non-bookable
+// weekdays and blocked dates before the visitor even picks a day.
+router.get("/demo-requests/booking-config", async (_req, res) => {
+  try {
+    const settings = await getBookingSettings();
+    res.json({
+      timezone: BOOKING_TIMEZONE_LABEL,
+      bookableWeekdays: settings.bookableWeekdays,
+      blockedDates: settings.blockedDates,
+    });
+  } catch (err) {
+    res.status(500).json({ error: "server_error" });
+  }
+});
+
 router.get("/demo-requests/available-slots", async (req, res) => {
   const dateStr = String(req.query.date || "");
   const parsedDate = parseDateParam(dateStr);
@@ -27,7 +43,7 @@ router.get("/demo-requests/available-slots", async (req, res) => {
     return;
   }
   const now = new Date();
-  const daySlots = getDaySlots(parsedDate.y, parsedDate.m, parsedDate.d, now);
+  const daySlots = await getDaySlots(parsedDate.y, parsedDate.m, parsedDate.d, now);
   if (daySlots.length === 0) {
     res.json({ date: dateStr, timezone: BOOKING_TIMEZONE_LABEL, slots: [] });
     return;
@@ -62,7 +78,7 @@ router.post("/demo-requests", async (req, res) => {
 
   const scheduledAt = new Date(parsed.data.scheduledAt);
   const { y, m, d } = istCalendarDateForInstant(scheduledAt);
-  if (!isValidSlotIso(y, m, d, scheduledAt.toISOString())) {
+  if (!(await isValidSlotIso(y, m, d, scheduledAt.toISOString()))) {
     res.status(400).json({ error: "invalid_slot" });
     return;
   }

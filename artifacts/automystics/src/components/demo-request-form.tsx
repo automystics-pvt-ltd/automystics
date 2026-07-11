@@ -27,11 +27,29 @@ export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [selectedSlotIso, setSelectedSlotIso] = useState<string | null>(null);
   const [timezoneLabel, setTimezoneLabel] = useState("IST");
+  const [bookableWeekdays, setBookableWeekdays] = useState<number[]>([1, 2, 3, 4, 5]);
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const maxDate = new Date(today);
   maxDate.setDate(maxDate.getDate() + 30);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/demo-requests/booking-config")
+      .then((res) => res.json())
+      .then((data) => {
+        if (cancelled) return;
+        if (Array.isArray(data.bookableWeekdays)) setBookableWeekdays(data.bookableWeekdays);
+        if (Array.isArray(data.blockedDates)) setBlockedDates(data.blockedDates);
+        if (data.timezone) setTimezoneLabel(data.timezone);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (!selectedDate) {
@@ -205,7 +223,7 @@ export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
           <div className="space-y-3">
             <Label className="text-foreground font-semibold ml-1">Pick a date &amp; time</Label>
             <p className="text-sm text-muted-foreground ml-1">
-              Times are shown in {timezoneLabel}. Weekday slots only.
+              Times are shown in {timezoneLabel}.
             </p>
             <div className="grid md:grid-cols-2 gap-6 bg-muted/30 border border-card-border rounded-2xl p-4 md:p-6">
               <div className="flex justify-center md:justify-start">
@@ -213,7 +231,12 @@ export function DemoRequestForm({ demos }: { demos: PublicDemo[] }) {
                   mode="single"
                   selected={selectedDate}
                   onSelect={setSelectedDate}
-                  disabled={(date) => date < today || date > maxDate || date.getDay() === 0 || date.getDay() === 6}
+                  disabled={(date) =>
+                    date < today ||
+                    date > maxDate ||
+                    !bookableWeekdays.includes(date.getDay()) ||
+                    blockedDates.includes(toDateKey(date))
+                  }
                   data-testid="demo-request-calendar"
                 />
               </div>
