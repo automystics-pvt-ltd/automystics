@@ -24,6 +24,24 @@ export async function ensureDefaultAdmin(): Promise<void> {
       .where(eq(adminUsersTable.username, DEFAULT_USERNAME))
       .limit(1);
     if (existing) {
+      // If ADMIN_PASSWORD is explicitly set and doesn't match the stored hash
+      // (e.g. it was rotated, or the account was originally seeded with the
+      // built-in default), update the stored password to match.
+      if (!USING_DEFAULT_PASSWORD) {
+        const matches = await bcrypt.compare(adminPassword, existing.passwordHash);
+        if (!matches) {
+          const hash = await bcrypt.hash(adminPassword, 10);
+          await db
+            .update(adminUsersTable)
+            .set({ passwordHash: hash })
+            .where(eq(adminUsersTable.username, DEFAULT_USERNAME));
+          logger.info(
+            { username: DEFAULT_USERNAME },
+            "admin password updated to match ADMIN_PASSWORD",
+          );
+          return;
+        }
+      }
       logger.info({ username: DEFAULT_USERNAME }, "default admin already exists");
       return;
     }
