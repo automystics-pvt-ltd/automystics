@@ -1,0 +1,109 @@
+root@srv1609330:/home/automystics/htdocs/www.automystics.com# pm2 start deploy/ecosystem.config.cjs --update-env
+pm2 save
+pm2 status
+curl -s http://127.0.0.1:8080/api/healthz
+[PM2][ERROR] File deploy/ecosystem.config.cjs not found
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+┌────┬───────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                  │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 11 │ erp-automystics       │ default     │ N/A     │ fork    │ 2051187  │ 25h    │ 3    │ online    │ 0%       │ 112.8mb  │ root     │ disabled │
+│ 1  │ fitro360              │ default     │ 1.0.0   │ fork    │ 2050982  │ 25h    │ 3    │ online    │ 0%       │ 114.2mb  │ root     │ disabled │
+│ 2  │ kalvicore-api         │ default     │ 0.0.0   │ fork    │ 2050984  │ 25h    │ 3    │ online    │ 0%       │ 119.2mb  │ root     │ disabled │
+│ 13 │ mmwear-erp            │ default     │ 0.0.0   │ fork    │ 126822   │ 3h     │ 53   │ online    │ 0%       │ 367.2mb  │ root     │ disabled │
+│ 14 │ mystics-audit         │ default     │ 0.0.0   │ fork    │ 3015109  │ 21h    │ 550  │ online    │ 0%       │ 150.4mb  │ root     │ disabled │
+│ 5  │ mysticscivil-api      │ default     │ N/A     │ fork    │ 2051048  │ 25h    │ 3    │ online    │ 0%       │ 226.5mb  │ root     │ disabled │
+│ 26 │ mysticshr-api         │ default     │ 0.0.0   │ fork    │ 2051239  │ 25h    │ 3    │ online    │ 0%       │ 380.6mb  │ root     │ disabled │
+│ 12 │ mysticsinventory      │ default     │ N/A     │ fork    │ 1220909  │ 0s     │ 108… │ online    │ 100%     │ 48.1mb   │ root     │ disabled │
+│ 3  │ people-connect-api    │ default     │ 0.0.0   │ fork    │ 2051010  │ 25h    │ 3    │ online    │ 0%       │ 204.8mb  │ root     │ disabled │
+│ 6  │ solarnexus-api        │ default     │ 0.0.0   │ fork    │ 2051050  │ 25h    │ 3    │ online    │ 0%       │ 136.1mb  │ root     │ disabled │
+│ 4  │ tkprabhu-api          │ default     │ 0.0.0   │ fork    │ 2051012  │ 25h    │ 3    │ online    │ 0%       │ 205.2mb  │ root     │ disabled │
+│ 8  │ ungalrajeev-api       │ default     │ N/A     │ fork    │ 1220825  │ 1s     │ 425… │ online    │ 100%     │ 109.4mb  │ root     │ disabled │
+│ 7  │ ungaludan-sarath      │ default     │ 0.0.0   │ fork    │ 2051112  │ 25h    │ 3    │ online    │ 0%       │ 207.6mb  │ root     │ disabled │
+│ 9  │ ungalvignesh-api      │ default     │ N/A     │ fork    │ 2051131  │ 25h    │ 38   │ online    │ 0%       │ 117.3mb  │ root     │ disabled │
+│ 10 │ ungalvignesh-api      │ default     │ N/A     │ fork    │ 1220883  │ 0s     │ 198… │ online    │ 100%     │ 71.4mb   │ root     │ disabled │
+└────┴───────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 98.5% | ram usage: 29.1% | lo: ⇓ 0.006mb/s ⇑ 0.006mb/s | disk: ⇓ 0.47mb/s ⇑ 0.042mb/s |
+{"status":"ok"}root@srv1609330:/home/automystics/htdocs/www.aucd /home/automystics/htdocs/www.automystics.comautomystics.com
+mv automystics-old-karthick automystics
+cd automystics
+pm2 start deploy/ecosystem.config.cjs --update-env
+pm2 save
+pm2 status
+curl -s http://127.0.0.1:8080/api/healthz
+[PM2][WARN] Applications automystics-api not running, starting...
+[PM2] App [automystics-api] launched (1 instances)
+┌────┬───────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                  │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 27 │ automystics-api       │ default     │ 0.0.0   │ fork    │ 1265629  │ 0s     │ 0    │ online    │ 0%       │ 10.6mb   │ root     │ disabled │
+│ 11 │ erp-automystics       │ default     │ N/A     │ fork    │ 2051187  │ 26h    │ 3    │ online    │ 0%       │ 112.8mb  │ root     │ disabled │
+│ 1  │ fitro360              │ default     │ 1.0.0   │ fork    │ 2050982  │ 26h    │ 3    │ online    │ 0%       │ 114.2mb  │ root     │ disabled │
+│ 2  │ kalvicore-api         │ default     │ 0.0.0   │ fork    │ 2050984  │ 26h    │ 3    │ online    │ 0%       │ 119.2mb  │ root     │ disabled │
+│ 13 │ mmwear-erp            │ default     │ 0.0.0   │ fork    │ 126822   │ 3h     │ 53   │ online    │ 0%       │ 508.9mb  │ root     │ disabled │
+│ 14 │ mystics-audit         │ default     │ 0.0.0   │ fork    │ 3015109  │ 21h    │ 550  │ online    │ 0%       │ 150.4mb  │ root     │ disabled │
+│ 5  │ mysticscivil-api      │ default     │ N/A     │ fork    │ 2051048  │ 26h    │ 3    │ online    │ 0%       │ 226.5mb  │ root     │ disabled │
+│ 26 │ mysticshr-api         │ default     │ 0.0.0   │ fork    │ 2051239  │ 26h    │ 3    │ online    │ 0%       │ 380.6mb  │ root     │ disabled │
+│ 12 │ mysticsinventory      │ default     │ N/A     │ fork    │ 1265601  │ 0s     │ 108… │ online    │ 80%      │ 77.5mb   │ root     │ disabled │
+│ 3  │ people-connect-api    │ default     │ 0.0.0   │ fork    │ 2051010  │ 26h    │ 3    │ online    │ 0%       │ 204.8mb  │ root     │ disabled │
+│ 6  │ solarnexus-api        │ default     │ 0.0.0   │ fork    │ 2051050  │ 26h    │ 3    │ online    │ 0%       │ 136.1mb  │ root     │ disabled │
+│ 4  │ tkprabhu-api          │ default     │ 0.0.0   │ fork    │ 2051012  │ 26h    │ 3    │ online    │ 0%       │ 205.2mb  │ root     │ disabled │
+│ 8  │ ungalrajeev-api       │ default     │ N/A     │ fork    │ 1265552  │ 0s     │ 426… │ online    │ 80%      │ 115.8mb  │ root     │ disabled │
+│ 7  │ ungaludan-sarath      │ default     │ 0.0.0   │ fork    │ 2051112  │ 26h    │ 3    │ online    │ 0%       │ 207.6mb  │ root     │ disabled │
+│ 9  │ ungalvignesh-api      │ default     │ N/A     │ fork    │ 2051131  │ 26h    │ 38   │ online    │ 0%       │ 117.3mb  │ root     │ disabled │
+│ 10 │ ungalvignesh-api      │ default     │ N/A     │ fork    │ 1265560  │ 0s     │ 198… │ online    │ 40%      │ 102.3mb  │ root     │ disabled │
+└────┴───────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 98.6% | ram usage: 30% | lo: ⇓ 0.009mb/s ⇑ 0.009mb/s | eth0: ⇓ 0.001mb/s ⇑ 0.001mb/s | disk: ⇓ 0mb/s ⇑ 0.029mb/s |
+[PM2] Saving current process list...
+[PM2] Successfully saved in /root/.pm2/dump.pm2
+┌────┬───────────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name                  │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼───────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 27 │ automystics-api       │ default     │ 0.0.0   │ fork    │ 1265629  │ 0s     │ 0    │ online    │ 0%       │ 92.2mb   │ root     │ disabled │
+│ 11 │ erp-automystics       │ default     │ N/A     │ fork    │ 2051187  │ 26h    │ 3    │ online    │ 0%       │ 112.8mb  │ root     │ disabled │
+│ 1  │ fitro360              │ default     │ 1.0.0   │ fork    │ 2050982  │ 26h    │ 3    │ online    │ 0%       │ 114.2mb  │ root     │ disabled │
+│ 2  │ kalvicore-api         │ default     │ 0.0.0   │ fork    │ 2050984  │ 26h    │ 3    │ online    │ 0%       │ 119.2mb  │ root     │ disabled │
+│ 13 │ mmwear-erp            │ default     │ 0.0.0   │ fork    │ 126822   │ 3h     │ 53   │ online    │ 0%       │ 508.9mb  │ root     │ disabled │
+│ 14 │ mystics-audit         │ default     │ 0.0.0   │ fork    │ 3015109  │ 21h    │ 550  │ online    │ 0%       │ 150.4mb  │ root     │ disabled │
+│ 5  │ mysticscivil-api      │ default     │ N/A     │ fork    │ 2051048  │ 26h    │ 3    │ online    │ 0%       │ 226.5mb  │ root     │ disabled │
+│ 26 │ mysticshr-api         │ default     │ 0.0.0   │ fork    │ 2051239  │ 26h    │ 3    │ online    │ 0%       │ 380.6mb  │ root     │ disabled │
+│ 12 │ mysticsinventory      │ default     │ N/A     │ fork    │ 1265666  │ 0s     │ 108… │ online    │ 0%       │ 69.1mb   │ root     │ disabled │
+│ 3  │ people-connect-api    │ default     │ 0.0.0   │ fork    │ 2051010  │ 26h    │ 3    │ online    │ 0%       │ 204.8mb  │ root     │ disabled │
+│ 6  │ solarnexus-api        │ default     │ 0.0.0   │ fork    │ 2051050  │ 26h    │ 3    │ online    │ 0%       │ 136.1mb  │ root     │ disabled │
+│ 4  │ tkprabhu-api          │ default     │ 0.0.0   │ fork    │ 2051012  │ 26h    │ 3    │ online    │ 0%       │ 205.2mb  │ root     │ disabled │
+│ 8  │ ungalrajeev-api       │ default     │ N/A     │ fork    │ 1265682  │ 0s     │ 426… │ online    │ 0%       │ 84.1mb   │ root     │ disabled │
+│ 7  │ ungaludan-sarath      │ default     │ 0.0.0   │ fork    │ 2051112  │ 26h    │ 3    │ online    │ 0%       │ 207.6mb  │ root     │ disabled │
+│ 9  │ ungalvignesh-api      │ default     │ N/A     │ fork    │ 2051131  │ 26h    │ 38   │ online    │ 0%       │ 117.3mb  │ root     │ disabled │
+│ 10 │ ungalvignesh-api      │ default     │ N/A     │ fork    │ 1265560  │ 1s     │ 198… │ online    │ 0%       │ 116.8mb  │ root     │ disabled │
+└────┴───────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+host metrics | cpu: 98.6% | ram usage: 30% | lo: ⇓ 0.009mb/s ⇑ 0.009mb/s | eth0: ⇓ 0.001mb/s ⇑ 0.001mb/s | disk: ⇓ 0mb/s ⇑ 0.029mb/s |
+{"status":"ok"}root@srv1609330:/home/automystics/htdocs/www.automystics.cocp /root/automystics-api.env.backup artifacts/api-server/.envapi-server/.env
+chmod 600 artifacts/api-server/.env
+pnpm install --frozen-lockfile
+pnpm --filter @workspace/db exec drizzle-kit push --force
+bash deploy/deploy.sh
+Scope: all 9 workspace projects
+? The modules directories will be removed and reinstalled from scratch. Proceed? (Y/n) ‣ true
+   ╭───────────────────────────────────────────────────────────────────╮
+   │                                                                   │
+   │                Update available! 9.15.9 → 11.11.0.                │
+   │   Changelog: https://github.com/pnpm/pnpm/releases/tag/v11.11.0   │
+   │                 Run "pnpm add -g pnpm" to update.                 │
+   │                                                                   │
+   ╰───────────────────────────────────────────────────────────────────╯
+
+✔ The modules directories will be removed and reinstalled from scratch. Proceed? (Y/n) · true
+Recreating /home/automystics/htdocs/www.automystics.com/automystics/node_modules
+ ERR_PNPM_LOCKFILE_CONFIG_MISMATCH  Cannot proceed with the frozen installation. The current "overrides" configuration doesn't match the value found in the lockfile
+
+Update your lockfile using "pnpm install --no-frozen-lockfile"
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/home/automystics/htdocs/www.automystics.com/automystics/lib/db/drizzle.config.ts'
+Cannot find module 'drizzle-kit'
+Require stack:
+- /home/automystics/htdocs/www.automystics.com/automystics/lib/db/drizzle.config.ts
+- /usr/lib/node_modules/drizzle-kit/bin.cjs
+/home/automystics/htdocs/www.automystics.com/automystics/lib/db:
+ ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL  Command failed with exit code 1: drizzle-kit push --force
+bash: deploy/deploy.sh: No such file or directory
