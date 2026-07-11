@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { eq } from "drizzle-orm";
+import { and, eq, gte, lt, ne } from "drizzle-orm";
 import {
   db,
   demoRequestsTable,
@@ -8,8 +8,50 @@ import {
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
 import { sendDemoRequestNotification, sendDemoRequestConfirmation } from "../lib/mailer";
+import {
+  BOOKING_TIMEZONE_LABEL,
+  getDaySlots,
+  getIstDayRangeUtc,
+  isValidSlotIso,
+  istCalendarDateForInstant,
+  parseDateParam,
+} from "../lib/scheduling";
 
 const router: IRouter = Router();
+
+router.get("/demo-requests/available-slots", async (req, res) => {
+  const dateStr = String(req.query.date || "");
+  const parsedDate = parseDateParam(dateStr);
+  if (!parsedDate) {
+    res.status(400).json({ error: "invalid_date" });
+    return;
+  }
+  const now = new Date();
+  const daySlots = getDaySlots(parsedDate.y, parsedDate.m, parsedDate.d, now);
+  if (daySlots.length === 0) {
+    res.json({ date: dateStr, timezone: BOOKING_TIMEZONE_LABEL, slots: [] });
+    return;
+  }
+  const { start, end } = getIstDayRangeUtc(parsedDate.y, parsedDate.m, parsedDate.d);
+  const booked = await db
+    .select({ scheduledAt: demoRequestsTable.scheduledAt })
+    .from(demoRequestsTable)
+    .where(
+      and(
+        gte(demoRequestsTable.scheduledAt, start),
+        lt(demoRequestsTable.scheduledAt, end),
+        ne(demoRequestsTable.status, "declined"),
+      ),
+    );
+  const bookedIsoSet = new Set(
+    booked.filter((b) => b.scheduledAt).map((b) => new Date(b.scheduledAt as Date).toISOString()),
+  );
+  res.json({
+    date: dateStr,
+    timezone: BOOKING_TIMEZONE_LABEL,
+    slots: daySlots.map((slot) => ({ ...slot, available: !bookedIsoSet.has(slot.iso) })),
+  });
+});
 
 router.post("/demo-requests", async (req, res) => {
   const parsed = insertDemoRequestSchema.safeParse(req.body);
@@ -17,19 +59,41 @@ router.post("/demo-requests", async (req, res) => {
     res.status(400).json({ error: "validation_failed", issues: parsed.error.flatten() });
     return;
   }
+
+  const scheduledAt = new Date(parsed.data.scheduledAt);
+  const { y, m, d } = istCalendarDateForInstant(scheduledAt);
+  if (!isValidSlotIso(y, m, d, scheduledAt.toISOString())) {
+    res.status(400).json({ error: "invalid_slot" });
+    return;
+  }
+
   try {
-    const [row] = await db
-      .insert(demoRequestsTable)
-      .values({
-        name: parsed.data.name,
-        email: parsed.data.email,
-        phone: parsed.data.phone || null,
-        company: parsed.data.company || null,
-        productInterest: parsed.data.productInterest || null,
-        preferredDate: parsed.data.preferredDate || null,
-        message: parsed.data.message || null,
-      })
-      .returning();
+    // A partial unique index on (scheduled_at) for non-declined rows
+    // (see lib/db/src/schema/demo-requests.ts) is the source of truth for
+    // slot exclusivity: it makes double-booking impossible even when two
+    // requests race, regardless of this pre-check.
+    let row: typeof demoRequestsTable.$inferSelect;
+    try {
+      [row] = await db
+        .insert(demoRequestsTable)
+        .values({
+          name: parsed.data.name,
+          email: parsed.data.email,
+          phone: parsed.data.phone || null,
+          company: parsed.data.company || null,
+          productInterest: parsed.data.productInterest || null,
+          scheduledAt,
+          message: parsed.data.message || null,
+        })
+        .returning();
+    } catch (insertErr) {
+      if (isUniqueViolation(insertErr)) {
+        res.status(409).json({ error: "slot_unavailable" });
+        return;
+      }
+      throw insertErr;
+    }
+
     res.status(201).json({ ok: true, id: row.id });
     const emailPayload = {
       id: row.id,
@@ -38,7 +102,7 @@ router.post("/demo-requests", async (req, res) => {
       phone: row.phone,
       company: row.company,
       productInterest: row.productInterest,
-      preferredDate: row.preferredDate,
+      scheduledAt: row.scheduledAt ? row.scheduledAt.toISOString() : null,
       message: row.message,
     };
     void sendDemoRequestNotification(emailPayload);
@@ -48,6 +112,14 @@ router.post("/demo-requests", async (req, res) => {
     res.status(500).json({ error: "server_error" });
   }
 });
+
+function isUniqueViolation(err: unknown): boolean {
+  if (typeof err !== "object" || err === null) return false;
+  const code = (err as { code?: string }).code;
+  if (code === "23505") return true;
+  const cause = (err as { cause?: unknown }).cause;
+  return typeof cause === "object" && cause !== null && (cause as { code?: string }).code === "23505";
+}
 
 router.get("/admin/demo-requests", requireAdmin, async (_req, res) => {
   const rows = await db

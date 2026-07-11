@@ -33,6 +33,7 @@ type DemoRequest = {
   phone: string | null;
   company: string | null;
   productInterest: string | null;
+  scheduledAt: string | null;
   preferredDate: string | null;
   message: string | null;
   status: string;
@@ -48,6 +49,24 @@ const STATUS_OPTIONS = [
   { value: "completed", label: "Completed" },
   { value: "declined", label: "Declined" },
 ];
+
+function formatScheduledAt(iso: string | null): string | null {
+  if (!iso) return null;
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return null;
+  return (
+    new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      weekday: "short",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).format(date) + " IST"
+  );
+}
 
 const STATUS_COLORS: Record<string, string> = {
   new: "bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/40",
@@ -232,7 +251,11 @@ export function AdminDemoRequests() {
                       {r.productInterest && (
                         <span className="inline-flex items-center gap-1.5"><Package className="w-3.5 h-3.5" /> {r.productInterest}</span>
                       )}
-                      <span className="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {new Date(r.createdAt).toLocaleString()}</span>
+                      {formatScheduledAt(r.scheduledAt) ? (
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-foreground"><CalendarCheck className="w-3.5 h-3.5" /> {formatScheduledAt(r.scheduledAt)}</span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> Submitted {new Date(r.createdAt).toLocaleString()}</span>
+                      )}
                     </div>
                     {!isOpen && r.message && (
                       <p className="mt-2 text-muted-foreground line-clamp-2">{r.message}</p>
@@ -251,11 +274,18 @@ export function AdminDemoRequests() {
                               <Phone className="w-3.5 h-3.5" /> {r.phone}
                             </div>
                           )}
-                          {r.preferredDate && (
+                          {formatScheduledAt(r.scheduledAt) ? (
                             <div className="flex items-center gap-2 text-muted-foreground">
-                              <CalendarCheck className="w-3.5 h-3.5" /> {r.preferredDate}
+                              <CalendarCheck className="w-3.5 h-3.5" /> {formatScheduledAt(r.scheduledAt)}
                             </div>
-                          )}
+                          ) : r.preferredDate ? (
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                              <CalendarCheck className="w-3.5 h-3.5" /> {r.preferredDate} (legacy request)
+                            </div>
+                          ) : null}
+                          <div className="flex items-center gap-2 text-muted-foreground">
+                            <Calendar className="w-3.5 h-3.5" /> Submitted {new Date(r.createdAt).toLocaleString()}
+                          </div>
                         </div>
                         {r.message && (
                           <div>

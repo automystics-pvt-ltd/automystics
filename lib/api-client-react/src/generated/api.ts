@@ -21,6 +21,8 @@ import type {
   CreateDemoRequestInput,
   CreateEnquiry201,
   CreateEnquiryInput,
+  DemoAvailableSlots,
+  GetDemoRequestAvailableSlotsParams,
   GetPublicSiteSettings200,
   HealthStatus,
   ListPublicProducts200,
@@ -434,3 +436,112 @@ export const useCreateDemoRequest = <
 > => {
   return useMutation(getCreateDemoRequestMutationOptions(options));
 };
+
+/**
+ * @summary List bookable demo time slots for a given date
+ */
+export const getGetDemoRequestAvailableSlotsUrl = (
+  params: GetDemoRequestAvailableSlotsParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/demo-requests/available-slots?${stringifiedParams}`
+    : `/api/demo-requests/available-slots`;
+};
+
+export const getDemoRequestAvailableSlots = async (
+  params: GetDemoRequestAvailableSlotsParams,
+  options?: RequestInit,
+): Promise<DemoAvailableSlots> => {
+  return customFetch<DemoAvailableSlots>(
+    getGetDemoRequestAvailableSlotsUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getGetDemoRequestAvailableSlotsQueryKey = (
+  params?: GetDemoRequestAvailableSlotsParams,
+) => {
+  return [
+    `/api/demo-requests/available-slots`,
+    ...(params ? [params] : []),
+  ] as const;
+};
+
+export const getGetDemoRequestAvailableSlotsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>,
+  TError = ErrorType<ValidationError>,
+>(
+  params: GetDemoRequestAvailableSlotsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetDemoRequestAvailableSlotsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>
+  > = ({ signal }) =>
+    getDemoRequestAvailableSlots(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetDemoRequestAvailableSlotsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>
+>;
+export type GetDemoRequestAvailableSlotsQueryError = ErrorType<ValidationError>;
+
+/**
+ * @summary List bookable demo time slots for a given date
+ */
+
+export function useGetDemoRequestAvailableSlots<
+  TData = Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>,
+  TError = ErrorType<ValidationError>,
+>(
+  params: GetDemoRequestAvailableSlotsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getDemoRequestAvailableSlots>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetDemoRequestAvailableSlotsQueryOptions(
+    params,
+    options,
+  );
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}

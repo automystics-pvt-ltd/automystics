@@ -78,6 +78,26 @@ export const CreateDemoRequestBody = zod.object({
   phone: zod.string().optional(),
   company: zod.string().optional(),
   productInterest: zod.string().optional(),
-  preferredDate: zod.string().optional(),
+  scheduledAt: zod.string().describe("ISO 8601 date-time of the chosen slot"),
   message: zod.string().optional(),
+});
+
+/**
+ * @summary List bookable demo time slots for a given date
+ */
+export const GetDemoRequestAvailableSlotsQueryParams = zod.object({
+  date: zod.coerce.string().describe("Calendar date in YYYY-MM-DD format"),
+});
+
+export const GetDemoRequestAvailableSlotsResponse = zod.object({
+  date: zod.string(),
+  timezone: zod.string(),
+  slots: zod.array(
+    zod.object({
+      hour: zod.number(),
+      label: zod.string(),
+      iso: zod.string(),
+      available: zod.boolean(),
+    }),
+  ),
 });

@@ -3,6 +3,7 @@ import { db, emailSettingsTable, type EmailSettings } from "@workspace/db";
 import { logger } from "./logger";
 import { decryptSecret } from "./crypto";
 import { assertSafeSmtpHost } from "./smtp-host-guard";
+import { formatScheduledAt } from "./scheduling";
 
 export async function getEmailSettings(): Promise<EmailSettings | null> {
   const [row] = await db.select().from(emailSettingsTable).limit(1);
@@ -93,7 +94,7 @@ export type DemoRequestEmailPayload = {
   phone?: string | null;
   company?: string | null;
   productInterest?: string | null;
-  preferredDate?: string | null;
+  scheduledAt?: string | null;
   message?: string | null;
 };
 
@@ -119,7 +120,7 @@ export async function sendDemoRequestNotification(payload: DemoRequestEmailPaylo
       `Phone:             ${payload.phone || "—"}`,
       `Company:           ${payload.company || "—"}`,
       `Product interest:  ${payload.productInterest || "—"}`,
-      `Preferred date:    ${payload.preferredDate || "—"}`,
+      `Scheduled for:     ${formatScheduledAt(payload.scheduledAt)}`,
       ``,
       `Message:`,
       payload.message || "—",
@@ -135,7 +136,7 @@ export async function sendDemoRequestNotification(payload: DemoRequestEmailPaylo
           <tr><td style="padding:6px 0;color:#64748b">Phone</td><td style="padding:6px 0">${escapeHtml(payload.phone || "—")}</td></tr>
           <tr><td style="padding:6px 0;color:#64748b">Company</td><td style="padding:6px 0">${escapeHtml(payload.company || "—")}</td></tr>
           <tr><td style="padding:6px 0;color:#64748b">Product interest</td><td style="padding:6px 0">${escapeHtml(payload.productInterest || "—")}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Preferred date</td><td style="padding:6px 0">${escapeHtml(payload.preferredDate || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Scheduled for</td><td style="padding:6px 0">${escapeHtml(formatScheduledAt(payload.scheduledAt))}</td></tr>
         </table>
         <h3 style="margin:0 0 8px">Message</h3>
         <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;white-space:pre-wrap">${escapeHtml(payload.message || "—")}</div>
@@ -176,7 +177,7 @@ export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPaylo
       `Phone:             ${payload.phone || "—"}`,
       `Company:           ${payload.company || "—"}`,
       `Product interest:  ${payload.productInterest || "—"}`,
-      `Preferred date:    ${payload.preferredDate || "—"}`,
+      `Scheduled for:     ${formatScheduledAt(payload.scheduledAt)}`,
       payload.message ? `Message:           ${payload.message}` : undefined,
       ``,
       `If any of this looks incorrect or you'd like to add more details, just reply to this email.`,
@@ -198,7 +199,7 @@ export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPaylo
           <tr><td style="padding:6px 0;color:#64748b">Phone</td><td style="padding:6px 0">${escapeHtml(payload.phone || "—")}</td></tr>
           <tr><td style="padding:6px 0;color:#64748b">Company</td><td style="padding:6px 0">${escapeHtml(payload.company || "—")}</td></tr>
           <tr><td style="padding:6px 0;color:#64748b">Product interest</td><td style="padding:6px 0">${escapeHtml(payload.productInterest || "—")}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Preferred date</td><td style="padding:6px 0">${escapeHtml(payload.preferredDate || "—")}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Scheduled for</td><td style="padding:6px 0">${escapeHtml(formatScheduledAt(payload.scheduledAt))}</td></tr>
         </table>
         ${payload.message ? `<h3 style="margin:0 0 8px">Your message</h3><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;white-space:pre-wrap">${escapeHtml(payload.message)}</div>` : ""}
         <p style="margin-top:24px;color:#64748b;font-size:13px">If any of this looks incorrect or you'd like to add more details, just reply to this email.</p>

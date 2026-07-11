@@ -53,8 +53,22 @@ export interface CreateDemoRequestInput {
   phone?: string;
   company?: string;
   productInterest?: string;
-  preferredDate?: string;
+  /** ISO 8601 date-time of the chosen slot */
+  scheduledAt: string;
   message?: string;
+}
+
+export interface DemoSlot {
+  hour: number;
+  label: string;
+  iso: string;
+  available: boolean;
+}
+
+export interface DemoAvailableSlots {
+  date: string;
+  timezone: string;
+  slots: DemoSlot[];
 }
 
 export type ValidationErrorIssues = { [key: string]: unknown };
@@ -80,4 +94,11 @@ export type CreateEnquiry201 = {
 export type CreateDemoRequest201 = {
   ok: boolean;
   id: number;
+};
+
+export type GetDemoRequestAvailableSlotsParams = {
+  /**
+   * Calendar date in YYYY-MM-DD format
+   */
+  date: string;
 };
