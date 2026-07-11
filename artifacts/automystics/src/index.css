@@ -54,80 +54,79 @@
 :root {
   color-scheme: light;
   
-  /* Vibrant Engineering Palette */
-  --background: 0 0% 99%;
+  /* Bold AI Theme Palette */
+  --background: 0 0% 100%;
   --foreground: 222 47% 11%;
   
-  --border: 220 13% 85%;
+  --border: 220 13% 91%;
   
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
-  --card-border: 220 13% 88%;
+  --card-border: 220 13% 91%;
   
   --popover: 0 0% 100%;
   --popover-foreground: 222 47% 11%;
-  --popover-border: 220 13% 90%;
+  --popover-border: 220 13% 91%;
   
-  /* Electric Coral - Bold Primary */
-  --primary: 14 100% 57%;
+  /* Vibrant Violet-Blue - Primary */
+  --primary: 250 85% 55%;
   --primary-foreground: 0 0% 100%;
   
-  /* Deep Teal - Secondary Accent */
-  --secondary: 185 84% 35%;
+  /* Bright Cyan/Teal - Secondary Accent */
+  --secondary: 190 90% 45%;
   --secondary-foreground: 0 0% 100%;
   
   --muted: 220 14% 96%;
   --muted-foreground: 220 9% 46%;
   
-  /* Vibrant Teal Accent */
-  --accent: 185 90% 95%;
-  --accent-foreground: 185 84% 25%;
+  --accent: 250 85% 96%;
+  --accent-foreground: 250 85% 40%;
   
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   
   --input: 220 13% 91%;
-  --ring: 14 100% 57%;
+  --ring: 250 85% 55%;
 
   --app-font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --app-font-serif: 'Space Grotesk', system-ui, sans-serif;
   --app-font-mono: 'JetBrains Mono', monospace;
-  --radius: 0.25rem;
+  --radius: 0.75rem;
 }
 
 .dark {
   color-scheme: dark;
   
-  --background: 222 47% 6%;
+  --background: 222 47% 4%;
   --foreground: 0 0% 98%;
   
   --border: 220 13% 18%;
   
-  --card: 222 40% 9%;
+  --card: 222 40% 6%;
   --card-foreground: 0 0% 98%;
   --card-border: 220 13% 16%;
   
-  --popover: 222 40% 9%;
+  --popover: 222 40% 6%;
   --popover-foreground: 0 0% 98%;
   --popover-border: 220 13% 18%;
   
-  --primary: 14 95% 62%;
+  --primary: 250 85% 65%;
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 185 80% 45%;
+  --secondary: 190 90% 50%;
   --secondary-foreground: 0 0% 100%;
   
-  --muted: 220 15% 14%;
+  --muted: 220 15% 10%;
   --muted-foreground: 220 9% 65%;
   
-  --accent: 185 60% 20%;
-  --accent-foreground: 185 90% 85%;
+  --accent: 250 50% 20%;
+  --accent-foreground: 250 85% 85%;
   
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   
   --input: 220 13% 18%;
-  --ring: 14 95% 62%;
+  --ring: 250 85% 65%;
 }
 
 @layer base {

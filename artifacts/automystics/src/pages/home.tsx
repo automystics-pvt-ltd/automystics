@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "wouter";
 import { SEO } from "@/components/seo";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { 
   Building2, GraduationCap, Mic, LineChart, Sun, Camera, Code, Dumbbell,
   Zap, Shield, Clock, ArrowUpRight, CheckCircle2, Factory, Database,
-  Activity, Users, Sparkles, HandCoins, FileSignature, ShieldCheck,
-  Package, HeartPulse, CalendarCheck, DollarSign
+  Activity, Users, Sparkles, FileSignature, 
+  Package, HeartPulse, CalendarCheck, DollarSign, ArrowRight, BrainCircuit,
+  Workflow
 } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
-import { NetworkGraph } from "@/components/network-graph";
+import { DiagonalDivider, WaveDivider } from "@/components/dividers";
 
 const HOME_ICON_MAP: Record<string, any> = {
   Building2, GraduationCap, Mic, LineChart, Sun, Camera, Code, Dumbbell,
@@ -40,8 +40,9 @@ export function Home() {
         icon: HOME_ICON_MAP[p.icon || "Package"] || Package,
       }))
     : fallbackProducts;
+
   return (
-    <div className="relative">
+    <div className="relative bg-background">
       <SEO 
         title="Automystics Technologies Private Limited | An AI Automation Company"
         description="Automystics Technologies Private Limited is an AI Automation Company building enterprise-grade custom software, AI integrations, fintech platforms, college and school ERPs, SCADA monitoring, and CCTV AI surveillance — delivered with unprecedented speed."
@@ -49,379 +50,261 @@ export function Home() {
         canonical="/"
       />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col justify-center pt-36 pb-24 md:pt-44 md:pb-32 overflow-hidden bg-[#050505]">
-        {/* Full-bleed cinematic background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
-          style={{ backgroundImage: 'url(/hero-bg.jpg)' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,_hsla(var(--primary),0.12),_transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_100%_100%,_hsla(var(--secondary),0.15),_transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 dark-grid-pattern opacity-20 pointer-events-none mix-blend-overlay" />
+      {/* Modern Gradient Hero */}
+      <section className="relative flex flex-col justify-center pt-40 pb-24 md:pt-48 md:pb-32 overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
+        
+        {/* Soft abstract blobs */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-primary/20 to-secondary/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4 pointer-events-none mix-blend-multiply dark:mix-blend-screen" />
 
-        {/* Network Graph Overlay */}
-        <div className="absolute inset-0 z-0">
-          <NetworkGraph />
-        </div>
-
-        <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl flex-1 flex flex-col justify-center">
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl">
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/40 border border-white/10 shadow-[0_0_20px_hsla(var(--primary),0.15)] text-primary text-xs font-bold mb-10 uppercase tracking-[0.2em] backdrop-blur-xl"
-            >
-              <Sparkles className="w-4 h-4 text-primary drop-shadow-[0_0_8px_hsla(var(--primary),0.8)]" /> 
-              <span className="text-white/90">Next-Gen Intelligence</span>
-            </motion.div>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-primary/20 shadow-sm text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em]">
+              <Sparkles className="w-4 h-4 text-primary" /> 
+              <span>Next-Gen AI Automation</span>
+            </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.1] mb-8 relative drop-shadow-2xl">
-              We Build Software,<br/>
-              <span className="relative inline-block mt-2">
-                <span className="bg-gradient-to-r from-white via-primary-foreground to-white/70 bg-clip-text text-transparent">Faster Than Anyone.</span>
-                <span className="absolute -inset-1 blur-3xl bg-primary/20 -z-10 rounded-full"></span>
-              </span>
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-foreground leading-[1.1] mb-8 relative">
+              Automate the Future,<br/>
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Faster Than Anyone.</span>
             </h1>
             
-            <p className="text-lg md:text-2xl text-white/60 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
-              Automystics delivers precision-engineered AI applications, financial platforms, and industrial systems with <span className="text-white/90">unprecedented speed</span>.
+            <p className="text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+              We deliver precision-engineered AI applications, financial platforms, and industrial systems with unprecedented speed and scale.
             </p>
             
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.7, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row justify-center gap-5 mb-16 w-full sm:w-auto"
-            >
+            <div className="flex flex-col sm:flex-row justify-center gap-5 mb-16 w-full sm:w-auto">
               <Link href="/contact" className="w-full sm:w-auto">
-                <Button size="lg" data-testid="button-hero-start" className="w-full rounded-full bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary hover:to-primary text-white font-bold px-9 py-7 text-lg shadow-[0_0_30px_hsla(var(--primary),0.4)] hover:shadow-[0_0_40px_hsla(var(--primary),0.6)] border border-primary/50 transition-all duration-300 group">
+                <Button size="lg" className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold px-9 py-7 text-lg shadow-[0_10px_30px_hsla(var(--primary),0.3)] transition-all duration-300 group">
                   Start Your Project
-                  <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="/products" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" data-testid="button-hero-explore" className="w-full rounded-full bg-black/40 border-white/20 hover:bg-white/10 hover:border-white/40 text-white font-bold px-9 py-7 text-lg backdrop-blur-xl transition-all duration-300 group">
-                  Explore Products
-                  <div className="w-2 h-2 rounded-full bg-secondary ml-3 group-hover:shadow-[0_0_10px_hsla(var(--secondary),0.8)] transition-all" />
+                <Button size="lg" variant="outline" className="w-full rounded-full bg-background/50 border-primary/20 hover:bg-primary/5 hover:border-primary/40 text-foreground font-bold px-9 py-7 text-lg backdrop-blur-sm transition-all duration-300 group">
+                  Explore Solutions
                 </Button>
               </Link>
-            </motion.div>
-
-            {/* Trust strip - icon row - Redesigned for cinematic feel */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7, duration: 1 }}
-              className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 pt-10 border-t border-white/10 w-full max-w-4xl mx-auto"
-            >
-              {[
-                { icon: Zap, text: "Fastest Delivery", color: "text-primary" },
-                { icon: Shield, text: "Enterprise Grade", color: "text-secondary" },
-                { icon: FileSignature, text: "Signed with NDA", color: "text-primary" },
-                { icon: Code, text: "100% Custom Built", color: "text-secondary" }
-              ].map((item, idx) => (
-                <React.Fragment key={idx}>
-                  <div className="flex items-center gap-3 group cursor-default">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md group-hover:bg-white/10 transition-colors duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_15px_hsla(var(--primary),0.2)]">
-                      <item.icon className={`w-4.5 h-4.5 ${item.color} drop-shadow-md`} />
-                    </div>
-                    <span className="text-sm font-semibold text-white/70 group-hover:text-white transition-colors">{item.text}</span>
-                  </div>
-                  {idx < 3 && <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-white/10" />}
-                </React.Fragment>
-              ))}
-            </motion.div>
+            </div>
           </motion.div>
         </div>
         
-        {/* Subtle gradient transition into next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-secondary/10 via-[#050505]/50 to-transparent pointer-events-none" />
+        {/* Wave Divider to next section */}
+        <WaveDivider className="bottom-[-1px] text-card" fill="fill-card" />
       </section>
 
-      {/* Stats Dark Accent Band */}
-      <section className="py-16 bg-secondary dark:bg-secondary border-y border-primary/30 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-white/10">
+      {/* Grayscale Trust Strip */}
+      <section className="py-12 bg-card relative z-20">
+        <div className="container mx-auto px-4">
+          <p className="text-center text-sm font-bold text-muted-foreground uppercase tracking-widest mb-8">Trusted by industry leaders</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
             {[
-              { label: "Projects Delivered", value: "150+", icon: CheckCircle2 },
-              { label: "Lines of Code", value: "2M+", icon: Code },
-              { label: "System Uptime", value: "99.9%", icon: Activity },
-              { label: "Enterprise Clients", value: "45+", icon: Users }
-            ].map((stat, i) => (
-              <div key={i} className="text-center px-4">
-                <stat.icon className="w-6 h-6 text-primary mx-auto mb-3 opacity-80" />
-                <div className="text-3xl md:text-4xl font-extrabold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-primary font-semibold uppercase tracking-wider">{stat.label}</div>
+              { icon: Zap, text: "Fastest Delivery" },
+              { icon: Shield, text: "Enterprise Grade" },
+              { icon: FileSignature, text: "Signed with NDA" },
+              { icon: Code, text: "100% Custom Built" }
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-center gap-3">
+                <item.icon className="w-6 h-6 text-foreground" />
+                <span className="text-lg font-bold text-foreground">{item.text}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Grid (Section A: light primary-gray) */}
-      <section id="services" className="py-24 md:py-32 relative bg-muted/30 dark:bg-muted/10">
-        <div className="absolute inset-0 bg-diagonal-pattern opacity-30" />
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-primary border border-card-border text-sm font-bold mb-6 uppercase tracking-wide shadow-sm">
-              <span className="text-xl leading-none -mt-1">●</span> OUR EXPERTISE
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6 tracking-tight">Enterprise solutions, <span className="text-primary">engineered to scale.</span></h2>
-            <p className="text-xl text-muted-foreground">From high-frequency algorithmic trading to large-scale SCADA monitoring, our suite of AI-powered solutions drives industry transformation.</p>
+      {/* Feature Badges with Dotted Connecting Lines */}
+      <section className="py-24 md:py-32 bg-card relative">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6">Intelligence at <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Every Layer</span></h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Our automated pipeline transforms complex business requirements into production-ready AI systems.</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {products.map((product, i) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-              >
-                <Link href={`/products#${product.id}`} className="block h-full group" data-testid={`product-tile-${product.id}`}>
-                  <div className="relative h-full bg-card dark:bg-card rounded-3xl border border-border overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30 hover:border-primary/60 hover:shadow-secondary/20">
-                    {/* Top gradient accent bar */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/80 to-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
-                    
-                    {/* Decorative bg blob */}
-                    <div className="absolute -top-12 -right-12 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    
-                    {/* Index number watermark */}
-                    <div className="absolute top-6 right-6 text-5xl font-extrabold text-foreground/5 group-hover:text-primary/30 transition-colors leading-none select-none">
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-
-                    <div className="relative p-7 flex flex-col h-full">
-                      {/* Icon */}
-                      <div className="relative mb-8">
-                        <div className="absolute inset-0 bg-primary/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-                          <product.icon className="w-7 h-7 text-foreground" />
-                        </div>
-                      </div>
-
-                      <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight group-hover:text-primary group-hover:scale-105 transition-colors">
-                        {product.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
-                        {product.desc}
-                      </p>
-
-                      <div className="flex items-center justify-between pt-5 border-t border-border">
-                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground group-hover:text-primary group-hover:scale-105 transition-colors">
-                          Explore
-                        </span>
-                        <div className="w-9 h-9 rounded-full bg-foreground/10 dark:bg-white/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
-                          <ArrowUpRight className="w-4 h-4 text-foreground transition-colors" />
-                        </div>
-                      </div>
-                    </div>
+          <div className="relative">
+            {/* Dotted connecting line */}
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-[2px] border-t-2 border-dashed border-primary/20 -translate-y-1/2 z-0" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+              {[
+                { icon: BrainCircuit, title: "AI Analysis", desc: "We map your workflow using advanced models to find optimal automation points." },
+                { icon: Workflow, title: "Process Design", desc: "Custom architecture tailored to your specific industry constraints." },
+                { icon: Zap, title: "Rapid Deployment", desc: "Production-ready systems launched in weeks, not months." }
+              ].map((feature, idx) => (
+                <motion.div 
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.2 }}
+                  className="flex flex-col items-center text-center bg-card p-6 rounded-3xl"
+                >
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-6 shadow-[0_0_30px_hsla(var(--primary),0.15)] border-4 border-background relative group">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <feature.icon className="w-10 h-10 text-primary group-hover:text-white relative z-10 transition-colors duration-300" />
                   </div>
-                </Link>
-              </motion.div>
-            ))}
+                  <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Industries (Section B: soft gradient panel) */}
-      <section id="industries" className="py-24 md:py-32 relative bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-muted/20 dark:via-muted/5 to-muted/40 dark:to-muted/15">
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
+      {/* Alternating Text + Illustration Rows */}
+      <section className="py-24 md:py-32 bg-muted/30 relative">
+        <DiagonalDivider className="top-[-1px] text-card" fill="fill-card" />
+        <div className="container relative z-10 mx-auto px-4 max-w-6xl mt-12">
+          
+          {/* Row 1 */}
+          <div className="flex flex-col md:flex-row items-center gap-16 mb-32">
+            <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="flex-1"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-card-border text-primary text-sm font-bold mb-6 uppercase tracking-wide shadow-sm">
-                <span className="text-xl leading-none -mt-1">●</span> SECTORS
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background text-primary border border-primary/20 text-sm font-bold mb-6">
+                <LineChart className="w-4 h-4" /> Fintech & Trading
               </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6 tracking-tight">Industries We <span className="text-primary">Power</span></h2>
-              <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
-                We deliver specialized intelligence and robust automation across key sectors, modernizing legacy workflows.
+              <h2 className="text-4xl font-extrabold mb-6">High-frequency performance.</h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                From precision algorithmic trading to secure chit fund management, our financial platforms process millions of transactions with zero downtime.
               </p>
-              
-              <div className="grid sm:grid-cols-2 gap-8">
-                {[
-                  { name: "Financial Services", desc: "Secure fintech platforms", icon: Building2 },
-                  { name: "Education", desc: "Scalable institution mgmt", icon: GraduationCap },
-                  { name: "Industrial & Energy", desc: "Real-time SCADA control", icon: Factory },
-                  { name: "Enterprise", desc: "Complex workflow automation", icon: Database }
-                ].map((ind, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-12 h-12 shrink-0 rounded-2xl bg-white border border-card-border shadow-sm flex items-center justify-center">
-                      <ind.icon className="w-6 h-6 text-primary" />
+              <ul className="space-y-4">
+                {['Sub-millisecond execution times', 'Bank-grade encryption', 'Real-time analytics dashboards'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                      <CheckCircle2 className="w-4 h-4 text-primary" />
                     </div>
-                    <div>
-                      <h4 className="text-foreground font-bold mb-1">{ind.name}</h4>
-                      <p className="text-sm text-muted-foreground">{ind.desc}</p>
-                    </div>
-                  </div>
+                    <span className="font-medium">{item}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative rounded-[2.5rem] overflow-hidden border border-card-border aspect-square lg:aspect-[4/3] bg-white shadow-xl p-8 flex flex-col items-center justify-center group"
+              className="flex-1 w-full"
             >
-              <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-              <div className="w-64 h-64 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-[80px] absolute group-hover:bg-primary/20 transition-colors duration-700" />
-              <div className="relative z-10 w-full h-full border border-card-border rounded-2xl bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-center p-6">
-                <div className="grid grid-cols-2 gap-4 w-full h-full">
-                  {/* Trading metric */}
-                  <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 relative overflow-hidden">
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                        <LineChart className="w-5 h-5 text-primary" />
-                      </div>
-                      <span className="text-[10px] font-bold text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2 py-0.5 rounded-full">+24.7%</span>
-                    </div>
-                    <div className="mt-2">
-                      <div className="text-xs text-muted-foreground font-semibold">Trade Volume</div>
-                      <div className="text-xl font-extrabold text-foreground tracking-tight">$4.2M</div>
-                    </div>
-                    <svg viewBox="0 0 100 24" className="w-full h-6" preserveAspectRatio="none">
-                      <polyline points="0,18 15,14 30,16 45,10 60,12 75,6 90,8 100,4" stroke="hsl(var(--primary))" strokeWidth="2" fill="none" />
-                    </svg>
+              <div className="relative aspect-square md:aspect-[4/3] bg-gradient-to-tr from-primary/5 to-secondary/10 rounded-[2rem] border border-background shadow-xl p-8 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+                <div className="relative z-10 bg-background rounded-2xl p-6 shadow-lg w-full max-w-sm border border-card-border">
+                  <div className="flex justify-between items-center mb-6">
+                    <div className="font-bold text-foreground">Live Trading Volume</div>
+                    <span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-bold">+24.7%</span>
                   </div>
-                  {/* Solar metric */}
-                  <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 mt-6 relative overflow-hidden">
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                        <Sun className="w-5 h-5 text-primary" />
-                      </div>
-                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">LIVE</span>
+                  <div className="text-4xl font-extrabold mb-4 text-foreground">$4.2M</div>
+                  <svg viewBox="0 0 100 24" className="w-full h-12" preserveAspectRatio="none">
+                    <polyline points="0,18 15,14 30,16 45,10 60,12 75,6 90,8 100,4" stroke="url(#grad)" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    <defs>
+                      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="hsl(var(--primary))" />
+                        <stop offset="100%" stopColor="hsl(var(--secondary))" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Row 2 */}
+          <div className="flex flex-col md:flex-row-reverse items-center gap-16 mb-20">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex-1"
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background text-secondary border border-secondary/20 text-sm font-bold mb-6">
+                <Sun className="w-4 h-4" /> Industrial & SCADA
+              </div>
+              <h2 className="text-4xl font-extrabold mb-6">Monitor everything, everywhere.</h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Large-scale industrial solar monitoring and CCTV AI surveillance systems that detect anomalies before they become critical failures.
+              </p>
+              <ul className="space-y-4">
+                {['Predictive maintenance alerts', 'Multi-site aggregation', 'Computer vision anomaly detection'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center">
+                      <CheckCircle2 className="w-4 h-4 text-secondary" />
                     </div>
-                    <div className="mt-2">
-                      <div className="text-xs text-muted-foreground font-semibold">Power Output</div>
-                      <div className="text-xl font-extrabold text-foreground tracking-tight">128.4 MW</div>
-                    </div>
-                    <div className="flex gap-1 items-end h-6">
-                      {[40, 60, 35, 80, 55, 90, 70, 95].map((h, i) => (
-                        <div key={i} className="flex-1 bg-primary/70 rounded-sm" style={{ height: `${h}%` }} />
-                      ))}
-                    </div>
+                    <span className="font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="flex-1 w-full"
+            >
+              <div className="relative aspect-square md:aspect-[4/3] bg-gradient-to-bl from-secondary/10 to-primary/5 rounded-[2rem] border border-background shadow-xl p-8 flex flex-col gap-4 justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+                <div className="relative z-10 bg-background rounded-2xl p-4 shadow-lg border border-card-border flex items-center gap-4 translate-x-4">
+                  <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center"><Camera className="w-6 h-6 text-secondary" /></div>
+                  <div>
+                    <div className="font-bold text-foreground">Zone A Camera 04</div>
+                    <div className="text-sm text-emerald-600 font-medium">Status Normal</div>
                   </div>
-                  {/* Voice AI */}
-                  <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 -mt-6 relative overflow-hidden">
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                        <Mic className="w-5 h-5 text-primary" />
-                      </div>
-                      <span className="text-[10px] font-bold text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2 py-0.5 rounded-full">98% ACC</span>
-                    </div>
-                    <div className="mt-2">
-                      <div className="text-xs text-muted-foreground font-semibold">Calls Handled</div>
-                      <div className="text-xl font-extrabold text-foreground tracking-tight">12,847</div>
-                    </div>
-                    <div className="flex items-center gap-0.5 h-6">
-                      {[3, 5, 8, 4, 9, 6, 11, 7, 5, 10, 4, 8, 6, 9].map((h, i) => (
-                        <div key={i} className="flex-1 bg-primary rounded-full" style={{ height: `${h * 8}%` }} />
-                      ))}
-                    </div>
+                </div>
+                <div className="relative z-10 bg-background rounded-2xl p-4 shadow-lg border border-card-border flex items-center gap-4 -translate-x-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center"><Activity className="w-6 h-6 text-primary" /></div>
+                  <div>
+                    <div className="font-bold text-foreground">Grid Inverter B</div>
+                    <div className="text-sm text-primary font-medium">Efficiency Drop Detected</div>
                   </div>
-                  {/* Fintech */}
-                  <div className="bg-white rounded-xl border border-card-border shadow-sm flex flex-col justify-between p-4 relative overflow-hidden">
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                        <Building2 className="w-5 h-5 text-primary" />
-                      </div>
-                      <span className="text-[10px] font-bold text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2 py-0.5 rounded-full">SECURE</span>
-                    </div>
-                    <div className="mt-2">
-                      <div className="text-xs text-muted-foreground font-semibold">Active Members</div>
-                      <div className="text-xl font-extrabold text-foreground tracking-tight">45.6K</div>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
-                        <div className="h-full w-[78%] bg-primary rounded-full" />
-                      </div>
-                      <span className="text-[10px] font-bold text-foreground">78%</span>
-                    </div>
+                </div>
+                <div className="relative z-10 bg-background rounded-2xl p-4 shadow-lg border border-card-border flex items-center gap-4 translate-x-8">
+                  <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center"><Sun className="w-6 h-6 text-secondary" /></div>
+                  <div>
+                    <div className="font-bold text-foreground">Total Output</div>
+                    <div className="text-sm text-muted-foreground font-medium">128.4 MW</div>
                   </div>
                 </div>
               </div>
             </motion.div>
           </div>
+
         </div>
+        <WaveDivider className="bottom-[-1px] text-background" fill="fill-background" flip />
       </section>
 
-      {/* Process / Why Choose Us (Section A: Off-white base) */}
-      <section className="py-24 md:py-32 bg-transparent relative">
-        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-primary border border-card-border text-sm font-bold mb-6 uppercase tracking-wide shadow-sm">
-              <span className="text-xl leading-none -mt-1">●</span> WORKFLOW
+      {/* Bold CTA Band */}
+      <section className="py-32 relative bg-background overflow-hidden">
+        <div className="container relative z-10 mx-auto px-4 max-w-5xl">
+          <div className="bg-gradient-to-r from-primary to-secondary rounded-[3rem] p-12 md:p-20 text-center shadow-[0_20px_50px_hsla(var(--primary),0.3)] relative overflow-hidden">
+            {/* Decorative background for CTA */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
+
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">Ready to scale your intelligence?</h2>
+              <p className="text-white/90 text-xl mb-10 max-w-2xl mx-auto">
+                Join the enterprise leaders who trust Automystics to build faster, smarter, and more securely.
+              </p>
+
+              <div className="bg-background p-2 rounded-full flex flex-col sm:flex-row gap-2 max-w-2xl mx-auto shadow-xl">
+                <div className="flex-1 flex items-center px-6">
+                  <span className="text-muted-foreground font-medium whitespace-nowrap">How can we help you build?</span>
+                </div>
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto rounded-full bg-foreground text-background hover:bg-foreground/90 font-bold px-8 py-6 text-lg">
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-foreground mb-6 tracking-tight">Our <span className="text-primary">Process</span></h2>
-            <p className="text-xl text-muted-foreground">A streamlined approach that guarantees delivery in record time without compromising quality.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-            {/* Dashed connector line behind cards */}
-            <div className="hidden md:block absolute top-16 left-[12%] right-[12%] h-px border-t-2 border-dashed border-primary/40" />
-
-            {[
-              { num: "01", title: "Discover", desc: "Deep dive into requirements and architecture planning.", icon: Database, time: "1-2 weeks", deliverables: ["Requirements doc", "Tech architecture", "Project roadmap"] },
-              { num: "02", title: "Design", desc: "UI/UX wireframing and scalable database schema design.", icon: Code, time: "2-3 weeks", deliverables: ["Wireframes & UI", "Database schema", "API contracts"] },
-              { num: "03", title: "Build", desc: "Rapid iterative development using advanced AI tooling.", icon: Zap, time: "4-8 weeks", deliverables: ["Working software", "Weekly demos", "QA & testing"] },
-              { num: "04", title: "Deliver", desc: "Rigorous testing, deployment, and ongoing support.", icon: CheckCircle2, time: "Ongoing", deliverables: ["Production deploy", "Documentation", "24/7 support"] }
-            ].map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative z-10 group"
-              >
-                {/* Step number circle on top */}
-                <div className="absolute left-1/2 -translate-x-1/2 -top-1 z-20">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/30 border-4 border-white">
-                    <step.icon className="w-6 h-6 text-foreground" />
-                  </div>
-                </div>
-
-                <div className="relative bg-white border border-card-border shadow-md hover:shadow-2xl hover:shadow-primary/10 rounded-3xl pt-12 pb-7 px-7 transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 h-full overflow-hidden">
-                  {/* Watermark step number */}
-                  <div className="absolute top-3 right-5 text-6xl font-extrabold text-primary/5 select-none leading-none">{step.num}</div>
-
-                  <div className="relative">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary bg-gradient-to-br from-primary/10 to-secondary/10 px-2.5 py-1 rounded-full">Step {step.num}</span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> {step.time}
-                      </span>
-                    </div>
-
-                    <h4 className="text-2xl font-extrabold text-foreground mb-2 tracking-tight">{step.title}</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-5">{step.desc}</p>
-
-                    <div className="space-y-2 pt-4 border-t border-card-border">
-                      {step.deliverables.map((d, j) => (
-                        <div key={j} className="flex items-center gap-2 text-xs">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
-                          <span className="text-muted-foreground font-medium">{d}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
