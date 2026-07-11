@@ -10,7 +10,7 @@ import {
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
 import emailSettingsRouter from "./admin-email";
-import { sendAdminPasswordChangedNotification } from "../lib/mailer";
+import { sendAdminPasswordChangedNotification, sendAdminLockoutNotification } from "../lib/mailer";
 
 const router: IRouter = Router();
 
@@ -26,9 +26,19 @@ const WINDOW_MS = 15 * 60 * 1000;
 const MAX_ATTEMPTS = 8;
 const LOCK_MS = 15 * 60 * 1000;
 
+// Throttle lockout emails so a sustained attack (possibly across many
+// usernames/IPs) can't spam the admin's inbox. At most one lockout
+// notification goes out per NOTIFY_THROTTLE_MS, regardless of how many
+// individual keys are locking out in that window.
+const NOTIFY_THROTTLE_MS = 15 * 60 * 1000;
+let lastLockoutNotifiedAt = 0;
+
+function clientIp(req: import("express").Request): string {
+  return (req.ip || req.socket.remoteAddress || "unknown").toString();
+}
+
 function attemptKey(req: import("express").Request, username: string): string {
-  const ip = (req.ip || req.socket.remoteAddress || "unknown").toString();
-  return `${ip}|${username.toLowerCase()}`;
+  return `${clientIp(req)}|${username.toLowerCase()}`;
 }
 
 function checkLock(key: string): { locked: boolean; retryAfter?: number } {
@@ -44,7 +54,7 @@ function checkLock(key: string): { locked: boolean; retryAfter?: number } {
   return { locked: false };
 }
 
-function recordFailure(key: string): void {
+function recordFailure(key: string, username: string, ip: string): void {
   const now = Date.now();
   const rec = loginAttempts.get(key);
   if (!rec || now - rec.firstAt > WINDOW_MS) {
@@ -52,9 +62,17 @@ function recordFailure(key: string): void {
     return;
   }
   rec.count += 1;
-  if (rec.count >= MAX_ATTEMPTS) {
+  if (rec.count >= MAX_ATTEMPTS && rec.lockedUntil <= now) {
     rec.lockedUntil = now + LOCK_MS;
+    notifyLockout(username, ip, rec.count, new Date(rec.lockedUntil));
   }
+}
+
+function notifyLockout(username: string, ip: string, attempts: number, lockedUntil: Date): void {
+  const now = Date.now();
+  if (now - lastLockoutNotifiedAt < NOTIFY_THROTTLE_MS) return;
+  lastLockoutNotifiedAt = now;
+  void sendAdminLockoutNotification({ username, ip, attempts, lockedUntil });
 }
 
 router.post("/login", async (req, res) => {
@@ -77,14 +95,14 @@ router.post("/login", async (req, res) => {
     .limit(1);
 
   if (!user) {
-    recordFailure(key);
+    recordFailure(key, parsed.data.username, clientIp(req));
     res.status(401).json({ error: "invalid_credentials" });
     return;
   }
 
   const ok = await bcrypt.compare(parsed.data.password, user.passwordHash);
   if (!ok) {
-    recordFailure(key);
+    recordFailure(key, parsed.data.username, clientIp(req));
     res.status(401).json({ error: "invalid_credentials" });
     return;
   }

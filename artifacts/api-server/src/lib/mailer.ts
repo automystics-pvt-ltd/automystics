@@ -271,6 +271,65 @@ export async function sendAdminPasswordChangedNotification(changedAt: Date): Pro
   }
 }
 
+export async function sendAdminLockoutNotification(payload: {
+  username: string;
+  ip: string;
+  attempts: number;
+  lockedUntil: Date;
+}): Promise<void> {
+  try {
+    const settings = await getEmailSettings();
+    if (!settings || !settings.enabled) return;
+    if (!settings.smtpHost || !settings.fromEmail || !settings.notifyEmails) return;
+
+    const recipients = settings.notifyEmails
+      .split(/[,;\s]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (recipients.length === 0) return;
+
+    const transport = await buildTransport(settings);
+    const until = payload.lockedUntil.toLocaleString("en-US", {
+      dateStyle: "long",
+      timeStyle: "short",
+      timeZone: "UTC",
+    }) + " UTC";
+    const subject = "Automystics admin login locked — repeated failed attempts";
+    const text = [
+      `The Automystics admin login was locked out after ${payload.attempts} failed sign-in attempts.`,
+      ``,
+      `Username attempted: ${payload.username}`,
+      `Source IP:          ${payload.ip}`,
+      `Locked until:       ${until}`,
+      ``,
+      `If this wasn't you, someone may be trying to guess your admin password. No action is required — the account stays locked until the time above — but you may want to review activity once you're able to sign in again.`,
+    ].join("\n");
+    const html = `
+      <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
+        <h2 style="color:#b91c1c;margin:0 0 16px">Admin login locked — repeated failed attempts</h2>
+        <p>The Automystics admin login was locked out after <strong>${payload.attempts}</strong> failed sign-in attempts.</p>
+        <table style="width:100%;border-collapse:collapse;margin:16px 0">
+          <tr><td style="padding:6px 0;color:#64748b">Username attempted</td><td style="padding:6px 0;font-weight:600">${escapeHtml(payload.username)}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Source IP</td><td style="padding:6px 0;font-weight:600">${escapeHtml(payload.ip)}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">Locked until</td><td style="padding:6px 0;font-weight:600">${escapeHtml(until)}</td></tr>
+        </table>
+        <p>If this wasn't you, someone may be trying to guess your admin password. No action is required — the account stays locked until the time above — but you may want to review activity once you're able to sign in again.</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress(settings),
+      to: recipients.join(", "),
+      subject,
+      text,
+      html,
+    });
+    logger.info({ username: payload.username, ip: payload.ip }, "admin lockout notification sent");
+  } catch (err) {
+    logger.error({ err }, "failed to send admin lockout notification");
+  }
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
