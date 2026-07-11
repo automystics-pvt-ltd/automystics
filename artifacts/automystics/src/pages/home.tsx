@@ -11,6 +11,7 @@ import {
   Package, HeartPulse, CalendarCheck, DollarSign
 } from "lucide-react";
 import { useProducts } from "@/hooks/use-products";
+import { NetworkGraph } from "@/components/network-graph";
 
 const HOME_ICON_MAP: Record<string, any> = {
   Building2, GraduationCap, Mic, LineChart, Sun, Camera, Code, Dumbbell,
@@ -49,97 +50,100 @@ export function Home() {
       />
 
       {/* Hero Section */}
-      <section className="relative pt-36 pb-24 md:pt-44 md:pb-28 overflow-hidden">
-        {/* Deep near-black background with side glows */}
-        <div className="absolute inset-0 bg-background dark:bg-background pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_0%_50%,_hsla(var(--primary),0.35),_transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_100%_50%,_hsla(var(--primary),0.28),_transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_0%,_hsla(var(--primary),0.18),_transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 dark-grid-pattern opacity-30 pointer-events-none" />
-
-        {/* Animated orbs */}
-        <motion.div 
-          animate={{ y: [0, -20, 0], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-12 w-40 h-40 bg-primary/30 rounded-full blur-3xl pointer-events-none" 
+      <section className="relative min-h-[90vh] flex flex-col justify-center pt-36 pb-24 md:pt-44 md:pb-32 overflow-hidden bg-[#050505]">
+        {/* Full-bleed cinematic background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
+          style={{ backgroundImage: 'url(/hero-bg.jpg)' }}
         />
-        <motion.div 
-          animate={{ y: [0, 30, 0], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-1/3 right-12 w-56 h-56 bg-primary/25 rounded-full blur-3xl pointer-events-none" 
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#050505] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,_hsla(var(--primary),0.12),_transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_100%_100%,_hsla(var(--secondary),0.15),_transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 dark-grid-pattern opacity-20 pointer-events-none mix-blend-overlay" />
 
-        <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl">
+        {/* Network Graph Overlay */}
+        <div className="absolute inset-0 z-0">
+          <NetworkGraph />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-4 text-center max-w-5xl flex-1 flex flex-col justify-center">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 dark:bg-white/5 border border-border shadow-lg shadow-primary/10 text-primary text-xs font-bold mb-8 uppercase tracking-[0.2em] backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5" /> Engineering The Future
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/40 border border-white/10 shadow-[0_0_20px_hsla(var(--primary),0.15)] text-primary text-xs font-bold mb-10 uppercase tracking-[0.2em] backdrop-blur-xl"
+            >
+              <Sparkles className="w-4 h-4 text-primary drop-shadow-[0_0_8px_hsla(var(--primary),0.8)]" /> 
+              <span className="text-white/90">Next-Gen Intelligence</span>
+            </motion.div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-foreground leading-[1.05] mb-8 relative">
+            <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.1] mb-8 relative drop-shadow-2xl">
               We Build Software,<br/>
-              <span className="relative inline-block mt-1">
-                <span className="bg-gradient-to-r from-primary/80 via-primary to-primary/60 bg-clip-text text-transparent">Faster Than Anyone.</span>
-                <svg className="absolute w-full -bottom-2 left-0" height="12" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none">
-                  <path d="M2 8 Q50 2 100 6 T198 5" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.7" />
-                </svg>
+              <span className="relative inline-block mt-2">
+                <span className="bg-gradient-to-r from-white via-primary-foreground to-white/70 bg-clip-text text-transparent">Faster Than Anyone.</span>
+                <span className="absolute -inset-1 blur-3xl bg-primary/20 -z-10 rounded-full"></span>
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
-              Automystics delivers precision-engineered AI applications, financial platforms, and industrial systems with unprecedented speed.
+            <p className="text-lg md:text-2xl text-white/60 mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
+              Automystics delivers precision-engineered AI applications, financial platforms, and industrial systems with <span className="text-white/90">unprecedented speed</span>.
             </p>
             
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-              <Link href="/contact">
-                <Button size="lg" data-testid="button-hero-start" className="w-full sm:w-auto rounded-full bg-gradient-to-r from-primary via-primary to-secondary hover:from-primary/90 hover:to-primary/90 text-primary-foreground font-semibold px-7 py-6 text-base shadow-2xl shadow-primary/40 group">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.7, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row justify-center gap-5 mb-16 w-full sm:w-auto"
+            >
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="lg" data-testid="button-hero-start" className="w-full rounded-full bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary hover:to-primary text-white font-bold px-9 py-7 text-lg shadow-[0_0_30px_hsla(var(--primary),0.4)] hover:shadow-[0_0_40px_hsla(var(--primary),0.6)] border border-primary/50 transition-all duration-300 group">
                   Start Your Project
-                  <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/products">
-                <Button size="lg" variant="outline" data-testid="button-hero-explore" className="w-full sm:w-auto rounded-full bg-foreground/5 dark:bg-white/5 border-border/80 hover:bg-foreground/10 dark:bg-white/10 hover:border-white/30 text-foreground font-semibold px-7 py-6 text-base backdrop-blur-md group">
+              <Link href="/products" className="w-full sm:w-auto">
+                <Button size="lg" variant="outline" data-testid="button-hero-explore" className="w-full rounded-full bg-black/40 border-white/20 hover:bg-white/10 hover:border-white/40 text-white font-bold px-9 py-7 text-lg backdrop-blur-xl transition-all duration-300 group">
                   Explore Products
-                  <ArrowUpRight className="w-5 h-5 ml-1 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="w-2 h-2 rounded-full bg-secondary ml-3 group-hover:shadow-[0_0_10px_hsla(var(--secondary),0.8)] transition-all" />
                 </Button>
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Trust strip - icon row */}
-            <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 mt-4 text-muted-foreground">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-sm font-semibold">Fastest Delivery</span>
-              </div>
-              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
-                  <Shield className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-sm font-semibold">Enterprise Grade</span>
-              </div>
-              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
-                  <FileSignature className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-sm font-semibold">Signed with NDA</span>
-              </div>
-              <div className="hidden md:block w-px h-6 bg-foreground/10 dark:bg-white/10" />
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary/20 via-secondary/15 to-secondary/10 border border-primary/40 flex items-center justify-center">
-                  <Code className="w-4 h-4 text-primary" />
-                </div>
-                <span className="text-sm font-semibold">100% Custom Built</span>
-              </div>
-            </div>
+            {/* Trust strip - icon row - Redesigned for cinematic feel */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 1 }}
+              className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 pt-10 border-t border-white/10 w-full max-w-4xl mx-auto"
+            >
+              {[
+                { icon: Zap, text: "Fastest Delivery", color: "text-primary" },
+                { icon: Shield, text: "Enterprise Grade", color: "text-secondary" },
+                { icon: FileSignature, text: "Signed with NDA", color: "text-primary" },
+                { icon: Code, text: "100% Custom Built", color: "text-secondary" }
+              ].map((item, idx) => (
+                <React.Fragment key={idx}>
+                  <div className="flex items-center gap-3 group cursor-default">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-md group-hover:bg-white/10 transition-colors duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_15px_hsla(var(--primary),0.2)]">
+                      <item.icon className={`w-4.5 h-4.5 ${item.color} drop-shadow-md`} />
+                    </div>
+                    <span className="text-sm font-semibold text-white/70 group-hover:text-white transition-colors">{item.text}</span>
+                  </div>
+                  {idx < 3 && <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-white/10" />}
+                </React.Fragment>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
+        
+        {/* Subtle gradient transition into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-secondary/10 via-[#050505]/50 to-transparent pointer-events-none" />
       </section>
 
       {/* Stats Dark Accent Band */}
