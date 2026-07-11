@@ -46,7 +46,7 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center gap-3 inline-block">
               <div className="bg-white p-1 rounded-full w-10 h-10 flex items-center justify-center overflow-hidden inline-flex">
-                <img src="/logo.jpeg" alt="Automystics Logo" className="w-8 h-8 object-contain mix-blend-multiply" />
+                <img src="/logo-icon.png" alt="Automystics Logo" className="w-8 h-8 object-contain" />
               </div>
               <div className="flex flex-col leading-tight">
                 <span className="text-xl font-bold tracking-tight text-foreground">Automystics Technologies</span>

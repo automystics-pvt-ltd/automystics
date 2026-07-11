@@ -122,9 +122,7 @@ export function Navbar() {
       <div className="container mx-auto max-w-7xl">
         <div className="flex items-center justify-between h-16 px-4 md:px-6">
           <Link href="/" className="flex items-center gap-3 relative z-10 outline-none shrink-0" data-testid="nav-logo">
-            <div className="bg-primary text-primary-foreground rounded-sm h-8 w-8 flex items-center justify-center font-bold text-lg">
-              A
-            </div>
+            <img src="/logo-icon.png" alt="Automystics" className="h-8 w-8 object-contain" />
             <div className="hidden sm:flex flex-col leading-none">
               <span className="text-lg font-bold tracking-tight text-foreground font-serif">Automystics</span>
             </div>
