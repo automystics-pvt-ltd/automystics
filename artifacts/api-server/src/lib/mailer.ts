@@ -1,9 +1,26 @@
 import nodemailer, { type Transporter } from "nodemailer";
-import { db, emailSettingsTable, type EmailSettings } from "@workspace/db";
+import {
+  db,
+  emailSettingsTable,
+  type EmailSettings,
+  DEFAULT_DEMO_CONFIRMATION_SUBJECT,
+  DEFAULT_DEMO_CONFIRMATION_BODY,
+} from "@workspace/db";
 import { logger } from "./logger";
 import { decryptSecret } from "./crypto";
 import { assertSafeSmtpHost } from "./smtp-host-guard";
 import { formatScheduledAt } from "./scheduling";
+
+// Renders a `{{var}}` / `{{#var}}...{{/var}}` template against a set of values.
+// `{{#var}}...{{/var}}` blocks are dropped entirely when `var` is empty/falsy,
+// which lets admins write optional lines (e.g. only show "Message:" when one was submitted).
+export function renderEmailTemplate(template: string, vars: Record<string, string>): string {
+  let out = template.replace(/{{#(\w+)}}([\s\S]*?){{\/\1}}/g, (_match, key: string, inner: string) =>
+    vars[key] ? inner : ""
+  );
+  out = out.replace(/{{(\w+)}}/g, (_match, key: string) => vars[key] ?? "");
+  return out;
+}
 
 export async function getEmailSettings(): Promise<EmailSettings | null> {
   const [row] = await db.select().from(emailSettingsTable).limit(1);
@@ -164,45 +181,30 @@ export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPaylo
     if (!settings.smtpHost || !settings.fromEmail) return;
 
     const transport = await buildTransport(settings);
-    const subject = `We received your demo request — Automystics`;
-    const text = [
-      `Hi ${payload.name},`,
-      ``,
-      `Thanks for requesting a demo of Automystics${payload.productInterest ? ` for ${payload.productInterest}` : ""}!`,
-      `We've received your request and a member of our team will reach out to ${payload.email} shortly to schedule a time.`,
-      ``,
-      `Here's a summary of what you submitted:`,
-      `Name:              ${payload.name}`,
-      `Email:             ${payload.email}`,
-      `Phone:             ${payload.phone || "—"}`,
-      `Company:           ${payload.company || "—"}`,
-      `Product interest:  ${payload.productInterest || "—"}`,
-      `Scheduled for:     ${formatScheduledAt(payload.scheduledAt)}`,
-      payload.message ? `Message:           ${payload.message}` : undefined,
-      ``,
-      `If any of this looks incorrect or you'd like to add more details, just reply to this email.`,
-      ``,
-      `Talk soon,`,
-      `The Automystics Team`,
-    ]
-      .filter((line): line is string => line !== undefined)
-      .join("\n");
+
+    const rawVars: Record<string, string> = {
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone || "—",
+      company: payload.company || "—",
+      productInterest: payload.productInterest || "",
+      scheduledAt: formatScheduledAt(payload.scheduledAt),
+      message: payload.message || "",
+    };
+    const escapedVars = Object.fromEntries(
+      Object.entries(rawVars).map(([k, v]) => [k, escapeHtml(v)])
+    );
+
+    const subjectTemplate = settings.demoConfirmationSubject || DEFAULT_DEMO_CONFIRMATION_SUBJECT;
+    const bodyTemplate = settings.demoConfirmationBody || DEFAULT_DEMO_CONFIRMATION_BODY;
+
+    const subject = renderEmailTemplate(subjectTemplate, rawVars);
+    const text = renderEmailTemplate(bodyTemplate, rawVars);
+    const htmlBody = renderEmailTemplate(bodyTemplate, escapedVars).replace(/\n/g, "<br/>");
     const html = `
       <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
         <h2 style="color:#06b6d4;margin:0 0 16px">Thanks for requesting a demo!</h2>
-        <p>Hi ${escapeHtml(payload.name)},</p>
-        <p>Thanks for requesting a demo of Automystics${payload.productInterest ? ` for <strong>${escapeHtml(payload.productInterest)}</strong>` : ""}! We've received your request and a member of our team will reach out to <a href="mailto:${escapeHtml(payload.email)}">${escapeHtml(payload.email)}</a> shortly to schedule a time.</p>
-        <h3 style="margin:24px 0 8px">Your request</h3>
-        <table style="width:100%;border-collapse:collapse;margin-bottom:16px">
-          <tr><td style="padding:6px 0;color:#64748b">Name</td><td style="padding:6px 0;font-weight:600">${escapeHtml(payload.name)}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Email</td><td style="padding:6px 0">${escapeHtml(payload.email)}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Phone</td><td style="padding:6px 0">${escapeHtml(payload.phone || "—")}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Company</td><td style="padding:6px 0">${escapeHtml(payload.company || "—")}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Product interest</td><td style="padding:6px 0">${escapeHtml(payload.productInterest || "—")}</td></tr>
-          <tr><td style="padding:6px 0;color:#64748b">Scheduled for</td><td style="padding:6px 0">${escapeHtml(formatScheduledAt(payload.scheduledAt))}</td></tr>
-        </table>
-        ${payload.message ? `<h3 style="margin:0 0 8px">Your message</h3><div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;white-space:pre-wrap">${escapeHtml(payload.message)}</div>` : ""}
-        <p style="margin-top:24px;color:#64748b;font-size:13px">If any of this looks incorrect or you'd like to add more details, just reply to this email.</p>
+        <div style="line-height:1.6">${htmlBody}</div>
       </div>
     `;
 

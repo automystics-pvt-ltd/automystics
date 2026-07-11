@@ -6,6 +6,8 @@ import {
   updateEmailSettingsSchema,
   testEmailSchema,
   type EmailSettings,
+  DEFAULT_DEMO_CONFIRMATION_SUBJECT,
+  DEFAULT_DEMO_CONFIRMATION_BODY,
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
 import { buildTransport, fromAddress, getEmailSettings } from "../lib/mailer";
@@ -30,6 +32,8 @@ function sanitize(row: EmailSettings | null) {
       notifyOnNewDemoRequest: true,
       notifyVisitorOnDemoRequest: true,
       enabled: false,
+      demoConfirmationSubject: DEFAULT_DEMO_CONFIRMATION_SUBJECT,
+      demoConfirmationBody: DEFAULT_DEMO_CONFIRMATION_BODY,
       updatedAt: null,
     };
   }
@@ -46,6 +50,8 @@ function sanitize(row: EmailSettings | null) {
     notifyOnNewDemoRequest: !!row.notifyOnNewDemoRequest,
     notifyVisitorOnDemoRequest: !!row.notifyVisitorOnDemoRequest,
     enabled: !!row.enabled,
+    demoConfirmationSubject: row.demoConfirmationSubject || DEFAULT_DEMO_CONFIRMATION_SUBJECT,
+    demoConfirmationBody: row.demoConfirmationBody || DEFAULT_DEMO_CONFIRMATION_BODY,
     updatedAt: row.updatedAt,
   };
 }
@@ -81,10 +87,12 @@ router.put("/email", requireAdmin, async (req, res) => {
     notifyOnNewDemoRequest: data.notifyOnNewDemoRequest ?? existing?.notifyOnNewDemoRequest ?? true,
     notifyVisitorOnDemoRequest: data.notifyVisitorOnDemoRequest ?? existing?.notifyVisitorOnDemoRequest ?? true,
     enabled: data.enabled ?? existing?.enabled ?? false,
+    demoConfirmationSubject: data.demoConfirmationSubject ?? existing?.demoConfirmationSubject ?? null,
+    demoConfirmationBody: data.demoConfirmationBody ?? existing?.demoConfirmationBody ?? null,
     updatedAt: new Date(),
   };
   // empty strings -> null for optional text columns
-  for (const k of ["smtpHost", "smtpUser", "fromEmail", "fromName", "notifyEmails"]) {
+  for (const k of ["smtpHost", "smtpUser", "fromEmail", "fromName", "notifyEmails", "demoConfirmationSubject", "demoConfirmationBody"]) {
     if (values[k] === "") values[k] = null;
   }
 
