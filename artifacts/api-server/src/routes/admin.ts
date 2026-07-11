@@ -115,6 +115,56 @@ router.get("/me", (req, res) => {
   res.json({ id: req.session.adminId, username: req.session.adminUsername });
 });
 
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1).max(255),
+  newPassword: z.string().min(8).max(255),
+});
+
+router.post("/change-password", requireAdmin, async (req, res) => {
+  const parsed = changePasswordSchema.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "validation_failed" });
+    return;
+  }
+
+  const adminId = req.session.adminId as number;
+  const [user] = await db
+    .select()
+    .from(adminUsersTable)
+    .where(eq(adminUsersTable.id, adminId))
+    .limit(1);
+
+  if (!user) {
+    res.status(401).json({ error: "unauthorized" });
+    return;
+  }
+
+  const ok = await bcrypt.compare(parsed.data.currentPassword, user.passwordHash);
+  if (!ok) {
+    res.status(400).json({ error: "invalid_current_password" });
+    return;
+  }
+
+  if (parsed.data.newPassword === parsed.data.currentPassword) {
+    res.status(400).json({ error: "password_unchanged" });
+    return;
+  }
+
+  const hash = await bcrypt.hash(parsed.data.newPassword, 10);
+  await db
+    .update(adminUsersTable)
+    .set({ passwordHash: hash })
+    .where(eq(adminUsersTable.id, adminId));
+
+  // Invalidate the current session so the admin must sign back in with the
+  // new password. This also protects against a stolen session being used to
+  // keep changing the password indefinitely.
+  req.session.destroy(() => {
+    res.clearCookie("automystics.sid");
+    res.json({ ok: true });
+  });
+});
+
 router.get("/enquiries", requireAdmin, async (_req, res) => {
   const rows = await db
     .select()

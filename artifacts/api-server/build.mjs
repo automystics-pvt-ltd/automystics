@@ -100,6 +100,10 @@ async function buildAll() {
       "puppeteer",
       "puppeteer-core",
       "electron",
+      // Reads a sibling table.sql file relative to its own __dirname at
+      // runtime; bundling it breaks that lookup because our banner rebinds
+      // __dirname to the bundle's output directory.
+      "connect-pg-simple",
     ],
     sourcemap: "linked",
     plugins: [
