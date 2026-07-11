@@ -5,18 +5,30 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
 
-import type { HealthStatus } from "./api.schemas";
+import type {
+  CreateDemoRequest201,
+  CreateDemoRequestInput,
+  CreateEnquiry201,
+  CreateEnquiryInput,
+  GetPublicSiteSettings200,
+  HealthStatus,
+  ListPublicProducts200,
+  ValidationError,
+} from "./api.schemas";
 
 import { customFetch } from "../custom-fetch";
-import type { ErrorType } from "../custom-fetch";
+import type { ErrorType, BodyType } from "../custom-fetch";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -99,3 +111,326 @@ export function useHealthCheck<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * Returns the enabled product/service catalog
+ * @summary List enabled products
+ */
+export const getListPublicProductsUrl = () => {
+  return `/api/public/products`;
+};
+
+export const listPublicProducts = async (
+  options?: RequestInit,
+): Promise<ListPublicProducts200> => {
+  return customFetch<ListPublicProducts200>(getListPublicProductsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getListPublicProductsQueryKey = () => {
+  return [`/api/public/products`] as const;
+};
+
+export const getListPublicProductsQueryOptions = <
+  TData = Awaited<ReturnType<typeof listPublicProducts>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listPublicProducts>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getListPublicProductsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof listPublicProducts>>
+  > = ({ signal }) => listPublicProducts({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof listPublicProducts>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type ListPublicProductsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof listPublicProducts>>
+>;
+export type ListPublicProductsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary List enabled products
+ */
+
+export function useListPublicProducts<
+  TData = Awaited<ReturnType<typeof listPublicProducts>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listPublicProducts>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getListPublicProductsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Get public company/site settings
+ */
+export const getGetPublicSiteSettingsUrl = () => {
+  return `/api/public/site`;
+};
+
+export const getPublicSiteSettings = async (
+  options?: RequestInit,
+): Promise<GetPublicSiteSettings200> => {
+  return customFetch<GetPublicSiteSettings200>(getGetPublicSiteSettingsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetPublicSiteSettingsQueryKey = () => {
+  return [`/api/public/site`] as const;
+};
+
+export const getGetPublicSiteSettingsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getPublicSiteSettings>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getPublicSiteSettings>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetPublicSiteSettingsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getPublicSiteSettings>>
+  > = ({ signal }) => getPublicSiteSettings({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getPublicSiteSettings>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetPublicSiteSettingsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getPublicSiteSettings>>
+>;
+export type GetPublicSiteSettingsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Get public company/site settings
+ */
+
+export function useGetPublicSiteSettings<
+  TData = Awaited<ReturnType<typeof getPublicSiteSettings>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getPublicSiteSettings>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetPublicSiteSettingsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Submit a contact enquiry
+ */
+export const getCreateEnquiryUrl = () => {
+  return `/api/enquiries`;
+};
+
+export const createEnquiry = async (
+  createEnquiryInput: CreateEnquiryInput,
+  options?: RequestInit,
+): Promise<CreateEnquiry201> => {
+  return customFetch<CreateEnquiry201>(getCreateEnquiryUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createEnquiryInput),
+  });
+};
+
+export const getCreateEnquiryMutationOptions = <
+  TError = ErrorType<ValidationError>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createEnquiry>>,
+    TError,
+    { data: BodyType<CreateEnquiryInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createEnquiry>>,
+  TError,
+  { data: BodyType<CreateEnquiryInput> },
+  TContext
+> => {
+  const mutationKey = ["createEnquiry"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createEnquiry>>,
+    { data: BodyType<CreateEnquiryInput> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createEnquiry(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateEnquiryMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createEnquiry>>
+>;
+export type CreateEnquiryMutationBody = BodyType<CreateEnquiryInput>;
+export type CreateEnquiryMutationError = ErrorType<ValidationError>;
+
+/**
+ * @summary Submit a contact enquiry
+ */
+export const useCreateEnquiry = <
+  TError = ErrorType<ValidationError>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createEnquiry>>,
+    TError,
+    { data: BodyType<CreateEnquiryInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createEnquiry>>,
+  TError,
+  { data: BodyType<CreateEnquiryInput> },
+  TContext
+> => {
+  return useMutation(getCreateEnquiryMutationOptions(options));
+};
+
+/**
+ * @summary Submit a demo booking request
+ */
+export const getCreateDemoRequestUrl = () => {
+  return `/api/demo-requests`;
+};
+
+export const createDemoRequest = async (
+  createDemoRequestInput: CreateDemoRequestInput,
+  options?: RequestInit,
+): Promise<CreateDemoRequest201> => {
+  return customFetch<CreateDemoRequest201>(getCreateDemoRequestUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createDemoRequestInput),
+  });
+};
+
+export const getCreateDemoRequestMutationOptions = <
+  TError = ErrorType<ValidationError>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createDemoRequest>>,
+    TError,
+    { data: BodyType<CreateDemoRequestInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createDemoRequest>>,
+  TError,
+  { data: BodyType<CreateDemoRequestInput> },
+  TContext
+> => {
+  const mutationKey = ["createDemoRequest"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createDemoRequest>>,
+    { data: BodyType<CreateDemoRequestInput> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createDemoRequest(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateDemoRequestMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createDemoRequest>>
+>;
+export type CreateDemoRequestMutationBody = BodyType<CreateDemoRequestInput>;
+export type CreateDemoRequestMutationError = ErrorType<ValidationError>;
+
+/**
+ * @summary Submit a demo booking request
+ */
+export const useCreateDemoRequest = <
+  TError = ErrorType<ValidationError>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createDemoRequest>>,
+    TError,
+    { data: BodyType<CreateDemoRequestInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createDemoRequest>>,
+  TError,
+  { data: BodyType<CreateDemoRequestInput> },
+  TContext
+> => {
+  return useMutation(getCreateDemoRequestMutationOptions(options));
+};

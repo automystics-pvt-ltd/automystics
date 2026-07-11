@@ -1,1 +1,2 @@
 - [Drizzle-kit config ESM shim](drizzle-kit-esm-shim.md) — drizzle-kit's loader shims `__dirname` for `.ts` config files; do NOT replace with `fileURLToPath`/`import.meta.url`.
+- [OpenAPI spec can lag hand-written routes](openapi-spec-lag.md) — check `lib/api-spec/openapi.yaml` against actual Express routes before assuming client hooks exist; extend spec + regenerate first.

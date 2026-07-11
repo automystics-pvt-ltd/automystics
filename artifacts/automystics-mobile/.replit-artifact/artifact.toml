@@ -1,0 +1,23 @@
+kind = "mobile"
+previewPath = "/mobile/"
+title = "Automystics Mobile"
+version = "1.0.0"
+id = "artifacts/automystics-mobile"
+router = "expo-domain"
+
+[[services]]
+name = "expo"
+ensurePreviewReachable = "/status"
+paths = [ "/mobile/" ]
+localPort = 22161
+
+[services.development]
+run = "pnpm --filter @workspace/automystics-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/automystics-mobile", "run", "build" ]
+run = [ "pnpm", "--filter", "@workspace/automystics-mobile", "run", "serve" ]
+
+[services.env]
+PORT = "22161"
+BASE_PATH = "/mobile/"

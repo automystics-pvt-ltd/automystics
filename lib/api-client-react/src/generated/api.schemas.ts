@@ -8,3 +8,76 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface Product {
+  id: number;
+  key: string;
+  title: string;
+  category?: string | null;
+  description?: string | null;
+  icon?: string | null;
+  features: string[];
+  liveUrl?: string | null;
+  enabled: boolean;
+  sortOrder: number;
+}
+
+export interface SiteSettings {
+  id: number;
+  companyName?: string | null;
+  tagline?: string | null;
+  primaryEmail?: string | null;
+  supportEmail?: string | null;
+  primaryPhone?: string | null;
+  secondaryPhone?: string | null;
+  addressLine1?: string | null;
+  addressLine2?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postalCode?: string | null;
+  country?: string | null;
+  mapUrl?: string | null;
+}
+
+export interface CreateEnquiryInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company?: string;
+  message: string;
+}
+
+export interface CreateDemoRequestInput {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  productInterest?: string;
+  preferredDate?: string;
+  message?: string;
+}
+
+export type ValidationErrorIssues = { [key: string]: unknown };
+
+export interface ValidationError {
+  error: string;
+  issues?: ValidationErrorIssues;
+}
+
+export type ListPublicProducts200 = {
+  products: Product[];
+};
+
+export type GetPublicSiteSettings200 = {
+  settings: SiteSettings;
+};
+
+export type CreateEnquiry201 = {
+  ok: boolean;
+  id: number;
+};
+
+export type CreateDemoRequest201 = {
+  ok: boolean;
+  id: number;
+};

@@ -10,6 +10,14 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: products
+    description: Product catalog
+  - name: site
+    description: Site/company settings
+  - name: enquiries
+    description: Contact enquiries
+  - name: demo-requests
+    description: Demo booking requests
 paths:
   /healthz:
     get:
@@ -24,6 +32,107 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /public/products:
+    get:
+      operationId: listPublicProducts
+      tags: [products]
+      summary: List enabled products
+      description: Returns the enabled product/service catalog
+      responses:
+        "200":
+          description: Products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+                required:
+                  - products
+  /public/site:
+    get:
+      operationId: getPublicSiteSettings
+      tags: [site]
+      summary: Get public company/site settings
+      responses:
+        "200":
+          description: Site settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  settings:
+                    $ref: "#/components/schemas/SiteSettings"
+                required:
+                  - settings
+  /enquiries:
+    post:
+      operationId: createEnquiry
+      tags: [enquiries]
+      summary: Submit a contact enquiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnquiryInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  id:
+                    type: integer
+                required:
+                  - ok
+                  - id
+        "400":
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+  /demo-requests:
+    post:
+      operationId: createDemoRequest
+      tags: [demo-requests]
+      summary: Submit a demo booking request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDemoRequestInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  id:
+                    type: integer
+                required:
+                  - ok
+                  - id
+        "400":
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +142,133 @@ components:
           type: string
       required:
         - status
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        key:
+          type: string
+        title:
+          type: string
+        category:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        icon:
+          type: string
+          nullable: true
+        features:
+          type: array
+          items:
+            type: string
+        liveUrl:
+          type: string
+          nullable: true
+        enabled:
+          type: boolean
+        sortOrder:
+          type: integer
+      required:
+        - id
+        - key
+        - title
+        - features
+        - enabled
+        - sortOrder
+    SiteSettings:
+      type: object
+      properties:
+        id:
+          type: integer
+        companyName:
+          type: string
+          nullable: true
+        tagline:
+          type: string
+          nullable: true
+        primaryEmail:
+          type: string
+          nullable: true
+        supportEmail:
+          type: string
+          nullable: true
+        primaryPhone:
+          type: string
+          nullable: true
+        secondaryPhone:
+          type: string
+          nullable: true
+        addressLine1:
+          type: string
+          nullable: true
+        addressLine2:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        state:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        country:
+          type: string
+          nullable: true
+        mapUrl:
+          type: string
+          nullable: true
+      required:
+        - id
+    CreateEnquiryInput:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        message:
+          type: string
+      required:
+        - firstName
+        - lastName
+        - email
+        - message
+    CreateDemoRequestInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        company:
+          type: string
+        productInterest:
+          type: string
+        preferredDate:
+          type: string
+        message:
+          type: string
+      required:
+        - name
+        - email
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: string
+        issues:
+          type: object
+      required:
+        - error
 

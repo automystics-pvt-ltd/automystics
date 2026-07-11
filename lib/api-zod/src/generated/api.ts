@@ -14,3 +14,70 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Returns the enabled product/service catalog
+ * @summary List enabled products
+ */
+export const ListPublicProductsResponse = zod.object({
+  products: zod.array(
+    zod.object({
+      id: zod.number(),
+      key: zod.string(),
+      title: zod.string(),
+      category: zod.string().nullish(),
+      description: zod.string().nullish(),
+      icon: zod.string().nullish(),
+      features: zod.array(zod.string()),
+      liveUrl: zod.string().nullish(),
+      enabled: zod.boolean(),
+      sortOrder: zod.number(),
+    }),
+  ),
+});
+
+/**
+ * @summary Get public company/site settings
+ */
+export const GetPublicSiteSettingsResponse = zod.object({
+  settings: zod.object({
+    id: zod.number(),
+    companyName: zod.string().nullish(),
+    tagline: zod.string().nullish(),
+    primaryEmail: zod.string().nullish(),
+    supportEmail: zod.string().nullish(),
+    primaryPhone: zod.string().nullish(),
+    secondaryPhone: zod.string().nullish(),
+    addressLine1: zod.string().nullish(),
+    addressLine2: zod.string().nullish(),
+    city: zod.string().nullish(),
+    state: zod.string().nullish(),
+    postalCode: zod.string().nullish(),
+    country: zod.string().nullish(),
+    mapUrl: zod.string().nullish(),
+  }),
+});
+
+/**
+ * @summary Submit a contact enquiry
+ */
+export const CreateEnquiryBody = zod.object({
+  firstName: zod.string(),
+  lastName: zod.string(),
+  email: zod.string(),
+  company: zod.string().optional(),
+  message: zod.string(),
+});
+
+/**
+ * @summary Submit a demo booking request
+ */
+export const CreateDemoRequestBody = zod.object({
+  name: zod.string(),
+  email: zod.string(),
+  phone: zod.string().optional(),
+  company: zod.string().optional(),
+  productInterest: zod.string().optional(),
+  preferredDate: zod.string().optional(),
+  message: zod.string().optional(),
+});
