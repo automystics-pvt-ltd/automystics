@@ -8,6 +8,7 @@ export type PublicProduct = {
   description: string | null;
   icon: string | null;
   features: string[];
+  liveUrl: string | null;
   enabled: boolean;
   sortOrder: number;
 };

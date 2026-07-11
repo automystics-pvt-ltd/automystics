@@ -9,6 +9,7 @@ export const productsTable = pgTable("products", {
   description: text("description"),
   icon: varchar("icon", { length: 64 }),
   features: text("features").array().notNull().default([] as string[]),
+  liveUrl: text("live_url"),
   enabled: boolean("enabled").notNull().default(true),
   sortOrder: integer("sort_order").notNull().default(0),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
@@ -19,6 +20,9 @@ export type Product = typeof productsTable.$inferSelect;
 
 const optionalString = (max: number) =>
   z.string().trim().max(max).optional().or(z.literal(""));
+
+const optionalUrl = (max: number) =>
+  z.string().trim().max(max).url().optional().or(z.literal(""));
 
 const slug = z
   .string()
@@ -34,6 +38,7 @@ export const upsertProductSchema = z.object({
   description: optionalString(8000),
   icon: optionalString(64),
   features: z.array(z.string().trim().max(255)).max(50).optional(),
+  liveUrl: optionalUrl(2000),
   enabled: z.boolean().optional(),
   sortOrder: z.coerce.number().int().min(0).max(9999).optional(),
 });

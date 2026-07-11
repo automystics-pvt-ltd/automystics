@@ -24,6 +24,7 @@ type Product = {
   description: string | null;
   icon: string | null;
   features: string[];
+  liveUrl: string | null;
   enabled: boolean;
   sortOrder: number;
 };
@@ -54,6 +55,7 @@ const EMPTY: Omit<Product, "id"> = {
   description: "",
   icon: "Package",
   features: [],
+  liveUrl: "",
   enabled: true,
   sortOrder: 0,
 };
@@ -191,6 +193,19 @@ function FormGrid({
             </option>
           ))}
         </select>
+      </div>
+      <div className="space-y-2 md:col-span-2">
+        <Label className="font-semibold">Live URL</Label>
+        <Input
+          value={data.liveUrl ?? ""}
+          onChange={(e) => onChange({ liveUrl: e.target.value })}
+          placeholder="https://mysticshr.automystics.tech/"
+          className="bg-white border-card-border h-11 rounded-xl"
+          data-testid={`${idPrefix}-live-url`}
+        />
+        <p className="text-xs text-muted-foreground">
+          If set, a "Visit Live Site" button appears on the product's page.
+        </p>
       </div>
       <div className="space-y-2 md:col-span-2">
         <Label className="font-semibold">Description</Label>

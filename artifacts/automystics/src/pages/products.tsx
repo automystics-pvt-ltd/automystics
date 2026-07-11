@@ -391,11 +391,20 @@ export function Products() {
                     ))}
                   </div>
 
-                  <Link href="/contact">
-                    <Button size="lg" className="rounded-full h-14 px-8 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 group">
-                      Request Demo <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </Button>
-                  </Link>
+                  <div className="flex flex-wrap gap-4">
+                    {product.liveUrl && (
+                      <a href={product.liveUrl} target="_blank" rel="noopener noreferrer">
+                        <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-lg font-bold border-primary text-primary hover:bg-primary hover:text-primary-foreground shadow-sm group" data-testid={`product-visit-${product.id}`}>
+                          Visit Live Site <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </Button>
+                      </a>
+                    )}
+                    <Link href="/contact">
+                      <Button size="lg" className="rounded-full h-14 px-8 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 group">
+                        Request Demo <ArrowUpRight className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
                 
                 <div className="flex-1 w-full">
