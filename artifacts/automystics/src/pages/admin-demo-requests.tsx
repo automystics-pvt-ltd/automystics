@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { Calendar as CalendarPicker } from "@/components/ui/calendar";
 import {
   Select,
   SelectContent,
@@ -18,12 +19,16 @@ import {
   Phone,
   Building2,
   Calendar,
+  CalendarClock,
+  CalendarX,
   ChevronDown,
   ChevronUp,
+  Clock,
   Package,
   Search,
   Trash2,
   User,
+  X,
 } from "lucide-react";
 
 type DemoRequest = {
@@ -68,6 +73,15 @@ function formatScheduledAt(iso: string | null): string | null {
   );
 }
 
+function toDateKey(date: Date): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+type AdminSlot = { hour: number; label: string; iso: string; available: boolean };
+
 const STATUS_COLORS: Record<string, string> = {
   new: "bg-gradient-to-br from-primary/10 to-secondary/10 text-primary border-primary/40",
   contacted: "bg-purple-100 text-purple-800 border-purple-300",
@@ -85,6 +99,69 @@ export function AdminDemoRequests() {
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [expanded, setExpanded] = useState<number | null>(null);
   const [draftNotes, setDraftNotes] = useState<Record<number, string>>({});
+  const [reschedulingId, setReschedulingId] = useState<number | null>(null);
+  const [rescheduleDate, setRescheduleDate] = useState<Date | undefined>(undefined);
+  const [rescheduleSlots, setRescheduleSlots] = useState<AdminSlot[]>([]);
+  const [loadingRescheduleSlots, setLoadingRescheduleSlots] = useState(false);
+  const [savingReschedule, setSavingReschedule] = useState(false);
+  const [bookableWeekdays, setBookableWeekdays] = useState<number[]>([1, 2, 3, 4, 5]);
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const maxRescheduleDate = new Date(today);
+  maxRescheduleDate.setDate(maxRescheduleDate.getDate() + 30);
+
+  useEffect(() => {
+    fetch("/api/demo-requests/booking-config")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data.bookableWeekdays)) setBookableWeekdays(data.bookableWeekdays);
+        if (Array.isArray(data.blockedDates)) setBlockedDates(data.blockedDates);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!reschedulingId || !rescheduleDate) {
+      setRescheduleSlots([]);
+      return;
+    }
+    let cancelled = false;
+    setLoadingRescheduleSlots(true);
+    fetch(`/api/admin/demo-requests/${reschedulingId}/available-slots?date=${toDateKey(rescheduleDate)}`, {
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.status === 401) { handleUnauthorized(); return null; }
+        return res.json();
+      })
+      .then((data) => {
+        if (cancelled || !data) return;
+        setRescheduleSlots(data.slots || []);
+      })
+      .catch(() => {
+        if (!cancelled) setRescheduleSlots([]);
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingRescheduleSlots(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reschedulingId, rescheduleDate]);
+
+  const openReschedule = (r: DemoRequest) => {
+    setReschedulingId(r.id);
+    setRescheduleDate(r.scheduledAt ? new Date(r.scheduledAt) : undefined);
+  };
+
+  const closeReschedule = () => {
+    setReschedulingId(null);
+    setRescheduleDate(undefined);
+    setRescheduleSlots([]);
+  };
 
   const fetchRequests = async () => {
     try {
@@ -120,21 +197,57 @@ export function AdminDemoRequests() {
     navigate("/admin/login");
   };
 
-  const updateRequest = async (id: number, patch: { status?: string; notes?: string }) => {
+  const updateRequest = async (
+    id: number,
+    patch: { status?: string; notes?: string; scheduledAt?: string | null },
+  ) => {
     const res = await fetch(`/api/admin/demo-requests/${id}`, {
       method: "PATCH",
       credentials: "include",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(patch),
     });
-    if (res.status === 401) { handleUnauthorized(); return; }
+    if (res.status === 401) { handleUnauthorized(); return false; }
     if (!res.ok) {
-      toast({ title: "Update failed", variant: "destructive" });
-      return;
+      const err = await res.json().catch(() => ({}));
+      toast({
+        title: "Update failed",
+        description: err?.error === "slot_unavailable" ? "That slot was just taken." : err?.error === "invalid_slot" ? "That slot is no longer bookable." : undefined,
+        variant: "destructive",
+      });
+      return false;
     }
     const data = await res.json();
     setRequests((prev) => prev.map((r) => (r.id === id ? data.demoRequest : r)));
     toast({ title: "Saved" });
+    return true;
+  };
+
+  const confirmReschedule = async (iso: string) => {
+    if (!reschedulingId) return;
+    setSavingReschedule(true);
+    const ok = await updateRequest(reschedulingId, { scheduledAt: iso });
+    setSavingReschedule(false);
+    if (ok) {
+      toast({ title: "Demo rescheduled", description: "The visitor has been notified by email." });
+      closeReschedule();
+    } else if (reschedulingId && rescheduleDate) {
+      fetch(`/api/admin/demo-requests/${reschedulingId}/available-slots?date=${toDateKey(rescheduleDate)}`, {
+        credentials: "include",
+      })
+        .then((r) => r.json())
+        .then((d) => setRescheduleSlots(d.slots || []))
+        .catch(() => {});
+    }
+  };
+
+  const clearSchedule = async (id: number) => {
+    if (!confirm("Clear this visitor's scheduled time? They'll be notified their slot was cancelled.")) return;
+    const ok = await updateRequest(id, { scheduledAt: null });
+    if (ok) {
+      toast({ title: "Slot cleared", description: "The visitor has been notified by email." });
+      if (reschedulingId === id) closeReschedule();
+    }
   };
 
   const deleteRequest = async (id: number) => {
@@ -331,6 +444,24 @@ export function AdminDemoRequests() {
                           </Select>
                         </div>
                         <div className="flex flex-col gap-2">
+                          <Button
+                            onClick={() => openReschedule(r)}
+                            variant="outline"
+                            className="rounded-full border-card-border hover:border-primary/40 text-foreground font-semibold"
+                            data-testid={`reschedule-demo-request-${r.id}`}
+                          >
+                            <CalendarClock className="w-4 h-4 mr-2" /> {r.scheduledAt ? "Reschedule" : "Schedule"}
+                          </Button>
+                          {r.scheduledAt && (
+                            <Button
+                              onClick={() => clearSchedule(r.id)}
+                              variant="outline"
+                              className="rounded-full border-amber-200 text-amber-800 hover:bg-amber-50"
+                              data-testid={`clear-demo-request-slot-${r.id}`}
+                            >
+                              <CalendarX className="w-4 h-4 mr-2" /> Clear scheduled time
+                            </Button>
+                          )}
                           <a
                             href={`mailto:${r.email}?subject=Re:%20Your%20demo%20request%20with%20Automystics`}
                             className="inline-flex items-center justify-center gap-2 h-11 rounded-full bg-white border border-card-border hover:border-primary/40 text-foreground font-semibold transition-colors"
@@ -348,6 +479,75 @@ export function AdminDemoRequests() {
                         </div>
                       </div>
                     </div>
+
+                    {reschedulingId === r.id && (
+                      <div className="mt-6 border-t border-card-border pt-6" data-testid={`reschedule-panel-${r.id}`}>
+                        <div className="flex items-center justify-between mb-4">
+                          <h4 className="text-sm font-bold uppercase tracking-wide text-muted-foreground">
+                            {r.scheduledAt ? "Pick a new time" : "Pick a time"}
+                          </h4>
+                          <button
+                            onClick={closeReschedule}
+                            className="text-muted-foreground hover:text-foreground"
+                            aria-label="Close"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-6 bg-muted/30 border border-card-border rounded-2xl p-4 md:p-6">
+                          <div className="flex justify-center md:justify-start">
+                            <CalendarPicker
+                              mode="single"
+                              selected={rescheduleDate}
+                              onSelect={setRescheduleDate}
+                              disabled={(date) =>
+                                date < today ||
+                                date > maxRescheduleDate ||
+                                !bookableWeekdays.includes(date.getDay()) ||
+                                blockedDates.includes(toDateKey(date))
+                              }
+                              data-testid={`reschedule-calendar-${r.id}`}
+                            />
+                          </div>
+                          <div>
+                            {!rescheduleDate ? (
+                              <div className="h-full flex items-center justify-center text-muted-foreground text-sm py-8">
+                                Select a date to see available times.
+                              </div>
+                            ) : loadingRescheduleSlots ? (
+                              <div className="h-full flex items-center justify-center text-muted-foreground text-sm py-8">
+                                Loading available times…
+                              </div>
+                            ) : rescheduleSlots.length === 0 ? (
+                              <div className="h-full flex items-center justify-center text-muted-foreground text-sm py-8 text-center">
+                                No slots left for this day. Please try another date.
+                              </div>
+                            ) : (
+                              <div className="grid grid-cols-2 gap-3" data-testid={`reschedule-slots-${r.id}`}>
+                                {rescheduleSlots.map((slot) => (
+                                  <button
+                                    key={slot.iso}
+                                    type="button"
+                                    disabled={!slot.available || savingReschedule}
+                                    onClick={() => confirmReschedule(slot.iso)}
+                                    data-testid={`reschedule-slot-${r.id}-${slot.hour}`}
+                                    className={`h-12 rounded-xl border text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors ${
+                                      slot.iso === r.scheduledAt
+                                        ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20"
+                                        : slot.available
+                                          ? "bg-white border-card-border hover:border-primary/50 text-foreground"
+                                          : "bg-muted text-muted-foreground border-card-border/60 line-through cursor-not-allowed opacity-60"
+                                    }`}
+                                  >
+                                    <Clock className="w-3.5 h-3.5" /> {slot.label}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

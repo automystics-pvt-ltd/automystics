@@ -7,7 +7,12 @@ import {
   updateDemoRequestSchema,
 } from "@workspace/db";
 import { requireAdmin } from "../middlewares/auth";
-import { sendDemoRequestNotification, sendDemoRequestConfirmation } from "../lib/mailer";
+import {
+  sendDemoRequestNotification,
+  sendDemoRequestConfirmation,
+  sendDemoRequestRescheduled,
+  sendDemoRequestSlotCleared,
+} from "../lib/mailer";
 import {
   BOOKING_TIMEZONE_LABEL,
   getBookingSettings,
@@ -137,6 +142,49 @@ function isUniqueViolation(err: unknown): boolean {
   return typeof cause === "object" && cause !== null && (cause as { code?: string }).code === "23505";
 }
 
+// Same shape as the public available-slots endpoint, but excludes the
+// request being rescheduled from the "booked" set so its own current slot
+// (and any other slot) can be freely re-selected.
+router.get("/admin/demo-requests/:id/available-slots", requireAdmin, async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isFinite(id)) {
+    res.status(400).json({ error: "invalid_id" });
+    return;
+  }
+  const dateStr = String(req.query.date || "");
+  const parsedDate = parseDateParam(dateStr);
+  if (!parsedDate) {
+    res.status(400).json({ error: "invalid_date" });
+    return;
+  }
+  const now = new Date();
+  const daySlots = await getDaySlots(parsedDate.y, parsedDate.m, parsedDate.d, now);
+  if (daySlots.length === 0) {
+    res.json({ date: dateStr, timezone: BOOKING_TIMEZONE_LABEL, slots: [] });
+    return;
+  }
+  const { start, end } = getIstDayRangeUtc(parsedDate.y, parsedDate.m, parsedDate.d);
+  const booked = await db
+    .select({ scheduledAt: demoRequestsTable.scheduledAt })
+    .from(demoRequestsTable)
+    .where(
+      and(
+        gte(demoRequestsTable.scheduledAt, start),
+        lt(demoRequestsTable.scheduledAt, end),
+        ne(demoRequestsTable.status, "declined"),
+        ne(demoRequestsTable.id, id),
+      ),
+    );
+  const bookedIsoSet = new Set(
+    booked.filter((b) => b.scheduledAt).map((b) => new Date(b.scheduledAt as Date).toISOString()),
+  );
+  res.json({
+    date: dateStr,
+    timezone: BOOKING_TIMEZONE_LABEL,
+    slots: daySlots.map((slot) => ({ ...slot, available: !bookedIsoSet.has(slot.iso) })),
+  });
+});
+
 router.get("/admin/demo-requests", requireAdmin, async (_req, res) => {
   const rows = await db
     .select()
@@ -157,21 +205,86 @@ router.patch("/admin/demo-requests/:id", requireAdmin, async (req, res) => {
     res.status(400).json({ error: "validation_failed" });
     return;
   }
+
+  const [existing] = await db
+    .select()
+    .from(demoRequestsTable)
+    .where(eq(demoRequestsTable.id, id))
+    .limit(1);
+  if (!existing) {
+    res.status(404).json({ error: "not_found" });
+    return;
+  }
+
   const updates: Record<string, unknown> = { updatedAt: new Date() };
   if (parsed.data.status !== undefined) updates.status = parsed.data.status;
   if (parsed.data.notes !== undefined) updates.notes = parsed.data.notes;
 
-  const [row] = await db
-    .update(demoRequestsTable)
-    .set(updates)
-    .where(eq(demoRequestsTable.id, id))
-    .returning();
+  const previousScheduledAt = existing.scheduledAt ? existing.scheduledAt.toISOString() : null;
+  let rescheduledTo: Date | null | undefined; // undefined = not touched by this request
+
+  if (parsed.data.scheduledAt !== undefined) {
+    if (parsed.data.scheduledAt === null) {
+      rescheduledTo = null;
+    } else {
+      const scheduledAt = new Date(parsed.data.scheduledAt);
+      const { y, m, d } = istCalendarDateForInstant(scheduledAt);
+      const iso = scheduledAt.toISOString();
+      // The slot is valid if it's a normal bookable slot, OR it's the
+      // request's own current slot (so re-saving the same time isn't
+      // rejected once it's in the past / lead-time window).
+      const isOwnCurrentSlot = previousScheduledAt === iso;
+      if (!isOwnCurrentSlot && !(await isValidSlotIso(y, m, d, iso))) {
+        res.status(400).json({ error: "invalid_slot" });
+        return;
+      }
+      rescheduledTo = scheduledAt;
+    }
+    updates.scheduledAt = rescheduledTo;
+  }
+
+  let row: typeof demoRequestsTable.$inferSelect;
+  try {
+    [row] = await db
+      .update(demoRequestsTable)
+      .set(updates)
+      .where(eq(demoRequestsTable.id, id))
+      .returning();
+  } catch (updateErr) {
+    if (isUniqueViolation(updateErr)) {
+      res.status(409).json({ error: "slot_unavailable" });
+      return;
+    }
+    throw updateErr;
+  }
 
   if (!row) {
     res.status(404).json({ error: "not_found" });
     return;
   }
   res.json({ ok: true, demoRequest: row });
+
+  if (rescheduledTo !== undefined) {
+    const newIso = rescheduledTo ? rescheduledTo.toISOString() : null;
+    if (newIso !== previousScheduledAt) {
+      if (newIso) {
+        void sendDemoRequestRescheduled({
+          id: row.id,
+          name: row.name,
+          email: row.email,
+          previousScheduledAt,
+          scheduledAt: newIso,
+        });
+      } else {
+        void sendDemoRequestSlotCleared({
+          id: row.id,
+          name: row.name,
+          email: row.email,
+          previousScheduledAt,
+        });
+      }
+    }
+  }
 });
 
 router.delete("/admin/demo-requests/:id", requireAdmin, async (req, res) => {

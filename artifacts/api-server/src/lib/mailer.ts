@@ -221,6 +221,101 @@ export async function sendDemoRequestConfirmation(payload: DemoRequestEmailPaylo
   }
 }
 
+export async function sendDemoRequestRescheduled(payload: {
+  id: number;
+  name: string;
+  email: string;
+  previousScheduledAt: string | null;
+  scheduledAt: string;
+}): Promise<void> {
+  try {
+    const settings = await getEmailSettings();
+    if (!settings || !settings.enabled || !settings.notifyVisitorOnDemoRequest) return;
+    if (!settings.smtpHost || !settings.fromEmail) return;
+
+    const transport = await buildTransport(settings);
+    const newWhen = formatScheduledAt(payload.scheduledAt);
+    const oldWhen = formatScheduledAt(payload.previousScheduledAt);
+    const subject = "Your Automystics demo has been rescheduled";
+    const text = [
+      `Hi ${payload.name},`,
+      ``,
+      `Your demo with Automystics has been rescheduled.`,
+      ``,
+      `Previous time: ${oldWhen}`,
+      `New time:      ${newWhen}`,
+      ``,
+      `If this new time doesn't work for you, just reply to this email and we'll find another slot.`,
+    ].join("\n");
+    const html = `
+      <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
+        <h2 style="color:#06b6d4;margin:0 0 16px">Your demo has been rescheduled</h2>
+        <p>Hi ${escapeHtml(payload.name)},</p>
+        <p>Your demo with Automystics has been rescheduled.</p>
+        <table style="width:100%;border-collapse:collapse;margin:16px 0">
+          <tr><td style="padding:6px 0;color:#64748b">Previous time</td><td style="padding:6px 0;text-decoration:line-through">${escapeHtml(oldWhen)}</td></tr>
+          <tr><td style="padding:6px 0;color:#64748b">New time</td><td style="padding:6px 0;font-weight:600">${escapeHtml(newWhen)}</td></tr>
+        </table>
+        <p>If this new time doesn't work for you, just reply to this email and we'll find another slot.</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress(settings),
+      to: payload.email,
+      subject,
+      text,
+      html,
+    });
+    logger.info({ id: payload.id }, "demo request reschedule notification sent");
+  } catch (err) {
+    logger.error({ err, id: payload.id }, "failed to send demo request reschedule notification");
+  }
+}
+
+export async function sendDemoRequestSlotCleared(payload: {
+  id: number;
+  name: string;
+  email: string;
+  previousScheduledAt: string | null;
+}): Promise<void> {
+  try {
+    const settings = await getEmailSettings();
+    if (!settings || !settings.enabled || !settings.notifyVisitorOnDemoRequest) return;
+    if (!settings.smtpHost || !settings.fromEmail) return;
+
+    const transport = await buildTransport(settings);
+    const oldWhen = formatScheduledAt(payload.previousScheduledAt);
+    const subject = "Your Automystics demo slot was cancelled";
+    const text = [
+      `Hi ${payload.name},`,
+      ``,
+      `Your previously scheduled demo (${oldWhen}) with Automystics has been cancelled.`,
+      ``,
+      `We'll be in touch to find a new time, or you're welcome to book a new slot on our site.`,
+    ].join("\n");
+    const html = `
+      <div style="font-family:Inter,system-ui,sans-serif;max-width:560px;margin:0 auto;color:#0a0612">
+        <h2 style="color:#06b6d4;margin:0 0 16px">Your demo slot was cancelled</h2>
+        <p>Hi ${escapeHtml(payload.name)},</p>
+        <p>Your previously scheduled demo (<strong>${escapeHtml(oldWhen)}</strong>) with Automystics has been cancelled.</p>
+        <p>We'll be in touch to find a new time, or you're welcome to book a new slot on our site.</p>
+      </div>
+    `;
+
+    await transport.sendMail({
+      from: fromAddress(settings),
+      to: payload.email,
+      subject,
+      text,
+      html,
+    });
+    logger.info({ id: payload.id }, "demo request slot cleared notification sent");
+  } catch (err) {
+    logger.error({ err, id: payload.id }, "failed to send demo request slot cleared notification");
+  }
+}
+
 export async function sendAdminPasswordChangedNotification(changedAt: Date): Promise<void> {
   try {
     const settings = await getEmailSettings();

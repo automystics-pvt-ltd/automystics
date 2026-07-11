@@ -54,5 +54,15 @@ export type DemoRequestStatus = (typeof DEMO_REQUEST_STATUSES)[number];
 export const updateDemoRequestSchema = z.object({
   status: z.enum(DEMO_REQUEST_STATUSES).optional(),
   notes: z.string().max(5000).optional(),
+  // Admin reschedule/cancel: a valid ISO string moves the visitor to a new
+  // slot, `null` clears the slot entirely (cancels the scheduled time
+  // without deleting the request itself).
+  scheduledAt: z
+    .string()
+    .trim()
+    .min(1)
+    .refine((v) => !Number.isNaN(Date.parse(v)), "invalid_datetime")
+    .nullable()
+    .optional(),
 });
 export type UpdateDemoRequest = z.infer<typeof updateDemoRequestSchema>;

@@ -2,3 +2,4 @@
 - [OpenAPI spec can lag hand-written routes](openapi-spec-lag.md) — check `lib/api-spec/openapi.yaml` against actual Express routes before assuming client hooks exist; extend spec + regenerate first.
 - [esbuild bundling breaks runtime file reads](esbuild-bundling-runtime-file-reads.md) — packages that read sibling files via their own `__dirname` (e.g. connect-pg-simple) must be externalized, not bundled.
 - [Email template + drizzle workflow](email-template-drizzle-workflow.md) — `{{var}}`/`{{#var}}` template pattern for admin-editable emails; rebuild `@workspace/db` dist after schema changes or consumers see stale type errors.
+- [drizzle-kit push interactive prompt](drizzle-kit-push-interactive-prompt.md) — create/rename prompt for new tables can't be answered via stdin piping; fall back to raw SQL `CREATE TABLE` to unblock dev DB sync.
