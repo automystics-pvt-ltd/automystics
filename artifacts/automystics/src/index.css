@@ -69,24 +69,24 @@
   --popover-border: 220 13% 91%;
   
   /* Brand Coral - Primary */
-  --primary: 10 85% 60%;
+  --primary: 14 96% 56%;
   --primary-foreground: 0 0% 100%;
   
   /* Brand Deep Teal - Secondary */
-  --secondary: 180 85% 30%;
+  --secondary: 174 92% 38%;
   --secondary-foreground: 0 0% 100%;
   
   --muted: 220 14% 96%;
   --muted-foreground: 220 9% 46%;
   
-  --accent: 10 85% 96%;
-  --accent-foreground: 10 85% 40%;
+  --accent: 14 96% 96%;
+  --accent-foreground: 14 96% 40%;
   
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
   
   --input: 220 13% 91%;
-  --ring: 10 85% 60%;
+  --ring: 14 96% 56%;
 
   --app-font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --app-font-serif: 'Space Grotesk', system-ui, sans-serif;
@@ -110,23 +110,23 @@
   --popover-foreground: 0 0% 98%;
   --popover-border: 220 13% 18%;
   
-  --primary: 10 85% 65%;
+  --primary: 14 96% 60%;
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 180 80% 40%;
-  --secondary-foreground: 0 0% 100%;
+  --secondary: 174 90% 48%;
+  --secondary-foreground: 222 47% 8%;
   
   --muted: 220 15% 10%;
   --muted-foreground: 220 9% 65%;
   
-  --accent: 10 50% 20%;
-  --accent-foreground: 10 85% 85%;
+  --accent: 14 60% 20%;
+  --accent-foreground: 14 96% 85%;
   
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
   
   --input: 220 13% 18%;
-  --ring: 10 85% 65%;
+  --ring: 14 96% 60%;
 }
 
 @layer base {
