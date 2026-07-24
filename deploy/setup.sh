@@ -120,8 +120,11 @@ chmod 600 "$ENV_FILE"
 echo "Written and locked to root-only (600)."
 
 # ── 6. Install dependencies + build ───────────────────────────────────────────
-log "Installing pnpm dependencies (frozen lockfile)"
-pnpm install --frozen-lockfile
+log "Installing pnpm dependencies"
+# NODE_ENV=production skips devDeps (breaks drizzle-kit/esbuild); override here.
+NODE_ENV=development pnpm install --no-frozen-lockfile --ignore-scripts
+# Run esbuild's postinstall explicitly so the binary is downloaded.
+pnpm rebuild esbuild
 
 log "Building API server → artifacts/api-server/dist/index.mjs"
 pnpm --filter @workspace/api-server build
