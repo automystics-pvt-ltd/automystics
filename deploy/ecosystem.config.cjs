@@ -15,8 +15,8 @@ module.exports = {
       env: {
         NODE_ENV: "production",
       },
-      out_file: "/var/log/automystics/api.out.log",
-      error_file: "/var/log/automystics/api.err.log",
+      out_file: path.resolve(__dirname, "..", "logs", "api.out.log"),
+      error_file: path.resolve(__dirname, "..", "logs", "api.err.log"),
       merge_logs: true,
       time: true,
     },

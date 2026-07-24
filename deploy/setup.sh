@@ -136,9 +136,13 @@ DATABASE_URL="$DATABASE_URL" pnpm --filter @workspace/db exec drizzle-kit push -
 # ── 8. Nginx configuration ─────────────────────────────────────────────────────
 log "Configuring Nginx for $SERVER_HOST"
 
+# Create logs directory next to the repo (used by ecosystem.config.cjs)
+mkdir -p "$REPO_ROOT/logs"
+
 NGINX_CONF="/etc/nginx/sites-available/automystics"
 cp "$REPO_ROOT/deploy/nginx.conf" "$NGINX_CONF"
-sed -i "s/YOUR_SERVER_IP_OR_DOMAIN/${SERVER_HOST}/g" "$NGINX_CONF"
+sed -i "s|YOUR_SERVER_IP_OR_DOMAIN|${SERVER_HOST}|g" "$NGINX_CONF"
+sed -i "s|REPO_ROOT_PLACEHOLDER|${REPO_ROOT}|g" "$NGINX_CONF"
 
 ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/automystics
 rm -f /etc/nginx/sites-enabled/default
