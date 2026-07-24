@@ -25,6 +25,23 @@ log()  { printf '\n\033[1;36m==> %s\033[0m\n' "$1"; }
 warn() { printf '\033[1;33mWARN: %s\033[0m\n' "$1"; }
 die()  { printf '\033[1;31mERROR: %s\033[0m\n' "$1" >&2; exit 1; }
 
+# ── parse flags ───────────────────────────────────────────────────────────────
+DB_PASSWORD=""
+ADMIN_PASSWORD=""
+SERVER_HOST=""
+SETUP_HTTPS="n"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --db-password)   DB_PASSWORD="$2";   shift 2 ;;
+    --admin-password) ADMIN_PASSWORD="$2"; shift 2 ;;
+    --domain)        SERVER_HOST="$2";   shift 2 ;;
+    --https)         SETUP_HTTPS="y";    shift ;;
+    -h|--help)       grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) die "Unknown option: $1" ;;
+  esac
+done
+
 # ── root check ────────────────────────────────────────────────────────────────
 if [[ $EUID -ne 0 ]]; then
   die "Run this script as root:  sudo bash deploy/setup.sh"
@@ -59,23 +76,32 @@ log "Node $(node -v) | pnpm $(pnpm -v) | pm2 $(pm2 -v)"
 # ── 2. Log directory ───────────────────────────────────────────────────────────
 mkdir -p /var/log/automystics
 
-# ── 3. Collect secrets interactively ──────────────────────────────────────────
-log "Configuration — enter values when prompted (input is hidden)"
+# ── 3. Collect secrets (flags take priority; prompt only for missing values) ───
+log "Configuration"
 
-read -rsp "PostgreSQL password for the 'automystics' DB user: " DB_PASSWORD; echo
-[[ -z "$DB_PASSWORD" ]] && die "DB password cannot be empty."
+# Always read from /dev/tty so hidden prompts don't bleed newlines into the next read
+if [[ -z "$DB_PASSWORD" ]]; then
+  read -rsp "PostgreSQL password for the 'automystics' DB user: " DB_PASSWORD </dev/tty; echo
+fi
+[[ -z "$DB_PASSWORD" ]] && die "DB password cannot be empty. Pass it with --db-password <pw>"
 
 SESSION_SECRET="$(openssl rand -base64 48)"
 echo "Session secret: auto-generated (64 random bytes)."
 
-read -rsp "Admin password for /admin (leave blank for built-in default — change before going live): " ADMIN_PASSWORD; echo
 ADMIN_USERNAME="admin"
+if [[ -z "$ADMIN_PASSWORD" ]]; then
+  read -rsp "Admin password for /admin (blank = built-in default, change before going live): " ADMIN_PASSWORD </dev/tty; echo
+fi
 
-read -rp  "Domain or IP for Nginx (e.g. automystics.com or 203.0.113.42): " SERVER_HOST
-[[ -z "$SERVER_HOST" ]] && die "Domain/IP cannot be empty."
+if [[ -z "$SERVER_HOST" ]]; then
+  read -rp  "Domain or IP for Nginx (e.g. automystics.com or 203.0.113.42): " SERVER_HOST </dev/tty
+fi
+[[ -z "$SERVER_HOST" ]] && die "Domain/IP cannot be empty. Pass it with --domain <host>"
 
-read -rp  "Set up HTTPS with Let's Encrypt? Requires a real domain pointed at this server. [y/N]: " SETUP_HTTPS
-SETUP_HTTPS="${SETUP_HTTPS,,}"
+if [[ "$SETUP_HTTPS" != "y" ]]; then
+  read -rp "Set up HTTPS with Let's Encrypt? Requires DNS pointed at this server. [y/N]: " _https </dev/tty
+  SETUP_HTTPS="${_https,,}"
+fi
 
 DATABASE_URL="postgresql://automystics:${DB_PASSWORD}@127.0.0.1:5432/automystics"
 
