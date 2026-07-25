@@ -14,6 +14,7 @@ module.exports = {
       max_memory_restart: "512M",
       env: {
         NODE_ENV: "production",
+        STATIC_DIR: path.resolve(__dirname, "..", "artifacts", "automystics", "dist", "public"),
       },
       out_file: path.resolve(__dirname, "..", "logs", "api.out.log"),
       error_file: path.resolve(__dirname, "..", "logs", "api.err.log"),
