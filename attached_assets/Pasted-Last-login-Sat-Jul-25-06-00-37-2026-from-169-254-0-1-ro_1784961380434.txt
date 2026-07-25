@@ -1,0 +1,53 @@
+Last login: Sat Jul 25 06:00:37 2026 from 169.254.0.1
+root@srv1609330:~# cd /home/automystics-tech/htdocs/automystics.com/automystics
+root@srv1609330:/home/automystics-tech/htdocs/automystics.com/automystics# # Show the nginx config
+cat /etc/nginx/sites-enabled/automystics
+
+# Confirm the API is actually reachable directly
+curl -s http://127.0.0.1:8080/api/healthz
+
+# Check if nginx is the one giving 502 or something else
+curl -sv http://127.0.0.1 2>&1 | grep -E "(< HTTP|upstream|connect|failed)"
+
+# What's actually listening on 8080?
+ss -tlnp | grep 8080
+server {
+    listen 80;
+    listen [::]:80;
+    server_name automystics.com www.automystics.com;
+
+    client_max_body_size 10m;
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+    gzip_min_length 1024;
+
+    root /home/automystics-tech/htdocs/automystics.com/automystics/artifacts/automystics/dist/public;
+    index index.html;
+
+    location /assets/ {
+        try_files $uri =404;
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+    }
+
+    location /api/ {
+        proxy_pass         http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   Upgrade           $http_upgrade;
+        proxy_set_header   Connection        "upgrade";
+        proxy_read_timeout 60s;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-cache";
+    }
+}
+{"status":"ok"}* Closing connection
+LISTEN 0      511                *:18080            *:*    users:(("MainThread",pid=1582490,fd=24))                                                                                                           
+LISTEN 0      511                *:8080             *:*    users:(("node /home/auto",pid=3380868,fd=23))  
