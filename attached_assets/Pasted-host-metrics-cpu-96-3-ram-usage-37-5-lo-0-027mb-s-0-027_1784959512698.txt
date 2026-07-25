@@ -1,0 +1,108 @@
+host metrics | cpu: 96.3% | ram usage: 37.5% | lo: ⇓ 0.027mb/s ⇑ 0.027mb/s | eth0: ⇓ 0.002mb/s ⇑ 0.001mb/s | disk: ⇓ 0mb/s ⇑ 0.174mb/s |
+[TAILING] Tailing last 50 lines for [automystics-api] process (change the value with --lines option)
+/root/.pm2/logs/automystics-api-error.log last 50 lines:
+28|automys | 2026-07-24T14:42:05:     at Module._load (node:internal/modules/cjs/loader:1379:12) {
+28|automys | 2026-07-24T14:42:05:   code: 'MODULE_NOT_FOUND',
+28|automys | 2026-07-24T14:42:05:   requireStack: []
+28|automys | 2026-07-24T14:42:05: }
+28|automys | 2026-07-24T14:42:05: Error: Cannot find module '/usr/bin/pm2'
+28|automys | 2026-07-24T14:42:05:     at Module._resolveFilename (node:internal/modules/cjs/loader:1500:15)
+28|automys | 2026-07-24T14:42:05:     at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+28|automys | 2026-07-24T14:42:05:     at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+28|automys | 2026-07-24T14:42:05:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1116:12)
+28|automys | 2026-07-24T14:42:05:     at Module._load (node:internal/modules/cjs/loader:1285:25)
+28|automys | 2026-07-24T14:42:05:     at Object.<anonymous> (/usr/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+28|automys | 2026-07-24T14:42:05:     at Module._compile (node:internal/modules/cjs/loader:1854:14)
+28|automys | 2026-07-24T14:42:05:     at Object..js (node:internal/modules/cjs/loader:1985:10)
+28|automys | 2026-07-24T14:42:05:     at Module.load (node:internal/modules/cjs/loader:1577:32)
+28|automys | 2026-07-24T14:42:05:     at Module._load (node:internal/modules/cjs/loader:1379:12) {
+28|automys | 2026-07-24T14:42:05:   code: 'MODULE_NOT_FOUND',
+28|automys | 2026-07-24T14:42:05:   requireStack: []
+28|automys | 2026-07-24T14:42:05: }
+28|automys | 2026-07-24T14:42:06: Error: Cannot find module '/usr/bin/pm2'
+28|automys | 2026-07-24T14:42:06:     at Module._resolveFilename (node:internal/modules/cjs/loader:1500:15)
+28|automys | 2026-07-24T14:42:06:     at wrapResolveFilename (node:internal/modules/cjs/loader:1071:27)
+28|automys | 2026-07-24T14:42:06:     at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1095:10)
+28|automys | 2026-07-24T14:42:06:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1116:12)
+28|automys | 2026-07-24T14:42:06:     at Module._load (node:internal/modules/cjs/loader:1285:25)
+28|automys | 2026-07-24T14:42:06:     at Object.<anonymous> (/usr/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+28|automys | 2026-07-24T14:42:06:     at Module._compile (node:internal/modules/cjs/loader:1854:14)
+28|automys | 2026-07-24T14:42:06:     at Object..js (node:internal/modules/cjs/loader:1985:10)
+28|automys | 2026-07-24T14:42:06:     at Module.load (node:internal/modules/cjs/loader:1577:32)
+28|automys | 2026-07-24T14:42:06:     at Module._load (node:internal/modules/cjs/loader:1379:12) {
+28|automys | 2026-07-24T14:42:06:   code: 'MODULE_NOT_FOUND',
+28|automys | 2026-07-24T14:42:06:   requireStack: []
+28|automys | 2026-07-24T14:42:06: }
+28|automys | 2026-07-24T18:31:07: Error: DATABASE_URL is not set
+28|automys | 2026-07-24T18:31:07:     at src/lib/db.ts (/root/artifacts/api-server/src/lib/db.ts:5:9)
+28|automys | 2026-07-24T18:31:07:     at __init (file:///root/artifacts/api-server/dist/index.mjs:22:56)
+28|automys | 2026-07-24T18:31:07:     at src/lib/auth.ts (/root/artifacts/api-server/src/lib/auth.ts:3:1)
+28|automys | 2026-07-24T18:31:07:     at __init (file:///root/artifacts/api-server/dist/index.mjs:22:56)
+28|automys | 2026-07-24T18:31:07:     at <anonymous> (/root/artifacts/api-server/src/routes/auth.ts:2:1)
+28|automys | 2026-07-24T18:31:07:     at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+28|automys | 2026-07-24T18:31:07:     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+28|automys | 2026-07-24T18:31:07:     at async node:internal/modules/esm/loader:633:26
+28|automys | 2026-07-24T18:34:15: Error: DATABASE_URL is not set
+28|automys | 2026-07-24T18:34:15:     at src/lib/db.ts (/root/artifacts/api-server/src/lib/db.ts:5:9)
+28|automys | 2026-07-24T18:34:15:     at __init (file:///root/artifacts/api-server/dist/index.mjs:22:56)
+28|automys | 2026-07-24T18:34:15:     at src/lib/auth.ts (/root/artifacts/api-server/src/lib/auth.ts:3:1)
+28|automys | 2026-07-24T18:34:15:     at __init (file:///root/artifacts/api-server/dist/index.mjs:22:56)
+28|automys | 2026-07-24T18:34:15:     at <anonymous> (/root/artifacts/api-server/src/routes/auth.ts:2:1)
+28|automys | 2026-07-24T18:34:15:     at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+28|automys | 2026-07-24T18:34:15:     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+28|automys | 2026-07-24T18:34:15:     at async node:internal/modules/esm/loader:633:26
+
+/root/.pm2/logs/automystics-api-out.log last 50 lines:
+28|automys | 2026-07-24T18:34:18: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:18: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:18: 
+28|automys | 2026-07-24T18:34:18: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:18: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:18: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:18: 
+28|automys | 2026-07-24T18:34:18: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:19: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:19: 
+28|automys | 2026-07-24T18:34:19: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:19: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:19: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:19: 
+28|automys | 2026-07-24T18:34:19: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:20: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:20: 
+28|automys | 2026-07-24T18:34:20: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:20: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:20: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:20: 
+28|automys | 2026-07-24T18:34:20: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:20: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:20: 
+28|automys | 2026-07-24T18:34:20: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:20: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:20: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:20: 
+28|automys | 2026-07-24T18:34:20: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:21: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:21: 
+28|automys | 2026-07-24T18:34:21: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:21: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:21: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:21: 
+28|automys | 2026-07-24T18:34:21: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:21: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:21: 
+28|automys | 2026-07-24T18:34:21: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:21: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:21: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:21: 
+28|automys | 2026-07-24T18:34:21: Access pm2 files in ~/.pm2
+28|automys | 2026-07-24T18:34:22: usage: pm2 [options] <command>
+28|automys | 2026-07-24T18:34:22: 
+28|automys | 2026-07-24T18:34:22: pm2 -h, --help             all available commands and options
+28|automys | 2026-07-24T18:34:22: pm2 examples               display pm2 usage examples
+28|automys | 2026-07-24T18:34:22: pm2 <command> -h           help on a specific command
+28|automys | 2026-07-24T18:34:22: 
+28|automys | 2026-07-24T18:34:22: Access pm2 files in ~/.pm2
+
+LISTEN 0      511          0.0.0.0:8080       0.0.0.0:*    users:(("node",pid=91730,fd=22))                                                                                                                   
+LISTEN 0      511                *:18080            *:*    users:(("MainThread",pid=1582490,fd=24))   
